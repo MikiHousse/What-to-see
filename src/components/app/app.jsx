@@ -3,10 +3,10 @@ import MainPage from "../main-page/main-page";
 import PropTypes from "prop-types";
 import { MovieCardTypes } from "../../prop-types/prop";
 
-export const App = ({ movieCards }) => {
+export const App = ({ movieCards, movieСategories }) => {
   return (
     <div>
-      <MainPage movieCards={movieCards} />
+      <MainPage movieCards={movieCards} movieСategories={movieСategories} />
     </div>
   );
 };
