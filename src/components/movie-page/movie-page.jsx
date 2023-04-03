@@ -1,6 +1,6 @@
 import React from "react";
 
-export const MoviePage = () => {
+const MoviePage = () => {
   return (
     <>
       <div className="visually-hidden">
@@ -279,3 +279,5 @@ export const MoviePage = () => {
     </>
   );
 };
+
+export default MoviePage;

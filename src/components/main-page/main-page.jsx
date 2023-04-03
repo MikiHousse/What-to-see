@@ -1,7 +1,9 @@
 import React from "react";
-import MovieCard from "../movie-card/movie-card";
 import PropTypes from "prop-types";
-import { MovieCardTypes } from "../../prop-types/prop";
+import { MovieCardTypes, MovieСategoriesTypes } from "../../prop-types/prop";
+
+import MovieCard from "../movie-card/movie-card";
+import { Link } from "react-router-dom";
 
 const MainPage = ({ movieCards, movieСategories }) => {
   return (
@@ -114,21 +116,23 @@ const MainPage = ({ movieCards, movieСategories }) => {
 
         <header className="page-header movie-card__head">
           <div className="logo">
-            <a className="logo__link">
+            <Link to="/" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="user-block">
             <div className="user-block__avatar">
-              <img
-                src="img/avatar.jpg"
-                alt="User avatar"
-                width="63"
-                height="63"
-              />
+              <Link to="/login">
+                <img
+                  src="img/avatar.jpg"
+                  alt="User avatar"
+                  width="63"
+                  height="63"
+                />
+              </Link>
             </div>
           </div>
         </header>
@@ -152,7 +156,8 @@ const MainPage = ({ movieCards, movieСategories }) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button
+                <Link
+                  to="/player/:id"
                   className="btn btn--play movie-card__button"
                   type="button"
                 >
@@ -160,7 +165,7 @@ const MainPage = ({ movieCards, movieСategories }) => {
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
@@ -227,6 +232,7 @@ const MainPage = ({ movieCards, movieСategories }) => {
 
 MainPage.propTypes = {
   movieCards: PropTypes.arrayOf(MovieCardTypes.isRequired),
+  movieСategories: PropTypes.arrayOf(MovieСategoriesTypes.isRequired),
 };
 
 export default MainPage;

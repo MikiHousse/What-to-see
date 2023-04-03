@@ -164,4 +164,67 @@ const MovieReviews = [
   },
 ]
 
-export {MovieCards, MovieСategories, MovieMoreLike, MovieReviews}
+const Rating = [
+  {
+    id: `1`,
+    name: `Rating 1`,
+    star: `star-1`,
+    value: `1`,
+  },
+  {
+    id: `2`,
+    name: `ComedRating 2`,
+    star: `star-2`,
+    value: `2`
+  },
+  {
+    id: `3`,
+    name: `Rating 3`,
+    star: `star-3`,
+    value: `3`
+  },
+    {
+    id: `4`,
+    name: `Rating 4`,
+    star: `star-4`,
+    value: `4`
+  },
+  {
+    id: `5`,
+    name: `Rating 5`,
+    star: `star-5`,
+    value: `5`
+  },
+  {
+    id: `6`,
+    name: `Rating 6`,
+    star: `star-6`,
+    value: `6`
+  },
+  {
+    id: `7`,
+    name: `Rating 7`,
+    star: `star-7`,
+    value: `7`
+  },
+  {
+    id: `8`,
+    name: `Rating 8`,
+    star: `star-8`,
+    value: `8`
+  },
+  {
+    id: `9`,
+    name: `Rating 9`,
+    star: `star-9`,
+    value: `9`
+  },
+  {
+    id: `10`,
+    name: `Rating 10`,
+    star: `star-10`,
+    value: `10`
+  },
+]
+
+export {MovieCards, MovieСategories, MovieMoreLike, MovieReviews, Rating}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Player = () => {
   return (
@@ -106,9 +107,9 @@ const Player = () => {
           poster="img/player-poster.jpg"
         ></video>
 
-        <button type="button" className="player__exit">
+        <Link to="/" type="button" className="player__exit">
           Exit
-        </button>
+        </Link>
 
         <div className="player__controls">
           <div className="player__controls-row">
@@ -118,7 +119,7 @@ const Player = () => {
                 value="30"
                 max="100"
               ></progress>
-              <div className="player__toggler" style="left: 30%;">
+              <div className="player__toggler" style={{ left: `30%` }}>
                 Toggler
               </div>
             </div>
@@ -134,7 +135,7 @@ const Player = () => {
             </button>
             <div className="player__name">Transpotting</div>
 
-            <button type="button" class="player__full-screen">
+            <button type="button" className="player__full-screen">
               <svg viewBox="0 0 27 27" width="27" height="27">
                 <use xlinkHref="#full-screen"></use>
               </svg>

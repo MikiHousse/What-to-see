@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const SingInPage = () => {
+const AddReviews = ({ rating }) => {
   return (
     <>
       <div className="visually-hidden">
@@ -100,77 +99,111 @@ const SingInPage = () => {
         </svg>
       </div>
 
-      <div className="user-page">
-        <header className="page-header user-page__head">
-          <div className="logo">
-            <Link to="/" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
+      <section className="movie-card movie-card--full">
+        <div className="movie-card__header">
+          <div className="movie-card__bg">
+            <img
+              src="img/bg-the-grand-budapest-hotel.jpg"
+              alt="The Grand Budapest Hotel"
+            />
           </div>
 
-          <h1 className="page-title user-page__title">Sign in</h1>
-        </header>
+          <h1 className="visually-hidden">WTW</h1>
 
-        <div className="sign-in user-page__content">
-          <form action="#" className="sign-in__form">
-            <div className="sign-in__fields">
-              <div className="sign-in__field">
-                <input
-                  className="sign-in__input"
-                  type="email"
-                  placeholder="Email address"
-                  name="user-email"
-                  id="user-email"
+          <header className="page-header">
+            <div className="logo">
+              <a href="main.html" className="logo__link">
+                <span className="logo__letter logo__letter--1">W</span>
+                <span className="logo__letter logo__letter--2">T</span>
+                <span className="logo__letter logo__letter--3">W</span>
+              </a>
+            </div>
+
+            <nav className="breadcrumbs">
+              <ul className="breadcrumbs__list">
+                <li className="breadcrumbs__item">
+                  <a href="movie-page.html" className="breadcrumbs__link">
+                    The Grand Budapest Hotel
+                  </a>
+                </li>
+                <li className="breadcrumbs__item">
+                  <a className="breadcrumbs__link">Add review</a>
+                </li>
+              </ul>
+            </nav>
+
+            <div className="user-block">
+              <div className="user-block__avatar">
+                <img
+                  src="img/avatar.jpg"
+                  alt="User avatar"
+                  width="63"
+                  height="63"
                 />
-                <label
-                  className="sign-in__label visually-hidden"
-                  htmlFor="user-email"
-                >
-                  Email address
-                </label>
-              </div>
-              <div className="sign-in__field">
-                <input
-                  className="sign-in__input"
-                  type="password"
-                  placeholder="Password"
-                  name="user-password"
-                  id="user-password"
-                />
-                <label
-                  className="sign-in__label visually-hidden"
-                  htmlFor="user-password"
-                >
-                  Password
-                </label>
               </div>
             </div>
-            <div className="sign-in__submit">
-              <button className="sign-in__btn" type="submit">
-                Sign in
-              </button>
+          </header>
+
+          <div className="movie-card__poster movie-card__poster--small">
+            <img
+              src="img/the-grand-budapest-hotel-poster.jpg"
+              alt="The Grand Budapest Hotel poster"
+              width="218"
+              height="327"
+            />
+          </div>
+        </div>
+
+        <div className="add-review">
+          <form action="#" className="add-review__form">
+            <div className="rating">
+              <div className="rating__stars">
+                {rating.map((item) => {
+                  return (
+                    <div key={item.id}>
+                      <input
+                        className="rating__input"
+                        id={item.star}
+                        type="radio"
+                        name="rating"
+                        value={item.value}
+                      />
+                      <label
+                        onClick={() => console.log(item.value)}
+                        className="rating__label"
+                        htmlFor={item.star}
+                        defaultChecked={item.value}
+                      >
+                        {item.name}
+                      </label>
+                    </div>
+                  );
+                })}
+
+                {/* <label className="rating__label" htmlFor="star-2">
+                  e
+                </label> */}
+              </div>
+            </div>
+
+            <div className="add-review__text">
+              <textarea
+                className="add-review__textarea"
+                name="review-text"
+                id="review-text"
+                placeholder="Review text"
+              ></textarea>
+              <div className="add-review__submit">
+                <button className="add-review__btn" type="submit">
+                  Post
+                </button>
+              </div>
             </div>
           </form>
         </div>
-
-        <footer className="page-footer">
-          <div className="logo">
-            <Link to="/" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
-      </div>
+      </section>
     </>
   );
 };
 
-export default SingInPage;
+export default AddReviews;
