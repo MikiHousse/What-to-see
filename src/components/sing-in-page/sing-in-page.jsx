@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const SingInPage = () => {
+const SingInPage = ({ authInfo }) => {
   return (
     <>
       <div className="visually-hidden">

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Player = () => {
+const Player = ({ film }) => {
   return (
     <>
       <div className="visually-hidden">

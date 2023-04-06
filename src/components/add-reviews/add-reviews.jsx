@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const AddReviews = ({ rating }) => {
+const AddReviews = ({ rating, film, authInfo }) => {
+  const [review, setReviev] = useState("");
+  console.log(review);
   return (
     <>
       <div className="visually-hidden">
@@ -102,29 +105,26 @@ const AddReviews = ({ rating }) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__header">
           <div className="movie-card__bg">
-            <img
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              alt="The Grand Budapest Hotel"
-            />
+            <img src={film.poster_image} alt={film.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <Link to="/" className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="movie-page.html" className="breadcrumbs__link">
-                    The Grand Budapest Hotel
-                  </a>
+                  <Link to="/films/:id" className="breadcrumbs__link">
+                    {film.name}
+                  </Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -134,20 +134,27 @@ const AddReviews = ({ rating }) => {
 
             <div className="user-block">
               <div className="user-block__avatar">
-                <img
-                  src="img/avatar.jpg"
-                  alt="User avatar"
-                  width="63"
-                  height="63"
-                />
+                <Link to="/login">
+                  {authInfo.map((item) => {
+                    return (
+                      <img
+                        key={item.id}
+                        src={item.avatar_url}
+                        alt="User avatar"
+                        width="63"
+                        height="63"
+                      />
+                    );
+                  })}
+                </Link>
               </div>
             </div>
           </header>
 
           <div className="movie-card__poster movie-card__poster--small">
             <img
-              src="img/the-grand-budapest-hotel-poster.jpg"
-              alt="The Grand Budapest Hotel poster"
+              src={film.preview_image}
+              alt={film.name}
               width="218"
               height="327"
             />
@@ -160,29 +167,29 @@ const AddReviews = ({ rating }) => {
               <div className="rating__stars">
                 {rating.map((item) => {
                   return (
-                    <div key={item.id}>
-                      <input
-                        className="rating__input"
-                        id={item.star}
-                        type="radio"
-                        name="rating"
-                        value={item.value}
-                      />
-                      <label
-                        onClick={() => console.log(item.value)}
-                        className="rating__label"
-                        htmlFor={item.star}
-                        defaultChecked={item.value}
-                      >
-                        {item.name}
-                      </label>
-                    </div>
+                    <input
+                      key={item.id}
+                      className="rating__input"
+                      id={item.star}
+                      type="radio"
+                      name="rating"
+                      value={item.value}
+                    />
                   );
                 })}
-
-                {/* <label className="rating__label" htmlFor="star-2">
-                  e
-                </label> */}
+                {rating.map((item) => {
+                  return (
+                    <label
+                      key={item.id}
+                      onClick={() => console.log(item.value)}
+                      className="rating__label"
+                      htmlFor={item.star}
+                      defaultChecked={item.value}
+                    >
+                      {item.name}
+                    </label>
+                  );
+                })}
               </div>
             </div>
 
@@ -191,6 +198,7 @@ const AddReviews = ({ rating }) => {
                 className="add-review__textarea"
                 name="review-text"
                 id="review-text"
+                onChange={(e) => setReviev(e.target.value)}
                 placeholder="Review text"
               ></textarea>
               <div className="add-review__submit">

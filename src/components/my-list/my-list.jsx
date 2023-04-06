@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const MyList = () => {
+const MyList = ({ movieMoreLike, authInfo }) => {
   return (
     <>
       <div className="visually-hidden">
@@ -102,23 +103,30 @@ const MyList = () => {
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
-            <a href="main.html" className="logo__link">
+            <Link to="/" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <h1 className="page-title user-page__title">My list</h1>
 
           <div className="user-block">
             <div className="user-block__avatar">
-              <img
-                src="img/avatar.jpg"
-                alt="User avatar"
-                width="63"
-                height="63"
-              />
+              <Link to="/login">
+                {authInfo.map((item) => {
+                  return (
+                    <img
+                      key={item.id}
+                      src={item.avatar_url}
+                      alt="User avatar"
+                      width="63"
+                      height="63"
+                    />
+                  );
+                })}
+              </Link>
             </div>
           </div>
         </header>
@@ -128,31 +136,41 @@ const MyList = () => {
 
           <div className="catalog__movies-list">
             {/* написатьmock MyFilms */}
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img
-                  src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">
-                  Fantastic Beasts: The Crimes of Grindelwald
-                </a>
-              </h3>
-            </article>
+            {movieMoreLike.map((item) => {
+              return (
+                <article
+                  key={item.id}
+                  className="small-movie-card catalog__movies-card"
+                >
+                  <div className="small-movie-card__image">
+                    <img
+                      src={item.img}
+                      alt={item.name}
+                      width="280"
+                      height="175"
+                    />
+                  </div>
+                  <h3 className="small-movie-card__title">
+                    <a
+                      className="small-movie-card__link"
+                      href="movie-page.html"
+                    >
+                      {item.name}
+                    </a>
+                  </h3>
+                </article>
+              );
+            })}
           </div>
         </section>
 
         <footer className="page-footer">
           <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
+            <Link to="/" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">

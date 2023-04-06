@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const MoviePage = () => {
+const MoviePage = ({ film, movieMoreLike, authInfo }) => {
   return (
     <>
       <div className="visually-hidden">
@@ -112,31 +113,38 @@ const MoviePage = () => {
 
           <header className="page-header movie-card__head">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <Link to="/" className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <div className="user-block">
               <div className="user-block__avatar">
-                <img
-                  src="img/avatar.jpg"
-                  alt="User avatar"
-                  width="63"
-                  height="63"
-                />
+                <Link to="/login">
+                  {authInfo.map((item) => {
+                    return (
+                      <img
+                        key={item.id}
+                        src={item.avatar_url}
+                        alt="User avatar"
+                        width="63"
+                        height="63"
+                      />
+                    );
+                  })}
+                </Link>
               </div>
             </div>
           </header>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{film.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{film.genre}</span>
+                <span className="movie-card__year">{film.released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -158,9 +166,9 @@ const MoviePage = () => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">
+                <Link to="/films/:id/review" className="btn movie-card__button">
                   Add review
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -200,37 +208,29 @@ const MoviePage = () => {
               </nav>
 
               <div className="movie-rating">
-                <div className="movie-rating__score">8,9</div>
+                <div className="movie-rating__score">{film.rating}</div>
                 <p className="movie-rating__meta">
                   <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">240 ratings</span>
+                  <span className="movie-rating__count">
+                    {film.scores_count} ratings
+                  </span>
                 </p>
               </div>
 
               <div className="movie-card__text">
-                <p>
-                  In the 1930s, the Grand Budapest Hotel is a popular European
-                  ski resort, presided over by concierge Gustave H. (Ralph
-                  Fiennes). Zero, a junior lobby boy, becomes Gustave's friend
-                  and protege.
-                </p>
-
-                <p>
-                  Gustave prides himself on providing first-class service to the
-                  hotel's guests, including satisfying the sexual needs of the
-                  many elderly women who stay there. When one of Gustave's
-                  lovers dies mysteriously, Gustave finds himself the recipient
-                  of a priceless painting and the chief suspect in her murder.
-                </p>
+                <p>{film.description}</p>
 
                 <p className="movie-card__director">
-                  <strong>Director: Wes Andreson</strong>
+                  <strong>
+                    Director:{` `}
+                    {film.director}
+                  </strong>
                 </p>
 
                 <p className="movie-card__starring">
                   <strong>
-                    Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe
-                    and other
+                    Starring:{` `}
+                    {film.starring.join(", ")}
                   </strong>
                 </p>
               </div>
@@ -245,31 +245,41 @@ const MoviePage = () => {
 
           <div className="catalog__movies-list">
             {/* отрисовать через map */}
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img
-                  src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">
-                  Fantastic Beasts: The Crimes of Grindelwald
-                </a>
-              </h3>
-            </article>
+            {movieMoreLike.map((item) => {
+              return (
+                <article
+                  key={item.id}
+                  className="small-movie-card catalog__movies-card"
+                >
+                  <div className="small-movie-card__image">
+                    <img
+                      src={item.img}
+                      alt={item.name}
+                      width="280"
+                      height="175"
+                    />
+                  </div>
+                  <h3 className="small-movie-card__title">
+                    <a
+                      className="small-movie-card__link"
+                      href="movie-page.html"
+                    >
+                      {item.name}
+                    </a>
+                  </h3>
+                </article>
+              );
+            })}
           </div>
         </section>
 
         <footer className="page-footer">
           <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
+            <Link to="/" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

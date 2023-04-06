@@ -1,53 +1,97 @@
+// import fef from '../public/video/trailer.webm'
+
+const User = {
+  email: `Oliver.conner@gmail.com`,
+  password: `12345678`
+}
+
+const AuthInfo = [
+  {
+    id: `1`,
+    email: `Oliver.conner@gmail.com`,
+    name: `Oliver.conner`,
+    avatar_url: `img/avatar.jpg`
+  }
+]
+
 const MovieCards = [
   {
     id: `1`,
     href: `#`,
     img: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    name: `Fantastic Beasts: The Crimes of Grindelwald`
+    name: `Fantastic Beasts: The Crimes of Grindelwald`,
+    video_link: `video/trailer.webm`,
   },
   {
     id: `2`,
     href: `#`,
     img: `img/bohemian-rhapsody.jpg`,
-    name: `Bohemian Rhapsody`
+    name: `Bohemian Rhapsody`,
+    video_link: `video/trailer.webm`,
   },
   {
     id: `3`,
     href: `#`,
     img: `img/macbeth.jpg`,
-    name: `Macbeth`
+    name: `Macbeth`,
+    video_link: `../public/video/trailer.webm`,
   },
   {
     id: `4`,
     href: `#`,
     img: `img/aviator.jpg`,
-    name: `Aviator`
+    name: `Aviator`,
+    video_link: `../public/video/trailer.webm`,
   },
   {
     id: `5`,
     href: `#`,
     img: `img/we-need-to-talk-about-kevin.jpg`,
-    name: `We need to talk about Kevin`
+    name: `We need to talk about Kevin`,
+    video_link: `../public/video/trailer.webm`,
   },
   {
     id: `6`,
     href: `#`,
     img: `img/what-we-do-in-the-shadows.jpg`,
-    name: `What We Do in the Shadows`
+    name: `What We Do in the Shadows`,
+    video_link: `../public/video/trailer.webm`,
   },
   {
     id: `7`,
     href: `#`,
     img: `img/revenant.jpg`,
-    name: `Revenant`
+    name: `Revenant`,
+    video_link: `../public/video/trailer.webm`,
   },
   {
     id: `8`,
     href: `#`,
     img: `img/johnny-english.jpg`,
-    name: `Johnny English`
+    name: `Johnny English`,
+    video_link: `../public/video/trailer.webm`,
   },
 ];
+
+const Film = {
+  id: `1`,
+  name: `The Grand Budapest Hotel`,
+  poster_image: `img/bg-the-grand-budapest-hotel.jpg`,
+  preview_image: `img/the-grand-budapest-hotel-poster.jpg`,
+  background_image: `img/the-grand-budapest-hotel-bg.jpg`,
+  background_color: `#ffffff`,
+  video_link: `../public/video/trailer.webm`,
+  preview_video_link: `../markup/video/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+  rating: `8.9`,
+  scores_count: `240`,
+  director: `Wes Andreson`,
+  starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+  run_time: `99`,
+  genre: `Comedy`,
+  released: `2014`,
+  is_favorite: false
+}
 
 const MovieСategories = [
   {
@@ -123,44 +167,80 @@ const MovieReviews = [
   {
     id: `1`,
     text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-    author: `Kate Muir`,
+    user: {
+      id: 4,
+      name: `Kate Muir`
+    },
     date: `December 24, 2016`,
     rating: `8,9`
   },
   {
     id: `2`,
     text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-    author: `Kate Muir`,
+    user: {
+      id: 4,
+      name: `Kate Muir`
+    },
     date: `December 24, 2016`,
     rating: `8,9`
   },
   {
     id: `3`,
     text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-    author: `Kate Muir`,
+    user: {
+      id: 4,
+      name: `Kate Muir`
+    },
     date: `December 24, 2016`,
     rating: `8,9`
   },
   {
     id: `4`,
     text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-    author: `Kate Muir`,
+    user: {
+      id: 4,
+      name: `Kate Muir`
+    },
     date: `December 24, 2016`,
     rating: `8,9`
   },
   {
     id: `5`,
     text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-    author: `Kate Muir`,
+    user: {
+      id: 4,
+      name: `Kate Muir`
+    },
     date: `December 24, 2016`,
     rating: `8,9`
   },
   {
     id: `6`,
     text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-    author: `Kate Muir`,
+    user: {
+      id: 4,
+      name: `Kate Muir`
+    },
     date: `December 24, 2016`,
     rating: `8,9`
+  },
+];
+
+const CommentPost = [
+  {
+    rating: `8`,
+    comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`
+  },
+]
+
+const MovieDetails = [
+  {
+    id: `1`,
+    name: `The Grand Budapest Hotel`,
+    genre: `Drama`,
+    year: `2014`,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`,` Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`]
   },
 ]
 
@@ -227,4 +307,4 @@ const Rating = [
   },
 ]
 
-export {MovieCards, MovieСategories, MovieMoreLike, MovieReviews, Rating}
+export {MovieCards, MovieСategories, MovieMoreLike, MovieReviews, Rating, MovieDetails, Film, AuthInfo}

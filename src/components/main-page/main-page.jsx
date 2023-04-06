@@ -2,10 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { MovieCardTypes, MovieСategoriesTypes } from "../../prop-types/prop";
 
-import MovieCard from "../movie-card/movie-card";
+import MovieList from "../movie-list/movie-list";
 import { Link } from "react-router-dom";
 
-const MainPage = ({ movieCards, movieСategories }) => {
+const MainPage = ({
+  movieCards,
+  movieСategories,
+  selectedMovieCategories,
+  authInfo,
+}) => {
   return (
     <>
       <div className="visually-hidden">
@@ -126,12 +131,17 @@ const MainPage = ({ movieCards, movieСategories }) => {
           <div className="user-block">
             <div className="user-block__avatar">
               <Link to="/login">
-                <img
-                  src="img/avatar.jpg"
-                  alt="User avatar"
-                  width="63"
-                  height="63"
-                />
+                {authInfo.map((item) => {
+                  return (
+                    <img
+                      key={item.id}
+                      src={item.avatar_url}
+                      alt="User avatar"
+                      width="63"
+                      height="63"
+                    />
+                  );
+                })}
               </Link>
             </div>
           </div>
@@ -185,26 +195,21 @@ const MainPage = ({ movieCards, movieСategories }) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ul className="catalog__genres-list">
-            {movieСategories.map((card) => {
+            {movieСategories.map((item) => {
+              const active =
+                item.id === selectedMovieCategories.id
+                  ? `catalog__genres-item--active`
+                  : ``;
               return (
-                <li
-                  key={card.id}
-                  className="catalog__genres-item {catalog__genres-item--active}"
-                >
-                  <a href="#" className="catalog__genres-link">
-                    {card.name}
-                  </a>
+                <li key={item.id} className={`catalog__genres-item ${active}`}>
+                  <Link to="/" className="catalog__genres-link">
+                    {item.name}
+                  </Link>
                 </li>
               );
             })}
           </ul>
-
-          <div className="catalog__movies-list">
-            {movieCards.map((card) => {
-              return <MovieCard key={card.id} item={card} />;
-            })}
-          </div>
-
+          <MovieList movieCards={movieCards} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">
               Show more

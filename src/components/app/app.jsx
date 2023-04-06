@@ -15,7 +15,14 @@ const AppRoute = {
   ROOT: `/`,
 };
 
-export const App = ({ movieCards, movieСategories, rating }) => {
+export const App = ({
+  movieCards,
+  movieСategories,
+  rating,
+  movieMoreLike,
+  film,
+  authInfo,
+}) => {
   return (
     <>
       <Router>
@@ -24,22 +31,28 @@ export const App = ({ movieCards, movieСategories, rating }) => {
             <MainPage
               movieCards={movieCards}
               movieСategories={movieСategories}
+              selectedMovieCategories={movieСategories[0]}
+              authInfo={authInfo}
             />
           </Route>
           <Route path="/login" exact>
-            <SingInPage />
+            <SingInPage authInfo={authInfo} />
           </Route>
           <Route path="/mylist" exact>
-            <MyList />
+            <MyList movieMoreLike={movieMoreLike} authInfo={authInfo} />
           </Route>
           <Route path="/films/:id" exact>
-            <MoviePage />
+            <MoviePage
+              film={film}
+              movieMoreLike={movieMoreLike}
+              authInfo={authInfo}
+            />
           </Route>
           <Route path="/films/:id/review" exact>
-            <AddReviews rating={rating} />
+            <AddReviews rating={rating} film={film} authInfo={authInfo} />
           </Route>
           <Route path="/player/:id" exact>
-            <Player />
+            <Player film={film} />
           </Route>
           <Route>
             <NotFoundPage />
