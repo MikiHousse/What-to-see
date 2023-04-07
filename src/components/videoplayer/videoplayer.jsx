@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 
-const Videoplayer = ({ vid, img }) => {
+const Videoplayer = ({ videoLink, img, videoRef }) => {
   return (
     <video
-      autoPlay={false}
-      width="280"
-      tabIndex="0"
+      ref={videoRef}
+      width="270"
       height="170"
       poster={img}
       muted
       preload="none"
     >
-      <source src={vid} type="video/webm" codecs="vp8, vorbis" />
+      <source src={videoLink} type="video/webm" codecs="vp8, vorbis" />
     </video>
   );
 };
