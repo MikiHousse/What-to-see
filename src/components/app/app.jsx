@@ -22,6 +22,8 @@ export const App = ({
   movieMoreLike,
   film,
   authInfo,
+  movieReviews,
+  movieDetails,
 }) => {
   return (
     <>
@@ -43,13 +45,15 @@ export const App = ({
           </Route>
           <Route path="/films/:id" exact>
             <MoviePage
-              film={film}
+              film={film[0]}
               movieMoreLike={movieMoreLike}
               authInfo={authInfo}
+              movieReviews={movieReviews}
+              movieDetails={movieDetails[0]}
             />
           </Route>
           <Route path="/films/:id/review" exact>
-            <AddReviews rating={rating} film={film} authInfo={authInfo} />
+            <AddReviews rating={rating} film={film[0]} authInfo={authInfo} />
           </Route>
           <Route path="/player/:id" exact>
             <Player film={film} />

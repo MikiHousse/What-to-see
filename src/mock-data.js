@@ -297,45 +297,25 @@ const MovieMoreLike = [
 ]
 
 const MovieReviews = [
-  {
+  [{
     id: `1`,
     text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
     user: {
       id: `4`,
       name: `Kate Muir`
     },
-    date: `December 24, 2016`,
+    date: `2019-05-08T14:13:56.569Z`,
     rating: `8,9`
-  },
-  {
-    id: `2`,
-    text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-    user: {
-      id: `2`,
-      name: `Matt Muir`
-    },
-    date: `December 24, 2016`,
-    rating: `9,9`
   },
   {
     id: `3`,
     text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
     user: {
-      id: `4`,
-      name: `Kate Muir`
+      id: `2`,
+      name: `Matt Muir`
     },
-    date: `December 24, 2016`,
-    rating: `8,9`
-  },
-  {
-    id: `4`,
-    text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-    user: {
-      id: `3`,
-      name: `Pitt Muir`
-    },
-    date: `December 24, 2016`,
-    rating: `5,9`
+    date: `2019-05-08T14:13:56.569Z`,
+    rating: `9,9`
   },
   {
     id: `5`,
@@ -344,7 +324,27 @@ const MovieReviews = [
       id: `4`,
       name: `Kate Muir`
     },
-    date: `December 24, 2016`,
+    date: `2019-05-08T14:13:56.569Z`,
+    rating: `8,9`
+  },],
+  [{
+    id: `2`,
+    text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+    user: {
+      id: `3`,
+      name: `Pitt Muir`
+    },
+    date: `2019-05-08T14:13:56.569Z`,
+    rating: `5,9`
+  },
+  {
+    id: `4`,
+    text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+    user: {
+      id: `4`,
+      name: `Kate Muir`
+    },
+    date: `2019-05-08T14:13:56.569Z`,
     rating: `8,9`
   },
   {
@@ -354,9 +354,9 @@ const MovieReviews = [
       id: `4`,
       name: `Kate Muir`
     },
-    date: `December 24, 2016`,
+    date: `2019-05-08T14:13:56.569Z`,
     rating: `8,9`
-  },
+  },]
 ];
 
 const CommentPost = [

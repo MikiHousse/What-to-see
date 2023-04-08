@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import MoviePageDesc from "./movie-page-desc/movie-page-desc";
+import MoviePageDetails from "./movide-page-details/movie-page-details";
+import MoviePageReviews from "./movie-page-reviews/movie-page-reviews";
 
-const MoviePage = ({ film, movieMoreLike, authInfo }) => {
+const MoviePage = ({
+  film,
+  movieMoreLike,
+  authInfo,
+  movieReviews,
+  movieDetails,
+}) => {
+  const [select, setSelect] = useState("desk");
+
+  const getByType = (type) => {
+    switch (type) {
+      case "desk":
+        return <MoviePageDesc film={film} />;
+      case "details":
+        return <MoviePageDetails movieDetails={movieDetails} />;
+      case "reviews":
+        return <MoviePageReviews movieReviews={movieReviews} />;
+    }
+    return <MoviePageDesc film={film} />;
+  };
+
+  const ch = () => {
+    setSelect(true);
+  };
   return (
     <>
       <div className="visually-hidden">
@@ -187,27 +213,49 @@ const MoviePage = ({ film, movieMoreLike, authInfo }) => {
             {/* нужна динамика ???*/}
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
-                {/* написать мок */}
                 <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">
+                  <li
+                    className={`movie-nav__item ${
+                      select === "desk" && `movie-nav__item--active`
+                    }`}
+                  >
+                    <p
+                      className="movie-nav__link"
+                      onClick={() => setSelect("desk")}
+                    >
                       Overview
-                    </a>
+                    </p>
                   </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">
+                  <li
+                    className={`movie-nav__item ${
+                      select === "details" && `movie-nav__item--active`
+                    }`}
+                  >
+                    <p
+                      className="movie-nav__link"
+                      onClick={() => setSelect("details")}
+                    >
                       Details
-                    </a>
+                    </p>
                   </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">
+                  <li
+                    className={`movie-nav__item ${
+                      select === "reviews" && `movie-nav__item--active`
+                    }`}
+                  >
+                    <p
+                      className="movie-nav__link"
+                      onClick={() => setSelect("reviews")}
+                    >
                       Reviews
-                    </a>
+                    </p>
                   </li>
                 </ul>
               </nav>
+              {/* {select ? <MoviePageDetails /> : <MoviePageDesc film={film} />} */}
+              {getByType(select)}
 
-              <div className="movie-rating">
+              {/* <div className="movie-rating">
                 <div className="movie-rating__score">{film.rating}</div>
                 <p className="movie-rating__meta">
                   <span className="movie-rating__level">Very good</span>
@@ -233,7 +281,7 @@ const MoviePage = ({ film, movieMoreLike, authInfo }) => {
                     {film.starring.join(", ")}
                   </strong>
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -244,7 +292,6 @@ const MoviePage = ({ film, movieMoreLike, authInfo }) => {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__movies-list">
-            {/* отрисовать через map */}
             {movieMoreLike.map((item) => {
               return (
                 <article
