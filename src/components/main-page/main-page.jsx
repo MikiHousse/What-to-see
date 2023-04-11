@@ -1,15 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { MovieCardTypes, MovieСategoriesTypes } from "../../prop-types/prop";
+import {
+  MovieСategoriesTypes,
+  FilmTypes,
+  AuthInfoTypes,
+} from "../../prop-types/prop";
 
 import MovieList from "../movie-list/movie-list";
 import { Link } from "react-router-dom";
 
 const MainPage = ({
-  movieCards,
   movieСategories,
   selectedMovieCategories,
   authInfo,
+  film,
 }) => {
   return (
     <>
@@ -209,7 +213,7 @@ const MainPage = ({
               );
             })}
           </ul>
-          <MovieList movieCards={movieCards} />
+          <MovieList film={film} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">
               Show more
@@ -235,9 +239,10 @@ const MainPage = ({
   );
 };
 
-MainPage.propTypes = {
-  movieCards: PropTypes.arrayOf(MovieCardTypes.isRequired),
+MainPage.protTypes = {
   movieСategories: PropTypes.arrayOf(MovieСategoriesTypes.isRequired),
+  film: PropTypes.arrayOf(FilmTypes.isRequired),
+  authInfo: PropTypes.arrayOf(AuthInfoTypes.isRequired),
 };
 
 export default MainPage;

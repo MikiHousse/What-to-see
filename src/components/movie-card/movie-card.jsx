@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { MovieCardTypes } from "../../prop-types/prop";
 import Videoplayer from "../videoplayer/videoplayer";
 
-export const MovieCard = ({ item = {} }) => {
-  const { href, img, name, video_link } = item;
+const MovieCard = ({ item = {} }) => {
+  const { preview_image, name, video_link } = item;
   const [play, setPlay] = useState(false);
 
   const videoRef = useRef();
@@ -27,13 +26,13 @@ export const MovieCard = ({ item = {} }) => {
       <div className="small-movie-card__image">
         <Videoplayer
           videoLink={video_link}
-          img={img}
+          img={preview_image}
           play={play}
           videoRef={videoRef}
         />
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href={href}>
+        <a className="small-movie-card__link" href="/">
           {name}
         </a>
       </h3>
@@ -41,8 +40,8 @@ export const MovieCard = ({ item = {} }) => {
   );
 };
 
-MovieCard.propTypes = {
-  item: MovieCardTypes.isRequired,
-};
+// MovieCard.propTypes = {
+
+// };
 
 export default MovieCard;

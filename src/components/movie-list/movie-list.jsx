@@ -1,10 +1,10 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React from "react";
 import MovieCard from "../movie-card/movie-card";
 
-const MovieList = ({ movieCards }) => {
+const MovieList = ({ film }) => {
   return (
     <div className="catalog__movies-list">
-      {movieCards.map((card) => {
+      {film.map((card) => {
         return <MovieCard key={card.id} item={card} />;
       })}
     </div>

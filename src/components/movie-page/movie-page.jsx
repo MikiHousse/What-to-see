@@ -1,16 +1,18 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import MoviePageDesc from "./movie-page-desc/movie-page-desc";
 import MoviePageDetails from "./movide-page-details/movie-page-details";
 import MoviePageReviews from "./movie-page-reviews/movie-page-reviews";
+import MovieMoreLike from "./movie-more-like/movie-more-like";
+import {
+  FilmTypes,
+  MovieMoreLikeTypes,
+  AuthInfoTypes,
+  MovieReviewsTypes,
+} from "../../prop-types/prop";
 
-const MoviePage = ({
-  film,
-  movieMoreLike,
-  authInfo,
-  movieReviews,
-  movieDetails,
-}) => {
+const MoviePage = ({ film, movieMoreLike, authInfo, movieReviews }) => {
   const [select, setSelect] = useState("desk");
 
   const getByType = (type) => {
@@ -18,7 +20,7 @@ const MoviePage = ({
       case "desk":
         return <MoviePageDesc film={film} />;
       case "details":
-        return <MoviePageDetails movieDetails={movieDetails} />;
+        return <MoviePageDetails film={film} />;
       case "reviews":
         return <MoviePageReviews movieReviews={movieReviews} />;
     }
@@ -252,36 +254,7 @@ const MoviePage = ({
                   </li>
                 </ul>
               </nav>
-              {/* {select ? <MoviePageDetails /> : <MoviePageDesc film={film} />} */}
               {getByType(select)}
-
-              {/* <div className="movie-rating">
-                <div className="movie-rating__score">{film.rating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">
-                    {film.scores_count} ratings
-                  </span>
-                </p>
-              </div>
-
-              <div className="movie-card__text">
-                <p>{film.description}</p>
-
-                <p className="movie-card__director">
-                  <strong>
-                    Director:{` `}
-                    {film.director}
-                  </strong>
-                </p>
-
-                <p className="movie-card__starring">
-                  <strong>
-                    Starring:{` `}
-                    {film.starring.join(", ")}
-                  </strong>
-                </p>
-              </div> */}
             </div>
           </div>
         </div>
@@ -290,34 +263,7 @@ const MoviePage = ({
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-
-          <div className="catalog__movies-list">
-            {movieMoreLike.map((item) => {
-              return (
-                <article
-                  key={item.id}
-                  className="small-movie-card catalog__movies-card"
-                >
-                  <div className="small-movie-card__image">
-                    <img
-                      src={item.img}
-                      alt={item.name}
-                      width="280"
-                      height="175"
-                    />
-                  </div>
-                  <h3 className="small-movie-card__title">
-                    <a
-                      className="small-movie-card__link"
-                      href="movie-page.html"
-                    >
-                      {item.name}
-                    </a>
-                  </h3>
-                </article>
-              );
-            })}
-          </div>
+          <MovieMoreLike movieMoreLike={movieMoreLike} />
         </section>
 
         <footer className="page-footer">
@@ -335,6 +281,13 @@ const MoviePage = ({
       </div>
     </>
   );
+};
+
+MoviePage.protTypes = {
+  film: PropTypes.arrayOf(FilmTypes.isRequired),
+  movieMoreLike: PropTypes.arrayOf(MovieMoreLikeTypes.isRequired),
+  authInfo: PropTypes.arrayOf(AuthInfoTypes.isRequired),
+  movieReviews: PropTypes.arrayOf(MovieReviewsTypes.isRequired),
 };
 
 export default MoviePage;

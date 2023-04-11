@@ -20,14 +20,6 @@ const FilmTypes = PropTypes.shape({
   is_favorite: PropTypes.bool.isRequired,
 })
 
-const MovieCardTypes = PropTypes.shape({
-  id: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  video_link: PropTypes.string.isRequired
-});
-
 const MovieСategoriesTypes = PropTypes.shape({
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired
@@ -48,11 +40,21 @@ const MovieReviewsTypes = PropTypes.shape({
   rating: PropTypes.string.isRequired
 })
 
-const RatingTypes = PropTypes.shape({
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  star: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired
+const UserTypes = PropTypes.shape({
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired
 })
 
-export {MovieCardTypes, MovieСategoriesTypes, MovieMoreLikeTypes, MovieReviewsTypes, RatingTypes}
+const AuthInfoTypes = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  avatar_url: PropTypes.string.isRequired
+})
+
+const CommentPostTypes = PropTypes.shape({
+  rating: PropTypes.string.isRequired,
+  comment: PropTypes.string.isRequired
+})
+
+export { MovieСategoriesTypes, MovieMoreLikeTypes, MovieReviewsTypes,FilmTypes,UserTypes,AuthInfoTypes,CommentPostTypes}

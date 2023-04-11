@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { AuthInfoTypes, MovieMoreLikeTypes } from "../../prop-types/prop";
 
 const MyList = ({ movieMoreLike, authInfo }) => {
   return (
@@ -180,6 +182,11 @@ const MyList = ({ movieMoreLike, authInfo }) => {
       </div>
     </>
   );
+};
+
+MyList.protTypes = {
+  movieMoreLike: PropTypes.arrayOf(MovieMoreLikeTypes.isRequired),
+  authInfo: PropTypes.arrayOf(AuthInfoTypes.isRequired),
 };
 
 export default MyList;

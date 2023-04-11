@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const AddReviews = ({ rating, film, authInfo }) => {
   const [review, setReviev] = useState("");
-  console.log(review);
   return (
     <>
       <div className="visually-hidden">
@@ -105,7 +104,7 @@ const AddReviews = ({ rating, film, authInfo }) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__header">
           <div className="movie-card__bg">
-            <img src={film.poster_image} alt={film.name} />
+            <img src={film.background_image} alt={film.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -153,7 +152,7 @@ const AddReviews = ({ rating, film, authInfo }) => {
 
           <div className="movie-card__poster movie-card__poster--small">
             <img
-              src={film.preview_image}
+              src={film.poster_image}
               alt={film.name}
               width="218"
               height="327"

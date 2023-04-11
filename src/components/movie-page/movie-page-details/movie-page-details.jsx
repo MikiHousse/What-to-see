@@ -1,22 +1,18 @@
 import React from "react";
 
-const MoviePageDetails = ({ movieDetails }) => {
-  const br = <br />;
-
+const MoviePageDetails = ({ film }) => {
   return (
     <>
       <div className="movie-card__text movie-card__row">
         <div className="movie-card__text-col">
           <p className="movie-card__details-item">
             <strong className="movie-card__details-name">Director</strong>
-            <span className="movie-card__details-value">
-              {movieDetails.director}
-            </span>
+            <span className="movie-card__details-value">{film.director}</span>
           </p>
           <div className="movie-card__details-item">
             <strong className="movie-card__details-name">Starring</strong>
             <span className="movie-card__details-value">
-              {movieDetails.starring.map((item) => {
+              {film.starring.map((item) => {
                 return <div key={item}>{item}</div>;
               })}
             </span>

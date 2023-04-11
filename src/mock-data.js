@@ -12,72 +12,13 @@ const AuthInfo = [
   }
 ]
 
-const MovieCards = [
-  {
-    id: `1`,
-    href: `/player/:id`,
-    img: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    name: `Fantastic Beasts: The Crimes of Grindelwald`,
-    video_link: `video/trailer.webm`,
-  },
-  {
-    id: `2`,
-    href: `/player/:id`,
-    img: `img/bohemian-rhapsody.jpg`,
-    name: `Bohemian Rhapsody`,
-    video_link: `video/trailer.webm`,
-  },
-  {
-    id: `3`,
-    href: `/player/:id`,
-    img: `img/macbeth.jpg`,
-    name: `Macbeth`,
-    video_link: `video/trailer.webm`,
-  },
-  {
-    id: `4`,
-    href: `/player/:id`,
-    img: `img/aviator.jpg`,
-    name: `Aviator`,
-    video_link: `video/trailer.webm`,
-  },
-  {
-    id: `5`,
-    href: `/player/:id`,
-    img: `img/we-need-to-talk-about-kevin.jpg`,
-    name: `We need to talk about Kevin`,
-    video_link: `video/trailer.webm`,
-  },
-  {
-    id: `6`,
-    href: `/player/:id`,
-    img: `img/what-we-do-in-the-shadows.jpg`,
-    name: `What We Do in the Shadows`,
-    video_link: `video/trailer.webm`,
-  },
-  {
-    id: `7`,
-    href: `/player/:id`,
-    img: `img/revenant.jpg`,
-    name: `Revenant`,
-    video_link: `video/trailer.webm`,
-  },
-  {
-    id: `8`,
-    href: `/player/:id`,
-    img: `img/johnny-english.jpg`,
-    name: `Johnny English`,
-    video_link: `video/trailer.webm`,
-  },
-];
-
 const Film = [
   {
     id: `1`,
     name: `The Grand Budapest Hotel`,
-    poster_image: `img/bg-the-grand-budapest-hotel.jpg`,
-    preview_image: `img/the-grand-budapest-hotel-poster.jpg`,
-    background_image: `img/the-grand-budapest-hotel-bg.jpg`,
+    poster_image: `img/the-grand-budapest-hotel-poster.jpg`,
+    preview_image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    background_image: `img/bg-the-grand-budapest-hotel.jpg`,
     background_color: `#E0777D`,
     video_link: `video/trailer.webm`,
     preview_video_link: `../markup/video/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -94,9 +35,9 @@ const Film = [
   {
     id: `2`,
     name: `Bohemian Rhapsody`,
-    poster_image: `img/bg-the-grand-budapest-hotel.jpg`,
-    preview_image: `img/bohemian-rhapsody.jpgjpg`,
-    background_image: `img/bohemian-rhapsody.jpg`,
+    poster_image: `img/bohemian-rhapsody.jpg`,
+    preview_image: `img/bohemian-rhapsody.jpg`,
+    background_image: `img/bg-the-grand-budapest-hotel.jpg`,
     background_color: `#E1DD8F`,
     video_link: `video/trailer.webm`,
     preview_video_link: `../markup/video/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -106,8 +47,8 @@ const Film = [
     director: `Wes Andreson`,
     starring: [`Bill Murray`, `Edward Norton`, `Willem Dafoe`, ],
     run_time: `94`,
-    genre: `Comedy`,
-    released: `2012`,
+    genre: `Drama`,
+    released: `2018`,
     is_favorite: false
   },
   {
@@ -125,8 +66,8 @@ const Film = [
     director: `Wes Andreson`,
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     run_time: `99`,
-    genre: `Comedy`,
-    released: `1994`,
+    genre: `Drama`,
+    released: `2015`,
     is_favorite: true
   },
   {
@@ -144,8 +85,8 @@ const Film = [
     director: `Wes Andreson`,
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     run_time: `99`,
-    genre: `Comedy`,
-    released: `2014`,
+    genre: `Drama`,
+    released: `2005`,
     is_favorite: true
   },
   {
@@ -163,8 +104,8 @@ const Film = [
     director: `Wes Andreson`,
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     run_time: `99`,
-    genre: `Comedy`,
-    released: `2014`,
+    genre: `Thriller`,
+    released: `2010`,
     is_favorite: false
   },
   {
@@ -206,7 +147,7 @@ const Film = [
     is_favorite: false
   },
   {
-    id: `7`,
+    id: `8`,
     name: `Johnny English`,
     poster_image: `img/johnny-english.jpg`,
     preview_image: `img/johnny-english.jpg`,
@@ -221,7 +162,7 @@ const Film = [
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     run_time: `99`,
     genre: `Comedy`,
-    released: `2014`,
+    released: `2005`,
     is_favorite: false
   },
 ]
@@ -366,17 +307,6 @@ const CommentPost = [
   },
 ]
 
-const MovieDetails = [
-  {
-    id: `1`,
-    name: `The Grand Budapest Hotel`,
-    genre: `Drama`,
-    year: `2014`,
-    director: `Wes Andreson`,
-    starring: [`Bill Murray`, `Edward Norton`,` Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`]
-  },
-]
-
 const Rating = [
   {
     id: `1`,
@@ -386,7 +316,7 @@ const Rating = [
   },
   {
     id: `2`,
-    name: `ComedRating 2`,
+    name: `Rating 2`,
     star: `star-2`,
     value: `2`
   },
@@ -440,4 +370,4 @@ const Rating = [
   },
 ]
 
-export {MovieCards, MovieСategories, MovieMoreLike, MovieReviews, Rating, MovieDetails, Film, AuthInfo}
+export { MovieСategories, MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User}

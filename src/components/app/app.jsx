@@ -7,7 +7,13 @@ import MoviePage from "../movie-page/movie-page";
 import AddReviews from "../add-reviews/add-reviews";
 import Player from "../player/player";
 import NotFoundPage from "../not-found-page/not-fountd-page";
-import { MovieCardTypes, MovieСategoriesTypes } from "../../prop-types/prop";
+import {
+  MovieСategoriesTypes,
+  FilmTypes,
+  MovieMoreLikeTypes,
+  AuthInfoTypes,
+  MovieReviewsTypes,
+} from "../../prop-types/prop";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // в будущем вывести этот объект в отельный js файл
@@ -15,15 +21,13 @@ const AppRoute = {
   ROOT: `/`,
 };
 
-export const App = ({
-  movieCards,
+const App = ({
   movieСategories,
   rating,
   movieMoreLike,
   film,
   authInfo,
   movieReviews,
-  movieDetails,
 }) => {
   return (
     <>
@@ -31,10 +35,10 @@ export const App = ({
         <Switch>
           <Route path={AppRoute.ROOT} exact>
             <MainPage
-              movieCards={movieCards}
               movieСategories={movieСategories}
               selectedMovieCategories={movieСategories[0]}
               authInfo={authInfo}
+              film={film}
             />
           </Route>
           <Route path="/login" exact>
@@ -49,7 +53,6 @@ export const App = ({
               movieMoreLike={movieMoreLike}
               authInfo={authInfo}
               movieReviews={movieReviews}
-              movieDetails={movieDetails[0]}
             />
           </Route>
           <Route path="/films/:id/review" exact>
@@ -68,8 +71,11 @@ export const App = ({
 };
 
 App.protTypes = {
-  movieCards: PropTypes.arrayOf(MovieCardTypes.isRequired),
   movieСategories: PropTypes.arrayOf(MovieСategoriesTypes.isRequired),
+  film: PropTypes.arrayOf(FilmTypes.isRequired),
+  movieMoreLike: PropTypes.arrayOf(MovieMoreLikeTypes.isRequired),
+  authInfo: PropTypes.arrayOf(AuthInfoTypes.isRequired),
+  movieReviews: PropTypes.arrayOf(MovieReviewsTypes.isRequired),
 };
 
 export default App;
