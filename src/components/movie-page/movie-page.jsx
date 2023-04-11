@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import MoviePageDesc from "./movie-page-desc/movie-page-desc";
-import MoviePageDetails from "./movide-page-details/movie-page-details";
+import MoviePageDetails from "./movie-page-details/movie-page-details";
 import MoviePageReviews from "./movie-page-reviews/movie-page-reviews";
 import MovieMoreLike from "./movie-more-like/movie-more-like";
 import {
