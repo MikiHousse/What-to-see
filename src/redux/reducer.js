@@ -1,19 +1,15 @@
-import ActionType from "./actions"
+import { SELECT_GENRE } from "./action-type";
 
 const initialState = {
     genre: `All`,
-    films: [],
-    selectedFilm: [],
-    similarFilm: [],
-    favoriteFilm: [],
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_GENRE:
+    case SELECT_GENRE:
       return {
         ...state,
-        selectedMovies: action.payload
+        selectedMovie: action.payload
       }
       default:
         return state

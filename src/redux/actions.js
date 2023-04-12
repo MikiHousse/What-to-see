@@ -1,12 +1,15 @@
-const ActionType = {
-  CHANGE_GENRE: `genres/genreChange`,
+import { SELECT_GENRE } from "./action-type";
+
+const selectGenry = (genre) => {
+  return {
+    type: SELECT_GENRE,
+    payload: genre
+  }
 }
 
-const ActionCreator = {
-  selectGenre: () => ({
-    type: ActionType.CHANGE_GENRE,
-    payload: 1,
-  })
-}
+export {selectGenry}
 
-export default {ActionType, ActionCreator}
+
+
+
+
