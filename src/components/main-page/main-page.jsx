@@ -8,13 +8,9 @@ import {
 
 import MovieList from "../movie-list/movie-list";
 import { Link } from "react-router-dom";
+import { GenreListWrapped } from "../genre-sort/sort-genre";
 
-const MainPage = ({
-  movieСategories,
-  selectedMovieCategories,
-  authInfo,
-  film,
-}) => {
+const MainPage = ({ authInfo, film }) => {
   return (
     <>
       <div className="visually-hidden">
@@ -198,21 +194,7 @@ const MainPage = ({
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <ul className="catalog__genres-list">
-            {movieСategories.map((item) => {
-              const active =
-                item.id === selectedMovieCategories.id
-                  ? `catalog__genres-item--active`
-                  : ``;
-              return (
-                <li key={item.id} className={`catalog__genres-item ${active}`}>
-                  <Link to="/" className="catalog__genres-link">
-                    {item.name}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          <GenreListWrapped />
           <MovieList film={film} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">

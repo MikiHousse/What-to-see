@@ -1,15 +1,20 @@
 import { SELECT_GENRE } from "./action-type";
+import {MovieСategories} from '../mock-data'
 
 const initialState = {
-    genre: `All`,
+    selectedGenre: {
+      id: `1`,
+      name: `All`,
+    },
+    genre: MovieСategories,
 }
 
-const reducer = (state = initialState, action) => {
+const reducer =  (state = initialState, action) => {
   switch (action.type) {
     case SELECT_GENRE:
       return {
         ...state,
-        selectedMovie: action.payload
+        selectedGenre: action.payload
       }
       default:
         return state
