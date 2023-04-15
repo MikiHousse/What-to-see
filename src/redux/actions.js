@@ -1,4 +1,4 @@
-import { SELECT_GENRE } from "./action-type";
+import { SELECT_GENRE, STORE_MOVIES } from "./action-type";
 
 const selectGenre = (genre) => {
   return {
@@ -7,7 +7,14 @@ const selectGenre = (genre) => {
   }
 }
 
-export {selectGenre}
+const storeOffers = (storeMovies) => {
+  return {
+    type: STORE_MOVIES,
+    payload: storeMovies
+  }
+}
+
+export {selectGenre, storeOffers}
 
 
 

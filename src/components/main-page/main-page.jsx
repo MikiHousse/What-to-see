@@ -9,8 +9,10 @@ import {
 import MovieList from "../movie-list/movie-list";
 import { Link } from "react-router-dom";
 import { GenreListWrapped } from "../genre-sort/sort-genre";
+import { OffersListWrapped } from "../movie-list/movie-list";
 
-const MainPage = ({ authInfo, film }) => {
+const MainPage = (props) => {
+  const { authInfo, film } = props;
   return (
     <>
       <div className="visually-hidden">
@@ -195,7 +197,8 @@ const MainPage = ({ authInfo, film }) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreListWrapped />
-          <MovieList film={film} />
+          {/* <MovieList film={film} /> */}
+          <OffersListWrapped film={film} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">
               Show more

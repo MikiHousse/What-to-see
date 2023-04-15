@@ -1,7 +1,9 @@
-import { SELECT_GENRE } from "./action-type";
-import {MovieСategories} from '../mock-data'
+import { SELECT_GENRE, STORE_MOVIES } from "./action-type";
+import {MovieСategories, Film} from '../mock-data'
 
 const initialState = {
+    selectedFilms: [],
+    storeMovies: Film,
     selectedGenre: {
       id: `1`,
       name: `All`,
@@ -15,7 +17,14 @@ const reducer =  (state = initialState, action) => {
       return {
         ...state,
         selectedGenre: action.payload
-      }
+      };
+      case STORE_MOVIES:
+        const sortedData = state.storeMovies.filter((el) => el);
+        // const sortedData = state.storeMovies
+        return {
+          ...state,
+          selectedFilms: sortedData,
+        }
       default:
         return state
   }

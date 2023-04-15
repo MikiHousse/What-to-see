@@ -6,6 +6,18 @@ const getGenre = (state) => {
   return state.genre
 }
 
+const getSelectedFilms = (state) => {
+  return state.selectedFilms
+}
+
+const getFilms = (state) => {
+  return state.storeMovies
+}
+
+
+
+
+
 export {
-  getSelectedGenre, getGenre
+  getSelectedGenre, getGenre, getFilms, getSelectedFilms
 }
