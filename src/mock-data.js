@@ -1,6 +1,16 @@
 const genresMax = 9;
 const all = `All genres`;
 
+const route = {
+  FILMS: '/films',
+  FILMS_ID: '/films/',
+  PROMO: '/promo',
+  FAVORITE: '/favorite',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+  COMMENTS: '/comments',
+};
+
 const User = {
   email: `Oliver.conner@gmail.com`,
   password: `12345678`
@@ -430,4 +440,4 @@ const Rating = [
   },
 ]
 
-export { MovieСategories, MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User, genresMax, all}
+export { MovieСategories, MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User, genresMax, all, route}
