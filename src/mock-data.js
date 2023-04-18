@@ -1,3 +1,6 @@
+const genresMax = 9;
+const all = `All genre`;
+
 const User = {
   email: `Oliver.conner@gmail.com`,
   password: `12345678`
@@ -370,4 +373,4 @@ const Rating = [
   },
 ]
 
-export { MovieСategories, MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User}
+export { MovieСategories, MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User, genresMax, all}

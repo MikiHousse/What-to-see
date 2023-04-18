@@ -1,20 +1,16 @@
-import { SELECT_GENRE, STORE_MOVIES } from "./action-type";
+import { SELECT_GENRE, RESET_GENRE } from "./action-type";
+import { createAction } from "@reduxjs/toolkit";
 
-const selectGenre = (genre) => {
-  return {
-    type: SELECT_GENRE,
-    payload: genre
-  }
-}
+const genreChange = createAction(SELECT_GENRE, (genre) => ({
+  payload: genre,
+}))
 
-const storeOffers = (storeMovies) => {
-  return {
-    type: STORE_MOVIES,
-    payload: storeMovies
-  }
-}
+const resetGenre = createAction(RESET_GENRE)
 
-export {selectGenre, storeOffers}
+
+
+
+export {genreChange, resetGenre}
 
 
 

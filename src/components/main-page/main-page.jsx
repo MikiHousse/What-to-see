@@ -6,13 +6,24 @@ import {
   AuthInfoTypes,
 } from "../../prop-types/prop";
 
+import { all } from "../../mock-data";
 import MovieList from "../movie-list/movie-list";
 import { Link } from "react-router-dom";
-import { GenreListWrapped } from "../genre-sort/sort-genre";
-import { OffersListWrapped } from "../movie-list/movie-list";
+import { SortGenre } from "../genre-sort/sort-genre";
+import { getGenre, getFilms } from "../../redux/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { genreChange } from "../../redux/actions";
 
 const MainPage = (props) => {
   const { authInfo, film } = props;
+  const films = useSelector(getFilms);
+  const genre = useSelector(getGenre);
+  const dispatch = useDispatch();
+
+  const onSelectGenreClick = (filmGenre) => {
+    dispatch(genreChange(filmGenre));
+  };
+
   return (
     <>
       <div className="visually-hidden">
@@ -196,9 +207,8 @@ const MainPage = (props) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenreListWrapped />
+          <SortGenre films={films} genre={genre} onClick={onSelectGenreClick} />
           {/* <MovieList film={film} /> */}
-          <OffersListWrapped film={film} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">
               Show more

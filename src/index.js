@@ -1,14 +1,17 @@
 import React from "react";
 import ReactDom from 'react-dom'
 import { createStore } from "redux";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import App from './components/app/app'
 import { MovieСategories, Rating, MovieMoreLike ,Film, AuthInfo, MovieReviews} from './mock-data'
-import reducer from './redux/reducer'
+import rootReducer from "./redux/root-reducer";
 
-const store = createStore(reducer, composeWithDevTools())
+const store = configureStore({
+  reducer: rootReducer,
+})
 
 ReactDom.render(
   <Provider store={store}>

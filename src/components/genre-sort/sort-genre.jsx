@@ -1,26 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { genresMax } from "../../mock-data";
 
-import withGenreSort from "./hoc/with-genre-sort";
+const SortGenre = ({ films, genre, onClick }) => {
+  const filmGenres = films.map((film) => film.genre);
+  console.log(genre);
 
-const SortGenre = ({ items, selectedItem, onClick }) => {
+  const filtredGenres = Array.from(new Set(filmGenres));
+  filtredGenres.slice(0, genresMax);
+  filtredGenres.unshift("All genres");
+
   return (
     <ul className="catalog__genres-list">
-      {items.map((item) => {
-        const active =
-          item.id === selectedItem.id ? `catalog__genres-item--active` : ``;
+      {filtredGenres.map((item) => {
+        const active = genre === item ? `catalog__genres-item--active` : ``;
+
         return (
           <li
-            key={item.id}
+            key={item + 1}
             className={`catalog__genres-item ${active}`}
             tabIndex="0"
             onClick={() => {
               onClick(item);
-              console.log(selectedItem.id);
             }}
           >
             <Link to="/" className="catalog__genres-link">
-              {item.name}
+              {item}
             </Link>
           </li>
         );
@@ -29,9 +34,4 @@ const SortGenre = ({ items, selectedItem, onClick }) => {
   );
 };
 
-// SortGenre.defaultProps = {
-//   onClick: () => undefined,
-// };
-
-const GenreListWrapped = withGenreSort(SortGenre);
-export { SortGenre, GenreListWrapped };
+export { SortGenre };

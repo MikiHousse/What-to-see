@@ -1,23 +1,4 @@
-const getSelectedGenre = (state) => {
-  return state.selectedGenre
-}
+import { NameSpace } from "./root-reducer";
 
-const getGenre = (state) => {
-  return state.genre
-}
-
-const getSelectedFilms = (state) => {
-  return state.selectedFilms
-}
-
-const getFilms = (state) => {
-  return state.storeMovies
-}
-
-
-
-
-
-export {
-  getSelectedGenre, getGenre, getFilms, getSelectedFilms
-}
+export const getGenre = (state) => state[NameSpace.FILMS].genre;
+export const getFilms = (state) => state[NameSpace.FILMS].films;

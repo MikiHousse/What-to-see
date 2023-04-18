@@ -1,7 +1,7 @@
 const SELECT_GENRE = `@genres/selectGenre`
-const STORE_MOVIES = `@genres/storeMovies`
+const RESET_GENRE = `@genres/genresReset`
 
 export {
   SELECT_GENRE,
-  STORE_MOVIES
+  RESET_GENRE
 }
