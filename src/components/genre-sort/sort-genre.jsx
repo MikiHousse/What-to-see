@@ -4,10 +4,8 @@ import { genresMax } from "../../mock-data";
 
 const SortGenre = ({ films, genre, onClick }) => {
   const filmGenres = films.map((film) => film.genre);
-  console.log(genre);
 
   const filtredGenres = Array.from(new Set(filmGenres));
-  filtredGenres.slice(0, genresMax);
   filtredGenres.unshift("All genres");
 
   return (

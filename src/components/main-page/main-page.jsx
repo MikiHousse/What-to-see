@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { genreChange } from "../../redux/actions";
 
 const MainPage = (props) => {
-  const { authInfo, film } = props;
+  const { authInfo } = props;
   const films = useSelector(getFilms);
   const genre = useSelector(getGenre);
   const dispatch = useDispatch();
@@ -23,6 +23,15 @@ const MainPage = (props) => {
   const onSelectGenreClick = (filmGenre) => {
     dispatch(genreChange(filmGenre));
   };
+
+  const filtredMovieList = (list) => {
+    if (genre === all) {
+      return list;
+    }
+    return list.filter((item) => item.genre === genre);
+  };
+
+  const movieList = filtredMovieList(films);
 
   return (
     <>
@@ -208,7 +217,7 @@ const MainPage = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <SortGenre films={films} genre={genre} onClick={onSelectGenreClick} />
-          {/* <MovieList film={film} /> */}
+          <MovieList film={movieList} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">
               Show more

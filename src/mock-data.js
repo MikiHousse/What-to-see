@@ -1,5 +1,5 @@
 const genresMax = 9;
-const all = `All genre`;
+const all = `All genres`;
 
 const User = {
   email: `Oliver.conner@gmail.com`,
@@ -165,6 +165,63 @@ const Film = [
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     run_time: `99`,
     genre: `Comedy`,
+    released: `2005`,
+    is_favorite: false
+  },
+  {
+    id: `9`,
+    name: `Johnny English`,
+    poster_image: `img/johnny-english.jpg`,
+    preview_image: `img/johnny-english.jpg`,
+    background_image: `img/the-grand-budapest-hotel-bg.jpg`,
+    background_color: `#ffffff`,
+    video_link: `video/trailer.webm`,
+    preview_video_link: `../markup/video/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+    rating: `8.9`,
+    scores_count: `240`,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+    run_time: `99`,
+    genre: `Crime`,
+    released: `2005`,
+    is_favorite: false
+  },
+  {
+    id: `10`,
+    name: `Johnny English`,
+    poster_image: `img/johnny-english.jpg`,
+    preview_image: `img/johnny-english.jpg`,
+    background_image: `img/the-grand-budapest-hotel-bg.jpg`,
+    background_color: `#ffffff`,
+    video_link: `video/trailer.webm`,
+    preview_video_link: `../markup/video/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+    rating: `8.9`,
+    scores_count: `240`,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+    run_time: `99`,
+    genre: `Crime`,
+    released: `2005`,
+    is_favorite: false
+  },
+  {
+    id: `11`,
+    name: `Johnny English`,
+    poster_image: `img/johnny-english.jpg`,
+    preview_image: `img/johnny-english.jpg`,
+    background_image: `img/the-grand-budapest-hotel-bg.jpg`,
+    background_color: `#ffffff`,
+    video_link: `video/trailer.webm`,
+    preview_video_link: `../markup/video/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+    rating: `8.9`,
+    scores_count: `240`,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+    run_time: `99`,
+    genre: `Crime`,
     released: `2005`,
     is_favorite: false
   },
