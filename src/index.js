@@ -1,15 +1,13 @@
 import React from "react";
 import ReactDom from 'react-dom'
-import { configureStore, createAsyncThunk, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import { applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
 
 import {createAPI} from './api'
 import App from './components/app/app'
 import { MovieСategories, Rating, MovieMoreLike ,Film, AuthInfo, MovieReviews} from './mock-data'
 import rootReducer from "./redux/root-reducer";
-import thunk from "redux-thunk";
+import { fetchFilmsList } from "./redux/api-action";
 
 const api = createAPI()
 
@@ -20,8 +18,10 @@ const store = configureStore({
     thunk: {
       extraArgument: api
     },
-  })
+  }),
 })
+
+store.dispatch(fetchFilmsList())
 
 ReactDom.render(
   <Provider store={store}>

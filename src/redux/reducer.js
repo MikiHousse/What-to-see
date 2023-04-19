@@ -1,8 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
-import {all, Film} from '../mock-data'
+import {all} from '../mock-data'
 import { genreChange, loadFilms, resetGenre } from "./actions";
 import {adapterFilms} from '../adapter'
-import createAPI from "../api";
 
 
 const firstGenre = all
@@ -10,7 +9,7 @@ const firstGenre = all
 const initialState = {
   genre: firstGenre,
   films: [],
-  loadsFilms: false
+  isDataLoaded: false
 }
 
 export const filmsData = createReducer(initialState, (builder) => {
@@ -20,7 +19,7 @@ export const filmsData = createReducer(initialState, (builder) => {
     })
     .addCase(loadFilms, (state, action) => {
       state.films = adapterFilms(action.payload);
-      state.loadsFilms = true
+      state.isDataLoaded = true;
     })
     .addCase(resetGenre, (state) => {
       state.genre = MovieСategories[0]

@@ -8,7 +8,7 @@ const genreChange = createAction(SELECT_GENRE, (genre) => ({
 const resetGenre = createAction(RESET_GENRE)
 
 const loadFilms = createAction(LOAD_FILMS, (films) => ({
-  payload: films
+  payload: films,
 }))
 
 

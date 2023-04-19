@@ -14,6 +14,7 @@ import {
   AuthInfoTypes,
   MovieReviewsTypes,
 } from "../../prop-types/prop";
+import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // в будущем вывести этот объект в отельный js файл
@@ -70,6 +71,11 @@ const App = ({
   );
 };
 
+const mapStateToProps = (state) => ({
+  films: state.films,
+  loadsFilms: state.loadsFilms,
+});
+
 App.protTypes = {
   movieСategories: PropTypes.arrayOf(MovieСategoriesTypes.isRequired),
   film: PropTypes.arrayOf(FilmTypes.isRequired),
@@ -78,4 +84,5 @@ App.protTypes = {
   movieReviews: PropTypes.arrayOf(MovieReviewsTypes.isRequired),
 };
 
-export default App;
+export { App };
+export default connect(mapStateToProps, null)(App);

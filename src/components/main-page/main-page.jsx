@@ -32,6 +32,7 @@ const MainPage = (props) => {
   };
 
   const movieList = filtredMovieList(films);
+  console.log(movieList);
 
   return (
     <>
