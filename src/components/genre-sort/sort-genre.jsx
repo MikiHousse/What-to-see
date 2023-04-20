@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { genresMax } from "../../mock-data";
 
 const SortGenre = ({ films, genre, onClick }) => {
   const filmGenres = films.map((film) => film.genre);

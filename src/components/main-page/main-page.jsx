@@ -10,14 +10,15 @@ import { all } from "../../mock-data";
 import MovieList from "../movie-list/movie-list";
 import { Link } from "react-router-dom";
 import { SortGenre } from "../genre-sort/sort-genre";
-import { getGenre, getFilms } from "../../redux/selectors";
+import { getGenre, getFilms, getCountFilmList } from "../../redux/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { genreChange } from "../../redux/actions";
+import { genreChange, moreFilms } from "../../redux/actions";
 
 const MainPage = (props) => {
   const { authInfo } = props;
   const films = useSelector(getFilms);
   const genre = useSelector(getGenre);
+  const filmList = useSelector(getCountFilmList);
   const dispatch = useDispatch();
 
   const onSelectGenreClick = (filmGenre) => {
@@ -31,8 +32,11 @@ const MainPage = (props) => {
     return list.filter((item) => item.genre === genre);
   };
 
+  const showMore = () => {
+    dispatch(moreFilms(filmList));
+  };
+
   const movieList = filtredMovieList(films);
-  console.log(movieList);
 
   return (
     <>
@@ -218,12 +222,20 @@ const MainPage = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <SortGenre films={films} genre={genre} onClick={onSelectGenreClick} />
-          <MovieList film={movieList} />
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">
-              Show more
-            </button>
-          </div>
+          <MovieList films={movieList} filmList={filmList} />
+          {movieList.length > filmList ? (
+            <div className="catalog__more">
+              <button
+                className="catalog__button"
+                type="button"
+                onClick={() => showMore(filmList)}
+              >
+                Show more
+              </button>
+            </div>
+          ) : (
+            ``
+          )}
         </section>
 
         <footer className="page-footer">

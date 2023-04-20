@@ -7,6 +7,7 @@ import MoviePage from "../movie-page/movie-page";
 import AddReviews from "../add-reviews/add-reviews";
 import Player from "../player/player";
 import NotFoundPage from "../not-found-page/not-fountd-page";
+import Loading from "../spinner/Loading";
 import {
   MovieСategoriesTypes,
   FilmTypes,
@@ -14,7 +15,8 @@ import {
   AuthInfoTypes,
   MovieReviewsTypes,
 } from "../../prop-types/prop";
-import { connect } from "react-redux";
+import { getDataLoadedStatus } from "../../redux/selectors";
+import { connect, useSelector } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // в будущем вывести этот объект в отельный js файл
@@ -30,6 +32,12 @@ const App = ({
   authInfo,
   movieReviews,
 }) => {
+  const isDataLoaded = useSelector(getDataLoadedStatus);
+
+  if (false === isDataLoaded) {
+    return <Loading />;
+  }
+
   return (
     <>
       <Router>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Videoplayer from "../videoplayer/videoplayer";
 
 const MovieCard = ({ item = {} }) => {
-  const { preview_image, name, video_link } = item;
+  const { previewImage, name, videoLink } = item;
   const [play, setPlay] = useState(false);
 
   const videoRef = useRef();
@@ -25,8 +25,8 @@ const MovieCard = ({ item = {} }) => {
     >
       <div className="small-movie-card__image">
         <Videoplayer
-          videoLink={video_link}
-          img={preview_image}
+          videoLink={videoLink}
+          img={previewImage}
           play={play}
           videoRef={videoRef}
         />

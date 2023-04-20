@@ -1,4 +1,4 @@
-const genresMax = 9;
+const countList = 8;
 const all = `All genres`;
 
 const route = {
@@ -440,4 +440,4 @@ const Rating = [
   },
 ]
 
-export { MovieСategories, MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User, genresMax, all, route}
+export { MovieСategories, MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User, countList, all, route}
