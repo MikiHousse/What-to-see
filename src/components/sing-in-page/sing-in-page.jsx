@@ -1,7 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { getAuthorizationStatus } from "../../redux/selectors";
+import { AppRoute } from "../../const";
+import { AuthorizationStatus } from "../../mock-data";
+import { loginAction } from "../../redux/api-action";
 
-const SingInPage = ({ authInfo }) => {
+const SingInPage = () => {
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
+  const dispatch = useDispatch();
+
+  const userIsAuth = (authorizationStatus) => {
+    console.log(authorizationStatus === AuthorizationStatus.AUTH);
+    authorizationStatus === AuthorizationStatus.AUTH;
+  };
+
+  if (userIsAuth(authorizationStatus)) {
+    return <Redirect to={AppRoute.MAIN} />;
+  }
+
+  const onSubmit = (authorizationData) =>
+    dispatch(loginAction(authorizationData));
+
   return (
     <>
       <div className="visually-hidden">

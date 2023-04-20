@@ -1,6 +1,12 @@
 const countList = 8;
 const all = `All genres`;
 
+const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
+}
+
 const route = {
   FILMS: '/films',
   FILMS_ID: '/films/',
@@ -440,4 +446,4 @@ const Rating = [
   },
 ]
 
-export { MovieСategories, MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User, countList, all, route}
+export { MovieСategories, MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User, countList, all, route, AuthorizationStatus}

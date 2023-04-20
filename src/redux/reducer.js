@@ -1,7 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
-import {all, countList} from '../mock-data'
-import { genreChange, loadFilms, resetGenre, moreFilms } from "./actions";
+import {all, countList, AuthorizationStatus} from '../mock-data'
+import { genreChange, loadFilms, resetGenre, moreFilms, requireAuthorization, submitLogin } from "./actions";
 import {adapterFilms} from '../adapter'
+import { loginAction } from "./api-action";
 
 
 const firstGenre = all
@@ -10,7 +11,8 @@ const initialState = {
   genre: firstGenre,
   films: [],
   isDataLoaded: false,
-  countFilmsList: countList
+  countFilmsList: countList,
+  authorizationStatus: AuthorizationStatus.NO_AUTH
 }
 
 export const filmsData = createReducer(initialState, (builder) => {
@@ -27,5 +29,11 @@ export const filmsData = createReducer(initialState, (builder) => {
     })
     .addCase(moreFilms, (state, action) => {
       state.countFilmsList = action.payload + countList
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(submitLogin, (_, action) => {
+      loginAction(action.payload)
     })
 })

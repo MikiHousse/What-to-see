@@ -5,11 +5,13 @@ import { Provider } from "react-redux";
 
 import {createAPI} from './api'
 import App from './components/app/app'
-import { MovieСategories, Rating, MovieMoreLike ,Film, AuthInfo, MovieReviews} from './mock-data'
+import { MovieСategories, Rating, MovieMoreLike ,Film, AuthInfo, MovieReviews, AuthorizationStatus} from './mock-data'
 import rootReducer from "./redux/root-reducer";
-import { fetchFilmsList } from "./redux/api-action";
+import { checkAuthAction, fetchFilmsList } from "./redux/api-action";
+import { requireAuthorization } from "./redux/actions";
+import { redirect } from "./redirect";
 
-const api = createAPI()
+const api = createAPI(() => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)))
 
 const store = configureStore({
   reducer: rootReducer,
@@ -18,9 +20,10 @@ const store = configureStore({
     thunk: {
       extraArgument: api
     },
-  }),
+  }).concat(redirect)
 })
 
+store.dispatch(checkAuthAction())
 store.dispatch(fetchFilmsList())
 
 ReactDom.render(
