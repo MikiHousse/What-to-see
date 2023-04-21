@@ -5,7 +5,8 @@ import { Provider } from "react-redux";
 
 import {createAPI} from './api'
 import App from './components/app/app'
-import { MovieСategories, Rating, MovieMoreLike ,Film, AuthInfo, MovieReviews, AuthorizationStatus} from './mock-data'
+import {Rating, MovieMoreLike ,Film, AuthInfo, MovieReviews} from './mock-data'
+import { AuthorizationStatus } from "./utils/const";
 import rootReducer from "./redux/root-reducer";
 import { checkAuthAction, fetchFilmsList } from "./redux/api-action";
 import { requireAuthorization } from "./redux/actions";
@@ -28,7 +29,7 @@ store.dispatch(fetchFilmsList())
 
 ReactDom.render(
   <Provider store={store}>
-      <App movieСategories={MovieСategories} rating={Rating} movieMoreLike={MovieMoreLike} film={Film} authInfo={AuthInfo} movieReviews={MovieReviews}/>
+      <App rating={Rating} movieMoreLike={MovieMoreLike} film={Film} authInfo={AuthInfo} movieReviews={MovieReviews}/>
   </Provider>,
   document.getElementById(`root`),
 );

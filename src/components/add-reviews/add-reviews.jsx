@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const AddReviews = ({ rating, film, authInfo }) => {
-  const [review, setReviev] = useState("");
+const ratingArr = () => {
+  let arr = [];
+  for (let i = 0; i < 10; i++) {
+    arr.push(i);
+  }
+  return arr;
+};
+
+const AddReviews = ({ film, authInfo }) => {
+  const [_, setReviev] = useState("");
+  const rating = ratingArr();
+
   return (
     <>
       <div className="visually-hidden">
@@ -166,27 +176,18 @@ const AddReviews = ({ rating, film, authInfo }) => {
               <div className="rating__stars">
                 {rating.map((item) => {
                   return (
-                    <input
-                      key={item.id}
-                      className="rating__input"
-                      id={item.star}
-                      type="radio"
-                      name="rating"
-                      value={item.value}
-                    />
-                  );
-                })}
-                {rating.map((item) => {
-                  return (
-                    <label
-                      key={item.id}
-                      onClick={() => console.log(item.value)}
-                      className="rating__label"
-                      htmlFor={item.star}
-                      defaultChecked={item.value}
-                    >
-                      {item.name}
-                    </label>
+                    <React.Fragment key={item}>
+                      <input
+                        className="rating__input"
+                        id={`star-${item}`}
+                        type="radio"
+                        name="rating"
+                        value={item}
+                      />
+                      <label className="rating__label" htmlFor={`star-${item}`}>
+                        Rating {item}
+                      </label>
+                    </React.Fragment>
                   );
                 })}
               </div>

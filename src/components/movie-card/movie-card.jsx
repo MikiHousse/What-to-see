@@ -40,8 +40,4 @@ const MovieCard = ({ item = {} }) => {
   );
 };
 
-// MovieCard.propTypes = {
-
-// };
-
 export default MovieCard;

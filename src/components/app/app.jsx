@@ -15,48 +15,41 @@ import {
   AuthInfoTypes,
   MovieReviewsTypes,
 } from "../../prop-types/prop";
-import { getDataLoadedStatus } from "../../redux/selectors";
+import { getDataLoadedStatus } from "../../redux/films-data/films-selectors";
+import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 import { connect, useSelector } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
+import browserHistory from "../../browserHistory";
+import PrivateRoute from "../private-route/private-route";
+import { AppRoute } from "../../utils/const";
 
-// в будущем вывести этот объект в отельный js файл
-const AppRoute = {
-  ROOT: `/`,
-};
-
-const App = ({
-  movieСategories,
-  rating,
-  movieMoreLike,
-  film,
-  authInfo,
-  movieReviews,
-}) => {
+const App = ({ rating, movieMoreLike, film, authInfo, movieReviews }) => {
   const isDataLoaded = useSelector(getDataLoadedStatus);
-
+  const authorizationStatus = useSelector(getAuthorizationStatus);
   if (false === isDataLoaded) {
     return <Loading />;
   }
 
   return (
-    <>
+    <BrowserRouter history={browserHistory}>
       <Router>
         <Switch>
-          <Route path={AppRoute.ROOT} exact>
-            <MainPage
-              movieСategories={movieСategories}
-              selectedMovieCategories={movieСategories[0]}
-              authInfo={authInfo}
-              film={film}
-            />
+          <Route path={AppRoute.MAIN} exact>
+            <MainPage authInfo={authInfo} />
           </Route>
           <Route path="/login" exact>
             <SingInPage authInfo={authInfo} />
           </Route>
-          <Route path="/mylist" exact>
-            <MyList movieMoreLike={movieMoreLike} authInfo={authInfo} />
-          </Route>
-          <Route path="/films/:id" exact>
+          <PrivateRoute
+            path={AppRoute.MY_LIST}
+            exact
+            authorizationStatus={authorizationStatus}
+            render={() => (
+              <MyList movieMoreLike={movieMoreLike} authInfo={authInfo} />
+            )}
+          ></PrivateRoute>
+          <Route path={AppRoute.FILM} exact>
             <MoviePage
               film={film[0]}
               movieMoreLike={movieMoreLike}
@@ -64,18 +57,26 @@ const App = ({
               movieReviews={movieReviews}
             />
           </Route>
-          <Route path="/films/:id/review" exact>
-            <AddReviews rating={rating} film={film[0]} authInfo={authInfo} />
-          </Route>
-          <Route path="/player/:id" exact>
-            <Player film={film} />
-          </Route>
+          <PrivateRoute
+            path={AppRoute.REVIEW}
+            exact
+            authorizationStatus={authorizationStatus}
+            render={() => (
+              <AddReviews rating={rating} film={film[0]} authInfo={authInfo} />
+            )}
+          ></PrivateRoute>
+          <PrivateRoute
+            path={AppRoute.PLAYER}
+            exact
+            authorizationStatus={authorizationStatus}
+            render={() => <Player film={film} />}
+          ></PrivateRoute>
           <Route>
             <NotFoundPage />
           </Route>
         </Switch>
       </Router>
-    </>
+    </BrowserRouter>
   );
 };
 

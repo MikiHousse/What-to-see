@@ -1,22 +1,3 @@
-const countList = 8;
-const all = `All genres`;
-
-const AuthorizationStatus = {
-  AUTH: 'AUTH',
-  NO_AUTH: 'NO_AUTH',
-  UNKNOWN: 'UNKNOWN',
-}
-
-const route = {
-  FILMS: '/films',
-  FILMS_ID: '/films/',
-  PROMO: '/promo',
-  FAVORITE: '/favorite',
-  LOGIN: '/login',
-  LOGOUT: '/logout',
-  COMMENTS: '/comments',
-};
-
 const User = {
   email: `Oliver.conner@gmail.com`,
   password: `12345678`
@@ -243,49 +224,6 @@ const Film = [
   },
 ]
 
-const MovieСategories = [
-  {
-    id: `1`,
-    name: `All genres`
-  },
-  {
-    id: `2`,
-    name: `Comedies`
-  },
-  {
-    id: `3`,
-    name: `Crime`
-  },
-    {
-    id: `4`,
-    name: `Documentary`
-  },
-  {
-    id: `5`,
-    name: `Dramas`
-  },
-  {
-    id: `6`,
-    name: `Horror`
-  },
-  {
-    id: `7`,
-    name: `Kids & Family`
-  },
-  {
-    id: `8`,
-    name: `Romance`
-  },
-  {
-    id: `9`,
-    name: `Sci-Fi`
-  },
-    {
-    id: `10`,
-    name: `Thrillers`
-  },
-];
-
 const MovieMoreLike = [
   {
     id: `1`,
@@ -446,4 +384,4 @@ const Rating = [
   },
 ]
 
-export { MovieСategories, MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User, countList, all, route, AuthorizationStatus}
+export {MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User}

@@ -6,13 +6,18 @@ import {
   AuthInfoTypes,
 } from "../../prop-types/prop";
 
-import { all } from "../../mock-data";
+import { ALL_GENRES } from "../../utils/const";
 import MovieList from "../movie-list/movie-list";
 import { Link } from "react-router-dom";
 import { SortGenre } from "../genre-sort/sort-genre";
-import { getGenre, getFilms, getCountFilmList } from "../../redux/selectors";
+import {
+  getGenre,
+  getFilms,
+  getCountFilmList,
+} from "../../redux/films-data/films-selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { genreChange, moreFilms } from "../../redux/actions";
+import ShowMore from "../show-more/show-more";
 
 const MainPage = (props) => {
   const { authInfo } = props;
@@ -26,7 +31,7 @@ const MainPage = (props) => {
   };
 
   const filtredMovieList = (list) => {
-    if (genre === all) {
+    if (genre === ALL_GENRES) {
       return list;
     }
     return list.filter((item) => item.genre === genre);
@@ -224,15 +229,7 @@ const MainPage = (props) => {
           <SortGenre films={films} genre={genre} onClick={onSelectGenreClick} />
           <MovieList films={movieList} filmList={filmList} />
           {movieList.length > filmList ? (
-            <div className="catalog__more">
-              <button
-                className="catalog__button"
-                type="button"
-                onClick={() => showMore(filmList)}
-              >
-                Show more
-              </button>
-            </div>
+            <ShowMore showMore={showMore} filmList={filmList} />
           ) : (
             ``
           )}
