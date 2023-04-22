@@ -3,31 +3,31 @@ import Videoplayer from "../videoplayer/videoplayer";
 
 const MovieCard = ({ item = {} }) => {
   const { previewImage, name, videoLink } = item;
-  const [play, setPlay] = useState(false);
+  const [isPlay, setIsPlay] = useState(false);
 
   const videoRef = useRef();
 
   useEffect(() => {
-    let left;
-    if (play) {
-      left = setTimeout(() => videoRef.current.play(), 1000);
+    let delay;
+    if (isPlay) {
+      delay = setTimeout(() => videoRef.current.play(), 1000);
     } else {
       videoRef.current.load();
     }
-    return () => clearTimeout(left);
-  }, [play]);
+    return () => clearTimeout(delay);
+  }, [isPlay]);
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onMouseEnter={() => setPlay(true)}
-      onMouseLeave={() => setPlay(false)}
+      onMouseEnter={() => setIsPlay(true)}
+      onMouseLeave={() => setIsPlay(false)}
     >
       <div className="small-movie-card__image">
         <Videoplayer
           videoLink={videoLink}
           img={previewImage}
-          play={play}
+          play={isPlay}
           videoRef={videoRef}
         />
       </div>

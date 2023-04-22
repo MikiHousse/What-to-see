@@ -27,6 +27,7 @@ import { AppRoute } from "../../utils/const";
 const App = ({ rating, movieMoreLike, film, authInfo, movieReviews }) => {
   const isDataLoaded = useSelector(getDataLoadedStatus);
   const authorizationStatus = useSelector(getAuthorizationStatus);
+
   if (false === isDataLoaded) {
     return <Loading />;
   }
@@ -36,10 +37,10 @@ const App = ({ rating, movieMoreLike, film, authInfo, movieReviews }) => {
       <Router>
         <Switch>
           <Route path={AppRoute.MAIN} exact>
-            <MainPage authInfo={authInfo} />
+            <MainPage />
           </Route>
-          <Route path="/login" exact>
-            <SingInPage authInfo={authInfo} />
+          <Route path={AppRoute.LOGIN} exact>
+            <SingInPage />
           </Route>
           <PrivateRoute
             path={AppRoute.MY_LIST}

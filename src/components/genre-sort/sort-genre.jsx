@@ -1,15 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { AppRoute } from "../../utils/const";
 
 const SortGenre = ({ films, genre, onClick }) => {
-  const filmGenres = films.map((film) => film.genre);
+  const genresFilms = films.map((film) => film.genre);
 
-  const filtredGenres = Array.from(new Set(filmGenres));
-  filtredGenres.unshift("All genres");
+  const genresFiltred = Array.from(new Set(genresFilms));
+  genresFiltred.unshift("All genres");
 
   return (
     <ul className="catalog__genres-list">
-      {filtredGenres.map((item) => {
+      {genresFiltred.map((item) => {
         const active = genre === item ? `catalog__genres-item--active` : ``;
 
         return (
@@ -21,7 +22,7 @@ const SortGenre = ({ films, genre, onClick }) => {
               onClick(item);
             }}
           >
-            <Link to="/" className="catalog__genres-link">
+            <Link to={AppRoute.MAIN} className="catalog__genres-link">
               {item}
             </Link>
           </li>

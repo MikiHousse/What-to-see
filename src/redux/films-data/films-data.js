@@ -1,13 +1,10 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { ALL_GENRES, LIST_COUNT_FILMS } from "../../utils/const";
-import { genreChange, loadFilms, resetGenre, moreFilms, } from "../actions";
-import {adapterFilms} from '../adapter'
-
-
-const firstGenre = ALL_GENRES
+import { genreChange, loadFilms, resetGenre, moreFilms, } from "../films-data/films-actions";
+import {adapterFilms} from './adapter'
 
 const initialState = {
-  genre: firstGenre,
+  genre: ALL_GENRES,
   films: [],
   isDataLoaded: false,
   countFilmsList: LIST_COUNT_FILMS,
@@ -28,10 +25,4 @@ export const filmsData = createReducer(initialState, (builder) => {
     .addCase(moreFilms, (state, action) => {
       state.countFilmsList = action.payload + LIST_COUNT_FILMS
     })
-    // .addCase(requireAuthorization, (state, action) => {
-    //   state.authorizationStatus = action.payload;
-    // })
-    // .addCase(submitLogin, (_, action) => {
-    //   loginAction(action.payload)
-    // })
 })

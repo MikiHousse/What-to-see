@@ -3,13 +3,14 @@ import ReactDom from 'react-dom'
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
-import {createAPI} from './api'
+import { createAPI } from './api'
 import App from './components/app/app'
 import {Rating, MovieMoreLike ,Film, AuthInfo, MovieReviews} from './mock-data'
 import { AuthorizationStatus } from "./utils/const";
 import rootReducer from "./redux/root-reducer";
-import { checkAuthAction, fetchFilmsList } from "./redux/api-action";
-import { requireAuthorization } from "./redux/actions";
+import { checkAuthAction } from "./redux/user-data/user-api-action";
+import { fetchFilmsList } from "./redux/films-data/films-api-action";
+import { requireAuthorization } from "./redux/user-data/user-actions";
 import { redirect } from "./redirect";
 
 const api = createAPI(() => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)))

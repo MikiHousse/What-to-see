@@ -1,8 +1,3 @@
-const User = {
-  email: `Oliver.conner@gmail.com`,
-  password: `12345678`
-}
-
 const AuthInfo = [
   {
     id: `1`,
@@ -384,4 +379,4 @@ const Rating = [
   },
 ]
 
-export {MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo,User}
+export {MovieMoreLike, MovieReviews, Rating, CommentPost, Film, AuthInfo}

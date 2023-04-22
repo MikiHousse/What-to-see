@@ -1,4 +1,4 @@
-import { REDIRECT_TO_ROUTE } from "./redux/action-type"
+import { REDIRECT_TO_ROUTE } from "./redux/user-data/user-action-type"
 import browserHistory from "./browserHistory"
 
 export const redirect = (_store) => (next) => (action) => {
