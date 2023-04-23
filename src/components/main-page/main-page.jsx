@@ -19,7 +19,7 @@ import { genreChange, moreFilms } from "../../redux/films-data/films-actions";
 import ShowMore from "../show-more/show-more";
 import Footer from "../footer/footer";
 import User from "../headers/user";
-import { filtredMovieList } from "../../utils/utils";
+import { filtrMovieList } from "../../utils/utils";
 
 const MainPage = () => {
   const films = useSelector(getFilms);
@@ -35,7 +35,7 @@ const MainPage = () => {
     dispatch(moreFilms(filmList));
   };
 
-  const movieList = filtredMovieList(films, genre);
+  const movieList = filtrMovieList(films, genre);
 
   return (
     <>

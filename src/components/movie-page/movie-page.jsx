@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import MoviePageDesc from "./movie-page-desc/movie-page-desc";
@@ -13,9 +13,36 @@ import {
 } from "../../prop-types/prop";
 import Footer from "../footer/footer";
 import User from "../headers/user";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Loading from "../spinner/Loading";
+import {
+  getSelectFilm,
+  getSelectFilmLoaded,
+} from "../../redux/films-data/films-selectors";
+import { fetchSelectedFilm } from "../../redux/films-data/films-api-action";
 
 const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  console.log(id);
+
+  const selectFilm = useSelector(getSelectFilm);
+  const isSelectFilmLoaded = useSelector(getSelectFilmLoaded);
+  console.log(selectFilm);
   const [select, setSelect] = useState("desk");
+
+  useEffect(() => {
+    dispatch(fetchSelectedFilm(id));
+  }, [dispatch, id]);
+
+  if (isSelectFilmLoaded) {
+    return <Loading />;
+  }
+
+  const { name, posterImage, bacgroundImage, genre, released, isFavorite } =
+    selectFilm;
 
   const getByType = (type) => {
     switch (type) {
@@ -46,7 +73,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{film.name}</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{film.genre}</span>
                 <span className="movie-card__year">{film.released}</span>

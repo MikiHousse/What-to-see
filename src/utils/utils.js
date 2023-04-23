@@ -8,7 +8,7 @@ export const starArr = () => {
   return arr;
 };
 
-export const filtredMovieList = (list, genre) => {
+export const filtrMovieList = (list, genre) => {
   if (genre === ALL_GENRES) {
     return list;
   }

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Videoplayer from "../videoplayer/videoplayer";
+import { AppRoute } from "../../utils/const";
 
 const MovieCard = ({ item = {} }) => {
   const { previewImage, name, videoLink } = item;
@@ -32,7 +33,7 @@ const MovieCard = ({ item = {} }) => {
         />
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="/">
+        <a className="small-movie-card__link" href={AppRoute.FILM}>
           {name}
         </a>
       </h3>
