@@ -6,5 +6,8 @@ export const getCountFilmList = (state) => state[NameSpace.FILMS].countFilmsList
 export const getDataLoadedStatus = (state) => state[NameSpace.FILMS].isDataLoaded;
 export const getSelectFilm = (state) => state[NameSpace.FILMS].selectFilm;
 export const getSelectFilmLoaded = (state) => state[NameSpace.FILMS].isSelectFilmLoaded;
+export const getReviewsFilm = (state) => state[NameSpace.FILMS].reviews;
+export const getReviewStatus = (state) => state[NameSpace.FILMS].isReviewsLoaded;
+export const getReviewSendingStatus = (state) => state[NameSpace.FILMS].isReviewsSending;
 
 

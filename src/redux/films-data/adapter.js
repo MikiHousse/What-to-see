@@ -43,8 +43,8 @@ export const selectAdapterFilm = (item) => {
     genre: item.genre,
     released: item.released,
     isFavorite: item.is_favorite,
-}
-return film
+  };
+  return film
 }
 
 

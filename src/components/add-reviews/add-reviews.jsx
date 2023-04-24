@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../logo/logo";
 import { starArr } from "../../utils/utils";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const AddReviews = ({ film, authInfo }) => {
   const [_, setReviev] = useState("");
   const rating = starArr();
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
   return (
     <>

@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Videoplayer from "../videoplayer/videoplayer";
-import { AppRoute } from "../../utils/const";
+import { AppRoute, ApiRoute } from "../../utils/const";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const MovieCard = ({ item = {} }) => {
-  const { previewImage, name, videoLink } = item;
+  const { previewImage, name, videoLink, id } = item;
   const [isPlay, setIsPlay] = useState(false);
 
   const videoRef = useRef();
@@ -33,9 +34,9 @@ const MovieCard = ({ item = {} }) => {
         />
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href={AppRoute.FILM}>
-          {name}
-        </a>
+        <Link className="small-movie-card__link" to={`${ApiRoute.FILMS}/${id}`}>
+          {name}`
+        </Link>
       </h3>
     </article>
   );

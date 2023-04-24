@@ -17,41 +17,49 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../spinner/Loading";
 import {
+  getReviewsFilm,
   getSelectFilm,
   getSelectFilmLoaded,
 } from "../../redux/films-data/films-selectors";
-import { fetchSelectedFilm } from "../../redux/films-data/films-api-action";
+import {
+  fetchReviewsFilm,
+  fetchSelectedFilm,
+} from "../../redux/films-data/films-api-action";
+import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
+import { AuthorizationStatus } from "../../utils/const";
+import { ApiRoute } from "../../utils/const";
 
 const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
   const { id } = useParams();
   const dispatch = useDispatch();
-
-  console.log(id);
-
+  const review = useSelector(getReviewsFilm);
+  console.log(review);
   const selectFilm = useSelector(getSelectFilm);
   const isSelectFilmLoaded = useSelector(getSelectFilmLoaded);
-  console.log(selectFilm);
   const [select, setSelect] = useState("desk");
 
   useEffect(() => {
     dispatch(fetchSelectedFilm(id));
+    dispatch(fetchReviewsFilm(id));
   }, [dispatch, id]);
 
-  if (isSelectFilmLoaded) {
+  if (!isSelectFilmLoaded) {
     return <Loading />;
   }
 
-  const { name, posterImage, bacgroundImage, genre, released, isFavorite } =
+  const { name, posterImage, backgroundImage, genre, released, isFavorite } =
     selectFilm;
 
   const getByType = (type) => {
     switch (type) {
       case "desk":
-        return <MoviePageDesc film={film} />;
+        return <MoviePageDesc film={selectFilm} />;
       case "details":
-        return <MoviePageDetails film={film} />;
+        return <MoviePageDetails film={selectFilm} />;
       case "reviews":
-        return <MoviePageReviews movieReviews={movieReviews} />;
+        return <MoviePageReviews movieReviews={movieReviews} review={review} />;
     }
     return <MoviePageDesc film={film} />;
   };
@@ -61,10 +69,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              alt="The Grand Budapest Hotel"
-            />
+            <img src={backgroundImage} alt="The Grand Budapest Hotel" />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -75,8 +80,8 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{film.genre}</span>
-                <span className="movie-card__year">{film.released}</span>
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -94,13 +99,27 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
                   type="button"
                 >
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
+                    {isFavorite ? (
+                      <use xlinkHref="#in-list"></use>
+                    ) : (
+                      <use xlinkHref="#add"></use>
+                    )}
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to="/films/:id/review" className="btn movie-card__button">
+                {authorizationStatus === AuthorizationStatus.AUTH ? (
+                  <Link
+                    to={`${ApiRoute.COMMENTS}/${id}`}
+                    className="btn movie-card__button"
+                  >
+                    Add review
+                  </Link>
+                ) : (
+                  ``
+                )}
+                {/* <Link to="/films/:id/review" className="btn movie-card__button">
                   Add review
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
@@ -109,12 +128,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
-                width="218"
-                height="327"
-              />
+              <img src={posterImage} alt={name} width="218" height="327" />
             </div>
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
