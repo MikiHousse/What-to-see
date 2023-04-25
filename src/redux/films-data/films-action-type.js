@@ -6,3 +6,4 @@ export const SELECT_FILM = `@film/selectFilm`
 export const REVIEWS_FILM = `@film/reviewsFilm`
 export const REVIEW_SENDING = `@film/reviewsSending`
 export const REDIRECT_TO_ROUTE = `@film/redirectToRoute`
+export const REVIEW_IS_LOADING = `@film/reviewIsLoading`

@@ -1,5 +1,5 @@
 import { ApiRoute } from "../../utils/const";
-import { loadFilms, redirectToRoute, reviewFilm, selectedFilm } from "./films-actions";
+import { loadFilms, redirectToRoute, selectedFilm, loadReviews, reviewIsLoading } from "./films-actions";
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => {
   api.get(ApiRoute.FILMS)
@@ -14,14 +14,14 @@ export const fetchSelectedFilm = (id) => (dispatch, _getState, api) => (
 
 export const fetchReviewsFilm = (id) => (dispatch, _getState, api) => (
     api.get(`${ApiRoute.COMMENTS}/${id}`)
-      .then(({data}) => dispatch(reviewFilm(data)))
+      .then(({data}) => dispatch(loadReviews(data)))
       .catch(() => {})
   )
 
-export const fetchSendingReview = (id) => (dispatch, _getState, api) => (
+export const sendingReview = ({rating, comment}, id) => (dispatch, _getState, api) => (
     api.post(`${ApiRoute.COMMENTS}/${id}`, {rating, comment})
-      .then(({data}) => dispatch(reviewSending(data)))
+      .then(({data}) => dispatch(loadReviews(data)))
       .then(() => dispatch(redirectToRoute(`${ApiRoute.FILMS}/${id}`)))
-      .then(() => dispatch(isReviewsLoaded(false)))
-      .catch(() => dispatch(isReviewsLoaded(false)))
+      .then(() => dispatch(reviewIsLoading(false)))
+      .catch(() => dispatch(reviewIsLoading(false)))
   )

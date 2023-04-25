@@ -3,7 +3,7 @@ const AppRoute = {
   MAIN: '/',
   MY_LIST: '/mylist',
   FILM: '/films/:id',
-  REVIEW: '/comments/:id',
+  REVIEW: '/films/:id/review',
   PLAYER: '/player/:id',
   NOT_FOUND: '/not-found'
 }

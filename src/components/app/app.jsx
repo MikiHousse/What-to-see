@@ -58,14 +58,27 @@ const App = ({ rating, movieMoreLike, film, authInfo, movieReviews }) => {
               movieReviews={movieReviews}
             />
           </Route>
-          <PrivateRoute
-            path={AppRoute.REVIEW}
+          {/* <PrivateRoute
+            path={`/films/:id/review`}
             exact
             authorizationStatus={authorizationStatus}
             render={() => (
-              <AddReviews rating={rating} film={film[0]} authInfo={authInfo} />
+              <AddReviews
+                path={`/films/:id/review`}
+                exact
+                rating={rating}
+                authInfo={authInfo}
+              />
             )}
-          ></PrivateRoute>
+          ></PrivateRoute> */}
+          <Route>
+            <AddReviews
+              path={`/films/:id/review`}
+              exact
+              rating={rating}
+              authInfo={authInfo}
+            />
+          </Route>
           <PrivateRoute
             path={AppRoute.PLAYER}
             exact

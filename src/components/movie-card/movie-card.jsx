@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Videoplayer from "../videoplayer/videoplayer";
-import { AppRoute, ApiRoute } from "../../utils/const";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { ApiRoute } from "../../utils/const";
+import { Link } from "react-router-dom";
 
 const MovieCard = ({ item = {} }) => {
   const { previewImage, name, videoLink, id } = item;

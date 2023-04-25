@@ -35,7 +35,6 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const review = useSelector(getReviewsFilm);
-  console.log(review);
   const selectFilm = useSelector(getSelectFilm);
   const isSelectFilmLoaded = useSelector(getSelectFilmLoaded);
   const [select, setSelect] = useState("desk");
@@ -48,7 +47,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
   if (!isSelectFilmLoaded) {
     return <Loading />;
   }
-
+  console.log("Это айди карточки фильма" + "  " + id);
   const { name, posterImage, backgroundImage, genre, released, isFavorite } =
     selectFilm;
 
@@ -107,19 +106,17 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                {authorizationStatus === AuthorizationStatus.AUTH ? (
-                  <Link
-                    to={`${ApiRoute.COMMENTS}/${id}`}
-                    className="btn movie-card__button"
-                  >
-                    Add review
-                  </Link>
+                {/* {authorizationStatus === AuthorizationStatus.AUTH ? (
+
                 ) : (
                   ``
-                )}
-                {/* <Link to="/films/:id/review" className="btn movie-card__button">
+                )} */}
+                <Link
+                  to={`/films/${id}/review`}
+                  className="btn movie-card__button"
+                >
                   Add review
-                </Link> */}
+                </Link>
               </div>
             </div>
           </div>

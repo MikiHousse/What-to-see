@@ -1,22 +1,55 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import Logo from "../logo/logo";
 import { starArr } from "../../utils/utils";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getReviewSendingStatus,
+  getSelectFilm,
+} from "../../redux/films-data/films-selectors";
+import { reviewIsLoading } from "../../redux/films-data/films-actions";
+import { sendingReview } from "../../redux/films-data/films-api-action";
+import { ApiRoute } from "../../utils/const";
 
-const AddReviews = ({ film, authInfo }) => {
-  const [_, setReviev] = useState("");
+const AddReviews = ({ authInfo }) => {
+  const { id } = useParams();
+  console.log("Это айди при рехедое через кнопку add review" + "  " + id);
+  const selectFilm = useSelector(getSelectFilm);
+  const { posterImage, backgroundImage, name } = selectFilm;
+  const [review, setReviev] = useState("");
+  const [star, setStar] = useState(0);
   const rating = starArr();
   const dispatch = useDispatch();
-  const { id } = useParams();
+
+  const isLoading = useSelector(getReviewSendingStatus);
+
+  const handleReviewStar = useCallback((e) => {
+    setStar(e.target.value);
+  }, []);
+  const handleCommentOnChange = useCallback((e) => {
+    setReviev(e.target.value);
+  }, []);
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    dispatch(reviewIsLoading(true));
+    dispatch(
+      sendingReview(
+        {
+          rating: Number(star),
+          comment: review,
+        },
+        id
+      )
+    );
+  };
 
   return (
     <>
       <section className="movie-card movie-card--full">
         <div className="movie-card__header">
           <div className="movie-card__bg">
-            <img src={film.background_image} alt={film.name} />
+            <img src={backgroundImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -27,8 +60,11 @@ const AddReviews = ({ film, authInfo }) => {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <Link to="/films/:id" className="breadcrumbs__link">
-                    {film.name}
+                  <Link
+                    to={`${ApiRoute.FILMS}/${id}`}
+                    className="breadcrumbs__link"
+                  >
+                    {name}
                   </Link>
                 </li>
                 <li className="breadcrumbs__item">
@@ -57,17 +93,16 @@ const AddReviews = ({ film, authInfo }) => {
           </header>
 
           <div className="movie-card__poster movie-card__poster--small">
-            <img
-              src={film.poster_image}
-              alt={film.name}
-              width="218"
-              height="327"
-            />
+            <img src={posterImage} alt={name} width="218" height="327" />
           </div>
         </div>
 
         <div className="add-review">
-          <form action="#" className="add-review__form">
+          <form
+            action="#"
+            className="add-review__form"
+            onSubmit={handleSubmitForm}
+          >
             <div className="rating">
               <div className="rating__stars">
                 {rating.map((item) => {
@@ -79,6 +114,8 @@ const AddReviews = ({ film, authInfo }) => {
                         type="radio"
                         name="rating"
                         value={item}
+                        onClick={handleReviewStar}
+                        // ref={rate}
                       />
                       <label className="rating__label" htmlFor={`star-${item}`}>
                         Rating {item}
@@ -94,11 +131,17 @@ const AddReviews = ({ film, authInfo }) => {
                 className="add-review__textarea"
                 name="review-text"
                 id="review-text"
-                onChange={(e) => setReviev(e.target.value)}
+                value={review}
+                // ref={com}
+                onChange={handleCommentOnChange}
                 placeholder="Review text"
               ></textarea>
               <div className="add-review__submit">
-                <button className="add-review__btn" type="submit">
+                <button
+                  className="add-review__btn"
+                  type="submit"
+                  onClick={handleSubmitForm}
+                >
                   Post
                 </button>
               </div>
