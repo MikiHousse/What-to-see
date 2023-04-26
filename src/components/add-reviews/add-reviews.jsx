@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Logo from "../logo/logo";
 import { starArr } from "../../utils/utils";
@@ -8,13 +8,17 @@ import {
   getSelectFilm,
 } from "../../redux/films-data/films-selectors";
 import { reviewIsLoading } from "../../redux/films-data/films-actions";
-import { sendingReview } from "../../redux/films-data/films-api-action";
+import {
+  fetchSelectedFilm,
+  sendingReview,
+} from "../../redux/films-data/films-api-action";
 import { ApiRoute } from "../../utils/const";
 
 const AddReviews = ({ authInfo }) => {
   const { id } = useParams();
   console.log("Это айди при рехедое через кнопку add review" + "  " + id);
   const selectFilm = useSelector(getSelectFilm);
+  console.log(selectFilm);
   const { posterImage, backgroundImage, name } = selectFilm;
   const [review, setReviev] = useState("");
   const [star, setStar] = useState(0);
@@ -22,6 +26,10 @@ const AddReviews = ({ authInfo }) => {
   const dispatch = useDispatch();
 
   const isLoading = useSelector(getReviewSendingStatus);
+
+  useEffect(() => {
+    dispatch(fetchSelectedFilm(id));
+  }, [dispatch, id]);
 
   const handleReviewStar = useCallback((e) => {
     setStar(e.target.value);
