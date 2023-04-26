@@ -1,23 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
-import { Redirect, Route } from "react-router-dom/cjs/react-router-dom.min";
+import { Redirect, Route } from "react-router-dom";
 import { AppRoute, AuthorizationStatus } from "../../utils/const";
 
-const PrivateRoute = ({ render, path, exact }) => {
+const PrivateRoute = ({ path, exact, children }) => {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   return (
-    <Route
-      pacth={path}
-      exact={exact}
-      render={(routeProps) =>
-        authorizationStatus === AuthorizationStatus.AUTH ? (
-          render(routeProps)
-        ) : (
-          <Redirect to={AppRoute.LOGIN} />
-        )
-      }
-    />
+    <Route exact={exact} path={path}>
+      {authorizationStatus === AuthorizationStatus.AUTH ? (
+        children
+      ) : (
+        <Redirect to={AppRoute.LOGIN} />
+      )}
+    </Route>
   );
 };
 

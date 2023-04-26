@@ -34,7 +34,7 @@ const MovieCard = ({ item = {} }) => {
         />
       </div>
       <h3 className="small-movie-card__title">
-        <Link className="small-movie-card__link" to={`${ApiRoute.FILMS}/${id}`}>
+        <Link className="small-movie-card__link" to={`/films/${id}`}>
           {name}`
         </Link>
       </h3>

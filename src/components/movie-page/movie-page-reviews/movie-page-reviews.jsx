@@ -1,13 +1,11 @@
 import React from "react";
 
-const MoviePageReviews = ({ movieReviews, review }) => {
+const MoviePageReviews = ({ review }) => {
   const dateConvector = (data) => {
     const date = new Date(data);
     return date.toLocaleString("en-US");
   };
 
-  const col1 = movieReviews[0];
-  const col2 = movieReviews[1];
   return (
     <>
       <div className="movie-card__reviews movie-card__row">
