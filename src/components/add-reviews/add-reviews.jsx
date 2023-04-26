@@ -1,8 +1,10 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import Logo from "../logo/logo";
-import { starArr } from "../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
+
+import Logo from "../logo/logo";
+
+import { starArr } from "../../utils/utils";
 import {
   getReviewSendingStatus,
   getSelectFilm,
@@ -16,11 +18,9 @@ import { ApiRoute } from "../../utils/const";
 
 const AddReviews = ({ authInfo }) => {
   const { id } = useParams();
-  console.log("Это айди при рехедое через кнопку add review" + "  " + id);
   const selectFilm = useSelector(getSelectFilm);
-  console.log(selectFilm);
   const { posterImage, backgroundImage, name } = selectFilm;
-  const [review, setReviev] = useState("");
+  const [comment, setComment] = useState("");
   const [star, setStar] = useState(0);
   const rating = starArr();
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const AddReviews = ({ authInfo }) => {
     setStar(e.target.value);
   }, []);
   const handleCommentOnChange = useCallback((e) => {
-    setReviev(e.target.value);
+    setComment(e.target.value);
   }, []);
 
   const handleSubmitForm = (e) => {
@@ -45,7 +45,7 @@ const AddReviews = ({ authInfo }) => {
       sendingReview(
         {
           rating: Number(star),
-          comment: review,
+          comment: comment,
         },
         id
       )
@@ -84,7 +84,7 @@ const AddReviews = ({ authInfo }) => {
             <div className="user-block">
               <div className="user-block__avatar">
                 <Link to="/login">
-                  {authInfo.map((item) => {
+                  {/* {authInfo.map((item) => {
                     return (
                       <img
                         key={item.id}
@@ -94,7 +94,7 @@ const AddReviews = ({ authInfo }) => {
                         height="63"
                       />
                     );
-                  })}
+                  })} */}
                 </Link>
               </div>
             </div>
@@ -123,7 +123,6 @@ const AddReviews = ({ authInfo }) => {
                         name="rating"
                         value={item}
                         onClick={handleReviewStar}
-                        // ref={rate}
                       />
                       <label className="rating__label" htmlFor={`star-${item}`}>
                         Rating {item}
@@ -139,8 +138,7 @@ const AddReviews = ({ authInfo }) => {
                 className="add-review__textarea"
                 name="review-text"
                 id="review-text"
-                value={review}
-                // ref={com}
+                value={comment}
                 onChange={handleCommentOnChange}
                 placeholder="Review text"
               ></textarea>
@@ -149,6 +147,7 @@ const AddReviews = ({ authInfo }) => {
                   className="add-review__btn"
                   type="submit"
                   onClick={handleSubmitForm}
+                  disabled={isLoading || comment.length === 0}
                 >
                   Post
                 </button>
