@@ -13,6 +13,7 @@ import {
   getGenre,
   getFilms,
   getCountFilmList,
+  getSelectFilm,
 } from "../../redux/films-data/films-selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { genreChange, moreFilms } from "../../redux/films-data/films-actions";
@@ -26,6 +27,8 @@ const MainPage = () => {
   const genre = useSelector(getGenre);
   const filmList = useSelector(getCountFilmList);
   const dispatch = useDispatch();
+  const selectFilm = useSelector(getSelectFilm);
+  console.log(selectFilm);
 
   const onSelectGenreClick = (filmGenre) => {
     dispatch(genreChange(filmGenre));
@@ -71,7 +74,7 @@ const MainPage = () => {
 
               <div className="movie-card__buttons">
                 <Link
-                  to="/player/:id"
+                  to={`/player/:id`}
                   className="btn btn--play movie-card__button"
                   type="button"
                 >
