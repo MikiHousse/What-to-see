@@ -1,5 +1,5 @@
 import { ApiRoute } from "../../utils/const";
-import { loadFilms, redirectToRoute, selectedFilm, loadReviews, reviewIsLoading } from "./films-actions";
+import { loadFilms, redirectToRoute, selectedFilm, loadReviews, reviewIsLoading, favoriteFilms } from "./films-actions";
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => {
   api.get(ApiRoute.FILMS)
@@ -25,3 +25,15 @@ export const sendingReview = ({rating, comment}, id) => (dispatch, _getState, ap
       .then(() => dispatch(reviewIsLoading(false)))
       .catch(() => dispatch(reviewIsLoading(false)))
   )
+
+export const fetchFavoriteFilms = () => (dispatch, _getState, api) => {
+  api.get(ApiRoute.FAVORITE)
+    .then(({data}) => dispatch(favoriteFilms(data)))
+    .catch(() => {})
+}
+
+export const addFavorite = (id, status) => (dispatch, _getState, api) => {
+  api.post(`${ApiRoute.FAVORITE}/${id}/${status}`)
+    .then(() => dispatch(fetchSelectedFilm(id)))
+    .catch(() => {})
+}

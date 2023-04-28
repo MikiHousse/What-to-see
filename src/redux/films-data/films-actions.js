@@ -1,4 +1,4 @@
-import { SELECT_GENRE, RESET_GENRE, LOAD_FILMS, SHOW_MORE_FILMS, SELECT_FILM, REVIEWS_FILM, REVIEW_SENDING, REDIRECT_TO_ROUTE, REVIEW_IS_LOADING } from "./films-action-type";
+import { SELECT_GENRE, RESET_GENRE, LOAD_FILMS, SHOW_MORE_FILMS, SELECT_FILM, REVIEWS_FILM, REVIEW_SENDING, REDIRECT_TO_ROUTE, REVIEW_IS_LOADING, FAVORITE_IS_LOADING } from "./films-action-type";
 import { createAction } from "@reduxjs/toolkit";
 
 const genreChange = createAction(SELECT_GENRE, (genre) => ({
@@ -30,6 +30,11 @@ export const redirectToRoute = createAction(REDIRECT_TO_ROUTE, (redirect) => ({
 export const reviewIsLoading = createAction(REVIEW_IS_LOADING, (loading) => ({
   payload: loading
 }))
+
+export const favoriteFilms = createAction(FAVORITE_IS_LOADING, (film) => ({
+  payload: film
+}))
+
 
 
 export {genreChange, resetGenre, loadFilms}

@@ -27,8 +27,7 @@ const MainPage = () => {
   const genre = useSelector(getGenre);
   const filmList = useSelector(getCountFilmList);
   const dispatch = useDispatch();
-  const selectFilm = useSelector(getSelectFilm);
-  console.log(selectFilm);
+  // const selectFilm = useSelector(getSelectFilm);
 
   const onSelectGenreClick = (filmGenre) => {
     dispatch(genreChange(filmGenre));

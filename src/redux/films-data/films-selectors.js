@@ -9,5 +9,6 @@ export const getSelectFilmLoaded = (state) => state[NameSpace.FILMS].isSelectFil
 export const getReviewsFilm = (state) => state[NameSpace.FILMS].reviews;
 export const getReviewStatus = (state) => state[NameSpace.FILMS].isReviewLoaded;
 export const getReviewSendingStatus = (state) => state[NameSpace.FILMS].isReviewSending;
+export const getFavoriteFilms = (state) => state[NameSpace.FILMS].myFavoriteFilms;
 
 

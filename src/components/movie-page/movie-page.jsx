@@ -21,12 +21,15 @@ import {
   getSelectFilmLoaded,
 } from "../../redux/films-data/films-selectors";
 import {
+  addFavorite,
   fetchReviewsFilm,
   fetchSelectedFilm,
 } from "../../redux/films-data/films-api-action";
 import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 import { AppRoute, AuthorizationStatus } from "../../utils/const";
 import { ApiRoute } from "../../utils/const";
+
+const check = (item) => (!item ? 1 : 0);
 
 const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
   const authorizationStatus = useSelector(getAuthorizationStatus);
@@ -37,6 +40,13 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
   const selectFilm = useSelector(getSelectFilm);
   const isSelectFilmLoaded = useSelector(getSelectFilmLoaded);
   const [select, setSelect] = useState("desk");
+  const { name, posterImage, backgroundImage, genre, released, isFavorite } =
+    selectFilm;
+
+  const addFavor = (e) => {
+    e.preventDefault();
+    dispatch(addFavorite(id, check(isFavorite)));
+  };
 
   useEffect(() => {
     dispatch(fetchSelectedFilm(id));
@@ -46,9 +56,6 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
   if (!isSelectFilmLoaded) {
     return <Loading />;
   }
-  console.log("Это айди карточки фильма" + "  " + id);
-  const { name, posterImage, backgroundImage, genre, released, isFavorite } =
-    selectFilm;
 
   const getByType = (type) => {
     switch (type) {
@@ -97,6 +104,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
+                  onClick={addFavor}
                 >
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     {isFavorite ? (
@@ -107,17 +115,16 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                {/* {authorizationStatus === AuthorizationStatus.AUTH ? (
-
+                {authorizationStatus === AuthorizationStatus.AUTH ? (
+                  <Link
+                    to={`/films/${id}/review`}
+                    className="btn movie-card__button"
+                  >
+                    Add review
+                  </Link>
                 ) : (
                   ``
-                )} */}
-                <Link
-                  to={`/films/${id}/review`}
-                  className="btn movie-card__button"
-                >
-                  Add review
-                </Link>
+                )}
               </div>
             </div>
           </div>

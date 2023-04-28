@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { ALL_GENRES, LIST_COUNT_FILMS } from "../../utils/const";
-import { genreChange, loadFilms, resetGenre, moreFilms, selectedFilm, loadReviews, reviewIsLoading } from "../films-data/films-actions";
+import { genreChange, loadFilms, resetGenre, moreFilms, selectedFilm, loadReviews, reviewIsLoading, favoriteFilms } from "../films-data/films-actions";
 import {adapterFilms, selectAdapterFilm} from './adapter'
 
 const initialState = {
@@ -12,7 +12,9 @@ const initialState = {
   isSelectFilmLoaded: false,
   reviews: [],
   isReviewLoaded: false,
-  isReviewSending: false
+  isReviewSending: false,
+  myFavoriteFilms: [],
+  isMyFavoriteFilmsLoaded: false,
 }
 
 export const filmsData = createReducer(initialState, (builder) => {
@@ -40,5 +42,9 @@ export const filmsData = createReducer(initialState, (builder) => {
     })
     .addCase(reviewIsLoading, (state, action) => {
       state.isReviewSending = action.payload
+    })
+    .addCase(favoriteFilms, (state, action) => {
+      state.myFavoriteFilms = adapterFilms(action.payload)
+      state.isMyFavoriteFilmsLoaded = true
     })
 })
