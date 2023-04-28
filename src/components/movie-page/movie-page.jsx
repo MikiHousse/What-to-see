@@ -22,6 +22,7 @@ import {
 } from "../../redux/films-data/films-selectors";
 import {
   addFavorite,
+  fetchPromoFilm,
   fetchReviewsFilm,
   fetchSelectedFilm,
 } from "../../redux/films-data/films-api-action";
@@ -51,6 +52,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
   useEffect(() => {
     dispatch(fetchSelectedFilm(id));
     dispatch(fetchReviewsFilm(id));
+    dispatch(fetchPromoFilm(id));
   }, [dispatch, id]);
 
   if (!isSelectFilmLoaded) {
@@ -90,17 +92,17 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
               </p>
 
               <div className="movie-card__buttons">
-                <Link to={`/player/${id}`}>
-                  <button
-                    className="btn btn--play movie-card__button"
-                    type="button"
-                  >
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"></use>
-                    </svg>
-                    <span>Play</span>
-                  </button>
+                <Link
+                  to={`/player/${id}`}
+                  className="btn btn--play movie-card__button"
+                  type="button"
+                >
+                  <svg viewBox="0 0 19 19" width="19" height="19">
+                    <use xlinkHref="#play-s"></use>
+                  </svg>
+                  <span>Play</span>
                 </Link>
+
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
@@ -185,7 +187,11 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieMoreLike movieMoreLike={movieMoreLike} />
+          <MovieMoreLike
+            movieMoreLike={movieMoreLike}
+            genre={genre}
+            index={id}
+          />
         </section>
 
         <Footer />

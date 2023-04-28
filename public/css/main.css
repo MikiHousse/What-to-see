@@ -1318,6 +1318,7 @@ main {
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.63) 97%); }
 
 .small-movie-card__title {
+  color: white;
   position: absolute;
   z-index: 2;
   left: 0;

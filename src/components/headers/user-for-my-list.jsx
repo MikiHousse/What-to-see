@@ -6,13 +6,14 @@ import { Link } from "react-router-dom";
 import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 import { useSelector } from "react-redux";
 
-const User = () => {
+const UserBlockMyList = () => {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const { id, avatar_url } = AuthInfo;
-
   return (
-    <header className="page-header movie-card__head">
+    <header className="page-header user-page__head">
       <Logo />
+
+      <h1 className="page-title user-page__title">My list</h1>
 
       <div className="user-block">
         <div className="user-block__avatar">
@@ -38,4 +39,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default UserBlockMyList;

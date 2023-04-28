@@ -1,4 +1,4 @@
-const AppRoute = {
+export const AppRoute = {
   LOGIN: '/login',
   MAIN: '/',
   MY_LIST: '/mylist',
@@ -8,25 +8,24 @@ const AppRoute = {
   NOT_FOUND: '/not-found'
 }
 
-const AuthorizationStatus = {
+export const AuthorizationStatus = {
   AUTH: 'AUTH',
   NO_AUTH: 'NO_AUTH',
   UNKNOWN: 'UNKNOWN',
 }
 
-const ApiRoute = {
+export const ApiRoute = {
   FILMS: '/films',
   FILMS_ID: '/films/',
-  PROMO: '/promo',
+  PROMO: '/films/promo',
   FAVORITE: '/favorite',
   LOGIN: '/login',
   LOGOUT: '/logout',
   COMMENTS: '/comments',
 };
 
-const LIST_COUNT_FILMS = 8;
+export const LIST_COUNT_FILMS = 8;
 
-const ALL_GENRES = `All genres`;
+export const ALL_GENRES = `All genres`;
+export const MAX_COUNT_GENRES = 9
 
-
-export {AppRoute, AuthorizationStatus, ApiRoute, ALL_GENRES, LIST_COUNT_FILMS }

@@ -1,10 +1,20 @@
 import React from "react";
 
 const MoviePageReviews = ({ review }) => {
-  const dateConvector = (data) => {
-    const date = new Date(data);
-    return date.toLocaleString("en-US");
-  };
+  function getMonthName(monthNumber) {
+    const date = new Date();
+    date.setMonth(monthNumber - 1);
+    return date.toLocaleString("en-US", {
+      month: "long",
+    });
+  }
+
+  function dateConvector(data) {
+    var date = new Date(data),
+      mnth = ("0" + (date.getMonth() - 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return `${getMonthName(mnth)} ${day}, ${date.getFullYear()}`;
+  }
 
   return (
     <>

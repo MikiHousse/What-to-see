@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   MovieСategoriesTypes,
@@ -13,21 +13,54 @@ import {
   getGenre,
   getFilms,
   getCountFilmList,
-  getSelectFilm,
+  getPromoFilm,
 } from "../../redux/films-data/films-selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { genreChange, moreFilms } from "../../redux/films-data/films-actions";
+import {
+  genreChange,
+  moreFilms,
+  resetGenre,
+} from "../../redux/films-data/films-actions";
 import ShowMore from "../show-more/show-more";
 import Footer from "../footer/footer";
 import User from "../headers/user";
 import { filtrMovieList } from "../../utils/utils";
+import {
+  addFavorite,
+  fetchPromoFilm,
+} from "../../redux/films-data/films-api-action";
+
+const check = (item) => (!item ? 1 : 0);
 
 const MainPage = () => {
   const films = useSelector(getFilms);
-  const genre = useSelector(getGenre);
+  const genres = useSelector(getGenre);
   const filmList = useSelector(getCountFilmList);
   const dispatch = useDispatch();
-  // const selectFilm = useSelector(getSelectFilm);
+  const promoFilms = useSelector(getPromoFilm);
+  const {
+    id,
+    name,
+    posterImage,
+    backgroundImage,
+    genre,
+    released,
+    isFavorite,
+  } = promoFilms;
+
+  const addFavor = (e) => {
+    e.preventDefault();
+    dispatch(addFavorite(id, check(isFavorite)));
+  };
+
+  useEffect(() => {
+    dispatch(fetchPromoFilm());
+    return () => {
+      dispatch(resetGenre());
+    };
+  }, [dispatch]);
+
+  console.log(isFavorite);
 
   const onSelectGenreClick = (filmGenre) => {
     dispatch(genreChange(filmGenre));
@@ -37,16 +70,13 @@ const MainPage = () => {
     dispatch(moreFilms(filmList));
   };
 
-  const movieList = filtrMovieList(films, genre);
+  const movieList = filtrMovieList(films, genres);
 
   return (
     <>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img
-            src="img/bg-the-grand-budapest-hotel.jpg"
-            alt="The Grand Budapest Hotel"
-          />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -56,24 +86,19 @@ const MainPage = () => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
-                width="218"
-                height="327"
-              />
+              <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
 
               <div className="movie-card__buttons">
                 <Link
-                  to={`/player/:id`}
+                  to={`/player/${id}`}
                   className="btn btn--play movie-card__button"
                   type="button"
                 >
@@ -85,9 +110,14 @@ const MainPage = () => {
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
+                  onClick={addFavor}
                 >
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
+                    {isFavorite ? (
+                      <use xlinkHref="#in-list"></use>
+                    ) : (
+                      <use xlinkHref="#add"></use>
+                    )}
                   </svg>
                   <span>My list</span>
                 </button>
@@ -97,10 +127,14 @@ const MainPage = () => {
         </div>
       </section>
 
-      <div className="page-content">
+      <div className="page-content" style={{ background: "rgb(29,8,3)" }}>
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <SortGenre films={films} genre={genre} onClick={onSelectGenreClick} />
+          <SortGenre
+            films={films}
+            genre={genres}
+            onClick={onSelectGenreClick}
+          />
           <MovieList films={movieList} filmList={filmList} />
           {movieList.length > filmList ? (
             <ShowMore showMore={showMore} filmList={filmList} />

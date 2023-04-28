@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { AuthInfoTypes, MovieMoreLikeTypes } from "../../prop-types/prop";
 import Footer from "../footer/footer";
-import User from "../headers/user";
+import UserBlockMyList from "../headers/user-for-my-list";
 import { useDispatch, useSelector } from "react-redux";
 import { getFavoriteFilms } from "../../redux/films-data/films-selectors";
 import { fetchFavoriteFilms } from "../../redux/films-data/films-api-action";
@@ -18,7 +18,7 @@ const MyList = () => {
   return (
     <>
       <div className="user-page">
-        <User />
+        <UserBlockMyList />
 
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>

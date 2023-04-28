@@ -1,14 +1,28 @@
 import React from "react";
 
+const ratingLevel = (item) => {
+  if (item >= 0 && item < 3) {
+    return "Bad";
+  } else if (item >= 3 && item < 5) {
+    return "Normal";
+  } else if (item >= 5 && item < 8) {
+    return "Good";
+  } else if (item >= 8 && item < 10) {
+    return "Very good";
+  } else if (item === 10) {
+    return "Awesome";
+  }
+};
+
 const MoviePageDesc = ({ film }) => {
-  const { rating, scores_count, description, director, starring } = film;
+  const { rating, scoresCount, description, director, starring } = film;
   return (
     <>
       <div className="movie-rating">
         <div className="movie-rating__score">{rating}</div>
         <p className="movie-rating__meta">
-          <span className="movie-rating__level">Very good</span>
-          <span className="movie-rating__count">{scores_count} ratings</span>
+          <span className="movie-rating__level">{ratingLevel(rating)}</span>
+          <span className="movie-rating__count">{scoresCount} ratings</span>
         </p>
       </div>
 

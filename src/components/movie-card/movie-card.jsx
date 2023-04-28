@@ -20,8 +20,10 @@ const MovieCard = ({ item = {} }) => {
   }, [isPlay]);
 
   return (
-    <article
+    <Link
+      to={`${ApiRoute.FILMS}/${id}`}
       className="small-movie-card catalog__movies-card"
+      style={{ color: "#c9b37e" }}
       onMouseEnter={() => setIsPlay(true)}
       onMouseLeave={() => setIsPlay(false)}
     >
@@ -34,11 +36,9 @@ const MovieCard = ({ item = {} }) => {
         />
       </div>
       <h3 className="small-movie-card__title">
-        <Link className="small-movie-card__link" to={`/films/${id}`}>
-          {name}
-        </Link>
+        <p className="small-movie-card__link">{name}</p>
       </h3>
-    </article>
+    </Link>
   );
 };
 

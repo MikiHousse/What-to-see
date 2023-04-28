@@ -42,19 +42,14 @@ const App = ({ rating, movieMoreLike, film, authInfo }) => {
         <Route exact path={AppRoute.LOGIN}>
           <SingInPage />
         </Route>
-        {/* <PrivateRoute
+        <PrivateRoute
           path={AppRoute.MY_LIST}
           exact
           authorizationStatus={authorizationStatus}
-          render={() => (
-            <MyList movieMoreLike={movieMoreLike} authInfo={authInfo} />
-          )}
-        ></PrivateRoute> */}
-        <Route exact path={AppRoute.MY_LIST}>
+        >
           {" "}
           <MyList movieMoreLike={movieMoreLike} authInfo={authInfo} />
-        </Route>
-
+        </PrivateRoute>
         <Route exact path={AppRoute.FILM}>
           <MoviePage
             film={film[0]}
@@ -65,21 +60,6 @@ const App = ({ rating, movieMoreLike, film, authInfo }) => {
         <PrivateRoute exact path={AppRoute.REVIEW}>
           <AddReviews rating={rating} authInfo={authInfo} />
         </PrivateRoute>
-        {/* <PrivateRoute
-          path={`/films/:id/review`}
-          exact
-          authorizationStatus={authorizationStatus}
-          render={() => <AddReviews rating={rating} authInfo={authInfo} />}
-        ></PrivateRoute> */}
-        {/* <Route >
-          <AddReviews rating={rating} authInfo={authInfo} />
-        </Route> */}
-        {/* <PrivateRoute
-          path={AppRoute.PLAYER}
-          exact
-          authorizationStatus={authorizationStatus}
-          render={() => <Player film={film} />}
-        ></PrivateRoute> */}
         <Route path={AppRoute.PLAYER} exact>
           <Player film={film} />
         </Route>

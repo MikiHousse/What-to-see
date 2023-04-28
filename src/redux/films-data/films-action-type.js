@@ -8,4 +8,5 @@ export const REVIEW_SENDING = `@film/reviewsSending`
 export const REDIRECT_TO_ROUTE = `@film/redirectToRoute`
 export const REVIEW_IS_LOADING = `@film/reviewIsLoading`
 export const FAVORITE_FILM = `@film/favoriteFilm`
-export const FAVORITE_IS_LOADING = `film/favoriteIsLoading`
+export const FAVORITE_IS_LOADING = `@film/favoriteIsLoading`
+export const PROMO_FILM = `@film/promoFilm`

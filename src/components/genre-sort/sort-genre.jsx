@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppRoute } from "../../utils/const";
+import { AppRoute, MAX_COUNT_GENRES } from "../../utils/const";
 
 const SortGenre = ({ films, genre, onClick }) => {
   const genresFilms = films.map((film) => film.genre);
 
-  const genresFiltred = Array.from(new Set(genresFilms));
+  const genresFiltred = Array.from(new Set(genresFilms)).slice(
+    0,
+    MAX_COUNT_GENRES
+  );
   genresFiltred.unshift("All genres");
 
   return (
