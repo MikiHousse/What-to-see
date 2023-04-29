@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
@@ -14,11 +14,10 @@ const SingInPage = () => {
   const dispatch = useDispatch();
   const loginRef = useRef();
   const passwordRef = useRef();
+  const [correctData, setCorrectData] = useState(false);
+  const [validPassword, setValidPassword] = useState(false);
 
-  const userIsAuth = (authorizationStatus) => {
-    authorizationStatus === AuthorizationStatus.AUTH;
-  };
-
+  const userIsAuth = (auth) => auth === AuthorizationStatus.AUTH;
   if (userIsAuth(authorizationStatus)) {
     return <Redirect to={AppRoute.MAIN} />;
   }
@@ -28,10 +27,26 @@ const SingInPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({
-      login: loginRef.current.value,
-      password: passwordRef.current.value,
-    });
+    setCorrectData(false);
+    setValidPassword(false);
+    const isPasswordValidLength = passwordRef.current.textLength !== 0;
+    const isWithoutPassword = passwordRef.current.value.trim().length > 0;
+
+    const isLoginValid = loginRef.current.textLength !== 0;
+    const isPasswordValid = isPasswordValidLength && isWithoutPassword;
+
+    if (isLoginValid && isPasswordValid) {
+      onSubmit({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      });
+    } else {
+      if (isLoginValid && !isWithoutPassword) {
+        return setValidPassword(true);
+      } else {
+        return setCorrectData(true);
+      }
+    }
   };
 
   return (
@@ -78,9 +93,15 @@ const SingInPage = () => {
                   Password
                 </label>
               </div>
+              {correctData ? <p>Неверный логин или пароль</p> : ""}
+              {validPassword ? <p>Пароль не может быть пустым</p> : ""}
             </div>
             <div className="sign-in__submit">
-              <button className="sign-in__btn" type="submit">
+              <button
+                className="sign-in__btn"
+                type="submit"
+                disabled={validPassword}
+              >
                 Sign in
               </button>
             </div>

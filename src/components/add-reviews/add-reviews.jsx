@@ -21,7 +21,9 @@ const AddReviews = ({ authInfo }) => {
   const selectFilm = useSelector(getSelectFilm);
   const { posterImage, backgroundImage, name } = selectFilm;
   const [comment, setComment] = useState("");
-  const [star, setStar] = useState(0);
+  const [star, setStar] = useState(1);
+  const [commentError, setCommentError] = useState(false);
+  const [starError, setStarError] = useState(false);
   const rating = starArr();
   const dispatch = useDispatch();
 
@@ -33,24 +35,38 @@ const AddReviews = ({ authInfo }) => {
 
   const handleReviewStar = useCallback((e) => {
     setStar(e.target.value);
+    setStarError(false);
   }, []);
   const handleCommentOnChange = useCallback((e) => {
     setComment(e.target.value);
+    setCommentError(false);
   }, []);
+
+  const validCommentLength = comment.length >= 50 && comment.length <= 400;
+  const validStar = star >= 1 && star <= 10;
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    dispatch(reviewIsLoading(true));
-    dispatch(
-      sendingReview(
-        {
-          rating: Number(star),
-          comment: comment,
-        },
-        id
-      )
-    );
+    if (validCommentLength && validStar) {
+      dispatch(reviewIsLoading(true));
+      dispatch(
+        sendingReview(
+          {
+            rating: Number(star),
+            comment: comment,
+          },
+          id
+        )
+      );
+    } else {
+      if (validStar && !validCommentLength) {
+        setCommentError(true);
+      } else {
+        setStarError(true);
+      }
+    }
   };
+  console.log(star);
 
   return (
     <>
@@ -106,11 +122,20 @@ const AddReviews = ({ authInfo }) => {
         </div>
 
         <div className="add-review">
-          <form
-            action="#"
-            className="add-review__form"
-            onSubmit={handleSubmitForm}
-          >
+          {starError ? (
+            <p style={{ color: "red" }}>Рейтинг фильма не указан</p>
+          ) : (
+            ""
+          )}
+          {commentError ? (
+            <p style={{ color: "red" }}>
+              Отзыв должен состоять минимум из 50 символо и не больше 400
+              символов
+            </p>
+          ) : (
+            ""
+          )}
+          <form action="#" className="add-review__form">
             <div className="rating">
               <div className="rating__stars">
                 {rating.map((item) => {
@@ -118,14 +143,17 @@ const AddReviews = ({ authInfo }) => {
                     <React.Fragment key={item}>
                       <input
                         className="rating__input"
-                        id={`star-${item}`}
+                        id={`star-${item + 1}`}
                         type="radio"
                         name="rating"
                         value={item}
                         onClick={handleReviewStar}
                       />
-                      <label className="rating__label" htmlFor={`star-${item}`}>
-                        Rating {item}
+                      <label
+                        className="rating__label"
+                        htmlFor={`star-${item + 1}`}
+                      >
+                        Rating {item + 1}
                       </label>
                     </React.Fragment>
                   );
@@ -147,7 +175,9 @@ const AddReviews = ({ authInfo }) => {
                   className="add-review__btn"
                   type="submit"
                   onClick={handleSubmitForm}
-                  disabled={isLoading || comment.length === 0}
+                  disabled={
+                    isLoading || (star > 0 && comment.length > 0 ? false : true)
+                  }
                 >
                   Post
                 </button>

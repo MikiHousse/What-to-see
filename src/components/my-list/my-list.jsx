@@ -6,6 +6,8 @@ import UserBlockMyList from "../headers/user-for-my-list";
 import { useDispatch, useSelector } from "react-redux";
 import { getFavoriteFilms } from "../../redux/films-data/films-selectors";
 import { fetchFavoriteFilms } from "../../redux/films-data/films-api-action";
+import { ApiRoute } from "../../utils/const";
+import { Link } from "react-router-dom";
 
 const MyList = () => {
   const dispatch = useDispatch();
@@ -26,8 +28,9 @@ const MyList = () => {
           <div className="catalog__movies-list">
             {favoriteFilms.map((item) => {
               return (
-                <article
+                <Link
                   key={item.id}
+                  to={`${ApiRoute.FILMS}/${item.id}`}
                   className="small-movie-card catalog__movies-card"
                 >
                   <div className="small-movie-card__image">
@@ -39,14 +42,15 @@ const MyList = () => {
                     />
                   </div>
                   <h3 className="small-movie-card__title">
-                    <a
+                    <p
+                      style={{ color: "#c9b37e" }}
                       className="small-movie-card__link"
                       href="movie-page.html"
                     >
                       {item.name}
-                    </a>
+                    </p>
                   </h3>
-                </article>
+                </Link>
               );
             })}
           </div>
