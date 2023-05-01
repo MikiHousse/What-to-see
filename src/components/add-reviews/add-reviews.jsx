@@ -15,6 +15,7 @@ import {
   sendingReview,
 } from "../../redux/films-data/films-api-action";
 import { ApiRoute } from "../../utils/const";
+import { Redirect, useHistory } from "react-router-dom";
 
 const AddReviews = ({ authInfo }) => {
   const { id } = useParams();
@@ -26,8 +27,22 @@ const AddReviews = ({ authInfo }) => {
   const [starError, setStarError] = useState(false);
   const rating = starArr();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const isLoading = useSelector(getReviewSendingStatus);
+
+  if (isLoading === true) {
+    return <Redirect to={ApiRoute.FILMS} />;
+  }
+
+  function goBack() {
+    const lastAction = history.action;
+    if (lastAction === "POP") {
+      console.log("Вы находитесь на первой странице");
+    } else {
+      history.goBack();
+    }
+  }
 
   useEffect(() => {
     dispatch(fetchSelectedFilm(id));
@@ -58,6 +73,8 @@ const AddReviews = ({ authInfo }) => {
           id
         )
       );
+      setComment("");
+      setStar(1);
     } else {
       if (validStar && !validCommentLength) {
         setCommentError(true);
@@ -66,7 +83,6 @@ const AddReviews = ({ authInfo }) => {
       }
     }
   };
-  console.log(star);
 
   return (
     <>
@@ -80,6 +96,7 @@ const AddReviews = ({ authInfo }) => {
 
           <header className="page-header">
             <Logo />
+            <button onClick={goBack}> efewfewf</button>
 
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
