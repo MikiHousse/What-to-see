@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Logo from "../logo/logo";
 
-import { starArr } from "../../utils/utils";
+import { starsArr } from "../../utils/utils";
 import {
   getReviewSendingStatus,
   getSelectFilm,
@@ -17,23 +17,26 @@ import {
 import { ApiRoute } from "../../utils/const";
 import { Redirect, useHistory } from "react-router-dom";
 
-const AddReviews = ({ authInfo }) => {
+const AddReviews = () => {
   const { id } = useParams();
   const selectFilm = useSelector(getSelectFilm);
-  const { posterImage, backgroundImage, name } = selectFilm;
-  const [comment, setComment] = useState("");
-  const [star, setStar] = useState(1);
-  const [commentError, setCommentError] = useState(false);
-  const [starError, setStarError] = useState(false);
-  const rating = starArr();
   const dispatch = useDispatch();
   const history = useHistory();
-
   const isLoading = useSelector(getReviewSendingStatus);
+  const rating = starsArr();
+  const { posterImage, backgroundImage, name } = selectFilm;
 
-  if (isLoading === true) {
-    return <Redirect to={ApiRoute.FILMS} />;
-  }
+  const [comment, setComment] = useState("");
+  const [stars, setStars] = useState(0);
+  const [commentError, setCommentError] = useState(false);
+  const [starError, setStarError] = useState(false);
+
+  const validCommentLength = comment.length >= 50 && comment.length <= 400;
+  const validStar = stars >= 1 && stars <= 10;
+
+  useEffect(() => {
+    dispatch(fetchSelectedFilm(id));
+  }, [dispatch, id]);
 
   function goBack() {
     const lastAction = history.action;
@@ -44,21 +47,15 @@ const AddReviews = ({ authInfo }) => {
     }
   }
 
-  useEffect(() => {
-    dispatch(fetchSelectedFilm(id));
-  }, [dispatch, id]);
-
   const handleReviewStar = useCallback((e) => {
-    setStar(e.target.value);
+    setStars(e.target.value);
     setStarError(false);
   }, []);
+
   const handleCommentOnChange = useCallback((e) => {
     setComment(e.target.value);
     setCommentError(false);
   }, []);
-
-  const validCommentLength = comment.length >= 50 && comment.length <= 400;
-  const validStar = star >= 1 && star <= 10;
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
@@ -67,14 +64,14 @@ const AddReviews = ({ authInfo }) => {
       dispatch(
         sendingReview(
           {
-            rating: Number(star),
+            rating: Number(stars),
             comment: comment,
           },
           id
         )
       );
       setComment("");
-      setStar(1);
+      setStars(0);
     } else {
       if (validStar && !validCommentLength) {
         setCommentError(true);
@@ -83,6 +80,10 @@ const AddReviews = ({ authInfo }) => {
       }
     }
   };
+
+  if (isLoading === true) {
+    return <Redirect to={`${ApiRoute.FILMS}/${id}`} />;
+  }
 
   return (
     <>
@@ -116,19 +117,7 @@ const AddReviews = ({ authInfo }) => {
 
             <div className="user-block">
               <div className="user-block__avatar">
-                <Link to="/login">
-                  {/* {authInfo.map((item) => {
-                    return (
-                      <img
-                        key={item.id}
-                        src={item.avatar_url}
-                        alt="User avatar"
-                        width="63"
-                        height="63"
-                      />
-                    );
-                  })} */}
-                </Link>
+                <Link to="/login"></Link>
               </div>
             </div>
           </header>
@@ -152,7 +141,7 @@ const AddReviews = ({ authInfo }) => {
           ) : (
             ""
           )}
-          <form action="#" className="add-review__form">
+          <form action="#" className="add-review__htmlForm">
             <div className="rating">
               <div className="rating__stars">
                 {rating.map((item) => {
@@ -160,17 +149,14 @@ const AddReviews = ({ authInfo }) => {
                     <React.Fragment key={item}>
                       <input
                         className="rating__input"
-                        id={`star-${item + 1}`}
+                        id={`star-${item}`}
                         type="radio"
                         name="rating"
                         value={item}
                         onClick={handleReviewStar}
                       />
-                      <label
-                        className="rating__label"
-                        htmlFor={`star-${item + 1}`}
-                      >
-                        Rating {item + 1}
+                      <label className="rating__label" htmlFor={`star-${item}`}>
+                        Rating {item}
                       </label>
                     </React.Fragment>
                   );
@@ -193,7 +179,8 @@ const AddReviews = ({ authInfo }) => {
                   type="submit"
                   onClick={handleSubmitForm}
                   disabled={
-                    isLoading || (star > 0 && comment.length > 0 ? false : true)
+                    isLoading ||
+                    (stars > 0 && comment.length > 0 ? false : true)
                   }
                 >
                   Post

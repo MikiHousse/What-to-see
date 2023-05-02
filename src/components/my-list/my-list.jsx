@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { AuthInfoTypes, MovieMoreLikeTypes } from "../../prop-types/prop";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import Footer from "../footer/footer";
 import UserBlockMyList from "../headers/user-for-my-list";
-import { useDispatch, useSelector } from "react-redux";
+
+import { AuthInfoTypes, MovieMoreLikeTypes } from "../../prop-types/prop";
 import { getFavoriteFilms } from "../../redux/films-data/films-selectors";
 import { fetchFavoriteFilms } from "../../redux/films-data/films-api-action";
 import { ApiRoute } from "../../utils/const";
-import { Link } from "react-router-dom";
 
 const MyList = () => {
   const dispatch = useDispatch();

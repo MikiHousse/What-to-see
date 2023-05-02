@@ -1,23 +1,24 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
-import { AppRoute } from "../../utils/const";
-import { AuthorizationStatus } from "../../utils/const";
-import { loginAction } from "../../redux/user-data/user-api-action";
+
 import Logo from "../logo/logo";
 import Footer from "../footer/footer";
 
-const SingInPage = () => {
-  const authorizationStatus = useSelector(getAuthorizationStatus);
+import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
+import { AppRoute } from "../../utils/const";
+import { userIsAuth } from "../../utils/utils";
+import { loginAction } from "../../redux/user-data/user-api-action";
 
+const SingInPage = () => {
   const dispatch = useDispatch();
+  const authorizationStatus = useSelector(getAuthorizationStatus);
   const loginRef = useRef();
   const passwordRef = useRef();
+
   const [correctData, setCorrectData] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
 
-  const userIsAuth = (auth) => auth === AuthorizationStatus.AUTH;
   if (userIsAuth(authorizationStatus)) {
     return <Redirect to={AppRoute.MAIN} />;
   }
@@ -27,8 +28,10 @@ const SingInPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setCorrectData(false);
     setValidPassword(false);
+
     const isPasswordValidLength = passwordRef.current.textLength !== 0;
     const isWithoutPassword = passwordRef.current.value.trim().length > 0;
 

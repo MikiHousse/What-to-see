@@ -5,63 +5,23 @@ import { useParams } from "react-router-dom";
 import { getSelectFilm } from "../../redux/films-data/films-selectors";
 import { fetchSelectedFilm } from "../../redux/films-data/films-api-action";
 
-const toggleFullScreen = () => {
-  const el = document.documentElement;
-
-  if (
-    !document.fullscreenElement &&
-    !document.mozFullScreenElement &&
-    !document.webkitFullscreenElement &&
-    !document.msFullscreenElement
-  ) {
-    if (el.requestFullscreen) {
-      el.requestFullscreen();
-    } else if (el.msRequestFullscreen) {
-      el.msRequestFullscreen();
-    } else if (el.mozRequestFullScreen) {
-      el.mozRequestFullScreen();
-    } else if (el.webkitRequestFullscreen) {
-      el.webkitRequestFullscreen();
-    }
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    }
-  }
-};
-
-const formatTime = (time) => {
-  if (time && !isNaN(time)) {
-    const hours = Math.floor(time / 3600);
-    const formatHours = hours < 10 ? `0${hours}` : `${hours}`;
-    const min = Math.floor(time / 60);
-    const formatMin = min < 10 ? `0${min}` : `${min}`;
-    const sec = Math.floor(time % 60);
-    const formatSec = sec < 10 ? `0${sec}` : `${sec}`;
-    return hours === 0
-      ? `${formatHours}:${formatMin}:${formatSec}`
-      : `${formatMin}:${formatSec}`;
-  }
-  return "00:00";
-};
+import { toggleFullScreen, formatTime } from "../../utils/utils";
 
 const Player = () => {
   const { id } = useParams();
   const selectFilm = useSelector(getSelectFilm);
-  const playRef = useRef();
   const dispatch = useDispatch();
+  const playRef = useRef();
+  const rangeRef = useRef();
+
   const { videoLink, backgroundImage } = selectFilm;
+
   const [isPlaying, setIsPlaying] = useState(true);
   const [timePassed, setTimePassed] = useState(0);
   const [end, setEnd] = useState(0);
-  const rangeRef = useRef();
+
   const time = (e) => setTimePassed(e.target.currentTime);
+
   const runTime = () => {
     setEnd(playRef.current.duration);
   };

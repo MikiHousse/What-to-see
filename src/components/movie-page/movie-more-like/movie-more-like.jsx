@@ -1,16 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getFilms } from "../../../redux/films-data/films-selectors";
 import { Link } from "react-router-dom";
-import { ApiRoute } from "../../../utils/const";
 
-const MORE_LIKE_COUNT = 4;
+import { getFilms } from "../../../redux/films-data/films-selectors";
+import { ApiRoute, MORE_LIKE_COUNT } from "../../../utils/const";
 
 const MovieMoreLike = ({ genre, index }) => {
   const films = useSelector(getFilms);
+
   const relatedFilms = films
     .filter((item) => item.genre === genre && item.id != index)
     .slice(0, MORE_LIKE_COUNT);
+
   return (
     <div className="catalog__movies-list">
       {relatedFilms.map((item) => {

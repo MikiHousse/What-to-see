@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   MovieСategoriesTypes,
   FilmTypes,
@@ -7,30 +10,27 @@ import {
 } from "../../prop-types/prop";
 
 import MovieList from "../movie-list/movie-list";
-import { Link } from "react-router-dom";
 import { SortGenre } from "../genre-sort/sort-genre";
+import ShowMore from "../show-more/show-more";
+import Footer from "../footer/footer";
+import User from "../headers/user";
+
 import {
   getGenre,
   getFilms,
   getCountFilmList,
   getPromoFilm,
 } from "../../redux/films-data/films-selectors";
-import { useDispatch, useSelector } from "react-redux";
 import {
   genreChange,
   moreFilms,
   resetGenre,
 } from "../../redux/films-data/films-actions";
-import ShowMore from "../show-more/show-more";
-import Footer from "../footer/footer";
-import User from "../headers/user";
-import { filtrMovieList } from "../../utils/utils";
 import {
   addFavorite,
   fetchPromoFilm,
 } from "../../redux/films-data/films-api-action";
-
-const check = (item) => (!item ? 1 : 0);
+import { filtrMovieList, checkFavorite } from "../../utils/utils";
 
 const MainPage = () => {
   const films = useSelector(getFilms);
@@ -48,11 +48,6 @@ const MainPage = () => {
     isFavorite,
   } = promoFilms;
 
-  const addFavor = (e) => {
-    e.preventDefault();
-    dispatch(addFavorite(id, check(isFavorite)));
-  };
-
   useEffect(() => {
     dispatch(fetchPromoFilm());
     return () => {
@@ -60,7 +55,10 @@ const MainPage = () => {
     };
   }, [dispatch]);
 
-  console.log(isFavorite);
+  const addFavor = (e) => {
+    e.preventDefault();
+    dispatch(addFavorite(id, checkFavorite(isFavorite)));
+  };
 
   const onSelectGenreClick = (filmGenre) => {
     dispatch(genreChange(filmGenre));

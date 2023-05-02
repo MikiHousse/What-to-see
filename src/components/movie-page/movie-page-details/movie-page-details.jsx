@@ -1,12 +1,10 @@
 import React from "react";
 
+import { timePlayer } from "../../../utils/utils";
+
 const MoviePageDetails = ({ film }) => {
   const { director, starring, runTime, genre, released } = film;
-  const time = (runTime) => {
-    let hours = Math.floor(runTime / 60);
-    let minutes = Math.floor(runTime % 60);
-    return `${hours}h ${minutes}m`;
-  };
+
   return (
     <>
       <div className="movie-card__text movie-card__row">
@@ -28,7 +26,9 @@ const MoviePageDetails = ({ film }) => {
         <div className="movie-card__text-col">
           <p className="movie-card__details-item">
             <strong className="movie-card__details-name">Run Time</strong>
-            <span className="movie-card__details-value">{time(runTime)}</span>
+            <span className="movie-card__details-value">
+              {timePlayer(runTime)}
+            </span>
           </p>
           <p className="movie-card__details-item">
             <strong className="movie-card__details-name">Genre</strong>

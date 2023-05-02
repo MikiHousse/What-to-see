@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import Logo from "../logo/logo";
+
 import { AppRoute, AuthorizationStatus } from "../../utils/const";
 import { AuthInfo } from "../../mock-data";
-import Logo from "../logo/logo";
-import { Link } from "react-router-dom";
 import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
-import { useSelector } from "react-redux";
 
 const User = () => {
   const authorizationStatus = useSelector(getAuthorizationStatus);

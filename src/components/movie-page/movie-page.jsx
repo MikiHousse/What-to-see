@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import MoviePageDesc from "./movie-page-desc/movie-page-desc";
 import MoviePageDetails from "./movie-page-details/movie-page-details";
 import MoviePageReviews from "./movie-page-reviews/movie-page-reviews";
 import MovieMoreLike from "./movie-more-like/movie-more-like";
+import Footer from "../footer/footer";
+import User from "../headers/user";
+import Loading from "../spinner/Loading";
+
 import {
   FilmTypes,
   MovieMoreLikeTypes,
   AuthInfoTypes,
   MovieReviewsTypes,
 } from "../../prop-types/prop";
-import Footer from "../footer/footer";
-import User from "../headers/user";
-import { useDispatch, useSelector } from "react-redux";
-import Loading from "../spinner/Loading";
 import {
   getReviewsFilm,
   getSelectFilm,
@@ -27,8 +29,7 @@ import {
   fetchSelectedFilm,
 } from "../../redux/films-data/films-api-action";
 import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
-import { AppRoute, AuthorizationStatus } from "../../utils/const";
-import { ApiRoute } from "../../utils/const";
+import { ApiRoute, AuthorizationStatus } from "../../utils/const";
 
 const check = (item) => (!item ? 1 : 0);
 
@@ -76,7 +77,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={backgroundImage} alt="The Grand Budapest Hotel" />
+            <img src={backgroundImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -93,7 +94,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
 
               <div className="movie-card__buttons">
                 <Link
-                  to={`/player/${id}`}
+                  to={`${ApiRoute.PLAYER}/${id}`}
                   className="btn btn--play movie-card__button"
                   type="button"
                 >
@@ -103,6 +104,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
                   <span>Play</span>
                 </Link>
 
+                {/* TODO: сделать компонент из кнопки  */}
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
@@ -119,7 +121,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
                 </button>
                 {authorizationStatus === AuthorizationStatus.AUTH ? (
                   <Link
-                    to={`/films/${id}/review`}
+                    to={`${ApiRoute.FILMS}/${id}/${ApiRoute.REVIEW}`}
                     className="btn movie-card__button"
                   >
                     Add review
@@ -137,6 +139,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
             <div className="movie-card__poster movie-card__poster--big">
               <img src={posterImage} alt={name} width="218" height="327" />
             </div>
+            {/* TODO: вынети в отдельный компонент  */}
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">

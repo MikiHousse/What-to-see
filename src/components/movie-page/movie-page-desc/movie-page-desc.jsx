@@ -1,18 +1,5 @@
 import React from "react";
-
-const ratingLevel = (item) => {
-  if (item >= 0 && item < 3) {
-    return "Bad";
-  } else if (item >= 3 && item < 5) {
-    return "Normal";
-  } else if (item >= 5 && item < 8) {
-    return "Good";
-  } else if (item >= 8 && item < 10) {
-    return "Very good";
-  } else if (item === 10) {
-    return "Awesome";
-  }
-};
+import { ratingLevel } from "../../../utils/utils";
 
 const MoviePageDesc = ({ film }) => {
   const { rating, scoresCount, description, director, starring } = film;

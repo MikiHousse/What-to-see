@@ -18,7 +18,9 @@ export const ApiRoute = {
   FILMS: '/films',
   FILMS_ID: '/films/',
   PROMO: '/films/promo',
+  PLAYER: '/player',
   FAVORITE: '/favorite',
+  REVIEW: 'review',
   LOGIN: '/login',
   LOGOUT: '/logout',
   COMMENTS: '/comments',
@@ -26,6 +28,13 @@ export const ApiRoute = {
 
 export const LIST_COUNT_FILMS = 8;
 
+export const MORE_LIKE_COUNT = 4;
+
 export const ALL_GENRES = `All genres`;
+
 export const MAX_COUNT_GENRES = 9
 
+export const FlagFavorite = {
+  TRUE: 1,
+  FALSE: 0,
+}
