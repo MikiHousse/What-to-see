@@ -1,11 +1,5 @@
-const REQUIRE_AUTHORIZATION = 'user/requireAuthorization'
-const LOGIN = 'user/login'
-const REDIRECT_TO_ROUTE = 'redirect/redirectRoute'
-const LOGOUT = 'user/logout'
-
-export {
-  REQUIRE_AUTHORIZATION,
-  LOGIN,
-  REDIRECT_TO_ROUTE,
-  LOGOUT
-}
+export const REQUIRE_AUTHORIZATION = '@user/requireAuthorization'
+export const LOGIN = 'user/login'
+export const REDIRECT_TO_ROUTE = '@redirect/redirectRoute'
+export const LOGOUT = '@user/logout'
+export const USER_DATA = '@user/userData'
