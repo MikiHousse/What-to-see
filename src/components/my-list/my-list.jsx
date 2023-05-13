@@ -11,6 +11,7 @@ import { fetchFavoriteFilms } from "../../redux/films-data/films-api-action";
 import { ApiRoute } from "../../utils/const";
 import User from "../user/user";
 import Logo from "../logo/logo";
+import Logout from "../logout/logout";
 
 const MyList = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const MyList = () => {
             <div className="user-block__avatar">
               <User />
             </div>
+            <Logout />
           </div>
         </header>
 

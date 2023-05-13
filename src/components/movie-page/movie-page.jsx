@@ -31,6 +31,8 @@ import {
 import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 import { ApiRoute, AuthorizationStatus } from "../../utils/const";
 import Logo from "../logo/logo";
+import Logout from "../logout/logout";
+import { userIsAuth } from "../../utils/utils";
 
 const check = (item) => (!item ? 1 : 0);
 
@@ -90,6 +92,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
               <div className="user-block__avatar">
                 <User />
               </div>
+              <Logout />
             </div>
           </header>
 

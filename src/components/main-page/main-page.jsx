@@ -90,7 +90,7 @@ const MainPage = () => {
             <div className="user-block__avatar">
               <User />
             </div>
-            {userIsAuth(authorizationStatus) ? <Logout /> : ""}
+            <Logout />
           </div>
         </header>
 
