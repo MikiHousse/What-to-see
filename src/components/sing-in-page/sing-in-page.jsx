@@ -1,10 +1,14 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Logo from "../logo/logo";
 import Footer from "../footer/footer";
 
 import { loginAction } from "../../redux/user-data/user-api-action";
+import { userIsAuth } from "../../utils/utils";
+import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { AppRoute } from "../../utils/const";
 
 const SingInPage = () => {
   const dispatch = useDispatch();
@@ -13,6 +17,8 @@ const SingInPage = () => {
 
   const [correctData, setCorrectData] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
+
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const onSubmit = (authorizationData) =>
     dispatch(loginAction(authorizationData));
@@ -42,6 +48,10 @@ const SingInPage = () => {
       }
     }
   };
+
+  if (userIsAuth(authorizationStatus)) {
+    return <Redirect to={AppRoute.MAIN} />;
+  }
 
   return (
     <>

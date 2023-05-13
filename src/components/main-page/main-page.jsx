@@ -53,17 +53,17 @@ const MainPage = () => {
     isFavorite,
   } = promoFilms;
 
+  const addFavor = (e) => {
+    e.preventDefault();
+    dispatch(addFavorite(id, checkFavorite(isFavorite)));
+  };
+
   useEffect(() => {
     dispatch(fetchPromoFilm());
     return () => {
       dispatch(resetGenre());
     };
   }, [dispatch]);
-
-  const addFavor = (e) => {
-    e.preventDefault();
-    dispatch(addFavorite(id, checkFavorite(isFavorite)));
-  };
 
   const onSelectGenreClick = (filmGenre) => {
     dispatch(genreChange(filmGenre));
