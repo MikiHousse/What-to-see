@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Footer from "../footer/footer";
-import UserBlockMyList from "../headers/user-for-my-list";
 
 import { AuthInfoTypes, MovieMoreLikeTypes } from "../../prop-types/prop";
 import { getFavoriteFilms } from "../../redux/films-data/films-selectors";
 import { fetchFavoriteFilms } from "../../redux/films-data/films-api-action";
 import { ApiRoute } from "../../utils/const";
+import User from "../user/user";
+import Logo from "../logo/logo";
 
 const MyList = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,15 @@ const MyList = () => {
   return (
     <>
       <div className="user-page">
-        <UserBlockMyList />
+        <header className="page-header user-page__head">
+          <Logo />
+          <h1 className="page-title user-page__title">My list</h1>
+          <div className="user-block">
+            <div className="user-block__avatar">
+              <User />
+            </div>
+          </div>
+        </header>
 
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>

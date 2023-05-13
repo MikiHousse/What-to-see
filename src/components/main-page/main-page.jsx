@@ -13,7 +13,7 @@ import MovieList from "../movie-list/movie-list";
 import { SortGenre } from "../genre-sort/sort-genre";
 import ShowMore from "../show-more/show-more";
 import Footer from "../footer/footer";
-import User from "../headers/user";
+import User from "../user/user";
 
 import {
   getGenre,
@@ -30,7 +30,10 @@ import {
   addFavorite,
   fetchPromoFilm,
 } from "../../redux/films-data/films-api-action";
-import { filtrMovieList, checkFavorite } from "../../utils/utils";
+import { filtrMovieList, checkFavorite, userIsAuth } from "../../utils/utils";
+import Logo from "../logo/logo";
+import Logout from "../logout/logout";
+import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 
 const MainPage = () => {
   const films = useSelector(getFilms);
@@ -38,6 +41,8 @@ const MainPage = () => {
   const filmList = useSelector(getCountFilmList);
   const dispatch = useDispatch();
   const promoFilms = useSelector(getPromoFilm);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
   const {
     id,
     name,
@@ -79,7 +84,15 @@ const MainPage = () => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <User />
+        <header className="page-header movie-card__head">
+          <Logo />
+          <div className="user-block">
+            <div className="user-block__avatar">
+              <User />
+            </div>
+            {userIsAuth(authorizationStatus) ? <Logout /> : ""}
+          </div>
+        </header>
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">

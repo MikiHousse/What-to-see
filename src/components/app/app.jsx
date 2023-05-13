@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Router as BrowserRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
 import MainPage from "../main-page/main-page";

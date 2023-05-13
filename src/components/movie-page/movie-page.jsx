@@ -8,7 +8,7 @@ import MoviePageDetails from "./movie-page-details/movie-page-details";
 import MoviePageReviews from "./movie-page-reviews/movie-page-reviews";
 import MovieMoreLike from "./movie-more-like/movie-more-like";
 import Footer from "../footer/footer";
-import User from "../headers/user";
+import User from "../user/user";
 import Loading from "../spinner/Loading";
 
 import {
@@ -30,6 +30,7 @@ import {
 } from "../../redux/films-data/films-api-action";
 import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 import { ApiRoute, AuthorizationStatus } from "../../utils/const";
+import Logo from "../logo/logo";
 
 const check = (item) => (!item ? 1 : 0);
 
@@ -82,7 +83,15 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <User />
+          <header className="page-header movie-card__head">
+            <Logo />
+
+            <div className="user-block">
+              <div className="user-block__avatar">
+                <User />
+              </div>
+            </div>
+          </header>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">

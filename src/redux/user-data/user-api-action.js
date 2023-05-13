@@ -1,4 +1,4 @@
-import { requireAuthorization, userData, redirectToRoute } from "./user-actions";
+import { requireAuthorization, setUserInfo, redirectToRoute } from "./user-actions";
 import { AppRoute, AuthorizationStatus, ApiRoute } from "../../utils/const";
 
 export const loginAction = ({login: email, password}) => (dispatch, _getState, api) => {
@@ -11,8 +11,13 @@ export const loginAction = ({login: email, password}) => (dispatch, _getState, a
 export const checkAuthAction = () => (dispatch, _getState, api) => {
   api.get(ApiRoute.LOGIN)
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(({data}) => dispatch(userData(data)))
     .catch(() => {})
+}
+
+export const fetchUserInfo = () => (dispatch, _getState, api) => {
+  api.get(ApiRoute.LOGIN)
+    .then((data) => dispatch(setUserInfo(data.data)))
+    .catch(() => {console.log('Error fetch user info')})
 }
 
 export const logoutAction = () => (dispatch, _getState, api) => {
