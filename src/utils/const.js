@@ -40,3 +40,10 @@ export const FlagFavorite = {
 }
 
 export const STARS_COUNT = 10;
+
+export const FetchStatus = {
+  FINALLY: `FINALLY`,
+  SENDING: `SENDING`,
+  DONE: `DONE`,
+  ERROR: `ERROR`
+};

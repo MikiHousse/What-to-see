@@ -13,7 +13,7 @@ import {
   fetchSelectedFilm,
   sendingReview,
 } from "../../redux/films-data/films-api-action";
-import { ApiRoute, STARS_COUNT } from "../../utils/const";
+import { ApiRoute, FetchStatus, STARS_COUNT } from "../../utils/const";
 import { Redirect, useHistory } from "react-router-dom";
 
 const AddReviews = () => {
@@ -36,15 +36,6 @@ const AddReviews = () => {
     dispatch(fetchSelectedFilm(id));
   }, [dispatch, id]);
 
-  function goBack() {
-    const lastAction = history.action;
-    if (lastAction === "POP") {
-      console.log("Вы находитесь на первой странице");
-    } else {
-      history.goBack();
-    }
-  }
-
   const handleReviewStar = useCallback(
     (item) => {
       setStars(item);
@@ -60,7 +51,7 @@ const AddReviews = () => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     if (validCommentLength && validStar) {
-      dispatch(reviewIsLoading(true));
+      dispatch(reviewIsLoading(FetchStatus.SENDING));
       dispatch(
         sendingReview(
           {
@@ -70,8 +61,6 @@ const AddReviews = () => {
           id
         )
       );
-      setComment("");
-      setStars(0);
     } else {
       if (validStar && !validCommentLength) {
         setCommentError(true);
@@ -81,7 +70,14 @@ const AddReviews = () => {
     }
   };
 
-  if (isLoading === true) {
+  useEffect(() => {
+    if (isLoading === FetchStatus.DONE) {
+      setComment("");
+      setStars(0);
+    }
+  }, [isLoading]);
+
+  if (isLoading === FetchStatus.FINALLY) {
     return <Redirect to={`${ApiRoute.FILMS}/${id}`} />;
   }
 
@@ -185,7 +181,7 @@ const AddReviews = () => {
                   type="submit"
                   onClick={handleSubmitForm}
                   disabled={
-                    isLoading ||
+                    !isLoading ||
                     (stars > 0 && comment.length > 0 ? false : true)
                   }
                 >

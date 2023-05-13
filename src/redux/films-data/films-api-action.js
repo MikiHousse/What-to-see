@@ -1,5 +1,5 @@
-import { ApiRoute } from "../../utils/const";
-import { loadFilms, redirectToRoute, selectedFilm, loadReviews, reviewIsLoading, favoriteFilms, promotionalFilm } from "./films-actions";
+import { ApiRoute, FetchStatus } from "../../utils/const";
+import { loadFilms, selectedFilm, loadReviews, reviewIsLoading, favoriteFilms, promotionalFilm } from "./films-actions";
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => {
   api.get(ApiRoute.FILMS)
@@ -21,9 +21,9 @@ export const fetchReviewsFilm = (id) => (dispatch, _getState, api) => (
 export const sendingReview = ({rating, comment}, id) => (dispatch, _getState, api) => (
     api.post(`${ApiRoute.COMMENTS}/${id}`, {rating, comment})
       .then(({data}) => dispatch(loadReviews(data)))
-      .then(() => dispatch(redirectToRoute(`${ApiRoute.FILMS}/${id}`)))
-      .then(() => dispatch(reviewIsLoading(false)))
-      .catch(() => dispatch(reviewIsLoading(false)))
+      .then(() => dispatch(reviewIsLoading(FetchStatus.DONE)))
+      .catch(() => dispatch(reviewIsLoading(FetchStatus.ERROR)))
+      .finally(() => setTimeout(() => (dispatch(reviewIsLoading(FetchStatus.FINALLY))), 500))
   )
 
 export const fetchFavoriteFilms = () => (dispatch, _getState, api) => {
