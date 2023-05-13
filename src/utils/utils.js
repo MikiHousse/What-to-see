@@ -1,13 +1,5 @@
 import { ALL_GENRES, FlagFavorite, AuthorizationStatus } from "./const";
 
-export const starsArr = () => {
-  const arr = [];
-  for (let i = 0; i < 10; i++) {
-    arr.push(i);
-  }
-  return arr;
-};
-
 export const filtrMovieList = (list, genre) => {
   if (genre === ALL_GENRES) {
     return list;

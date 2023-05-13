@@ -38,3 +38,5 @@ export const FlagFavorite = {
   TRUE: 1,
   FALSE: 0,
 }
+
+export const STARS_COUNT = 10;

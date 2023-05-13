@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Logo from "../logo/logo";
 
-import { starsArr } from "../../utils/utils";
 import {
   getReviewSendingStatus,
   getSelectFilm,
@@ -14,7 +13,7 @@ import {
   fetchSelectedFilm,
   sendingReview,
 } from "../../redux/films-data/films-api-action";
-import { ApiRoute } from "../../utils/const";
+import { ApiRoute, STARS_COUNT } from "../../utils/const";
 import { Redirect, useHistory } from "react-router-dom";
 
 const AddReviews = () => {
@@ -23,7 +22,6 @@ const AddReviews = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const isLoading = useSelector(getReviewSendingStatus);
-  const rating = starsArr();
   const { posterImage, backgroundImage, name } = selectFilm;
 
   const [comment, setComment] = useState("");
@@ -47,10 +45,12 @@ const AddReviews = () => {
     }
   }
 
-  const handleReviewStar = useCallback((e) => {
-    setStars(e.target.value);
-    setStarError(false);
-  }, []);
+  const handleReviewStar = useCallback(
+    (item) => {
+      setStars(item);
+    },
+    [stars]
+  );
 
   const handleCommentOnChange = useCallback((e) => {
     setComment(e.target.value);
@@ -97,7 +97,6 @@ const AddReviews = () => {
 
           <header className="page-header">
             <Logo />
-            <button onClick={goBack}> efewfewf</button>
 
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
@@ -144,19 +143,26 @@ const AddReviews = () => {
           <form action="#" className="add-review__htmlForm">
             <div className="rating">
               <div className="rating__stars">
-                {rating.map((item) => {
+                {Array.from(Array(STARS_COUNT)).map((_, index) => {
+                  const starRating = index + 1;
                   return (
-                    <React.Fragment key={item}>
+                    <React.Fragment key={index}>
                       <input
-                        className="rating__input"
-                        id={`star-${item}`}
+                        className="rating__input visually-hidden
+                        "
+                        id={`star-${starRating}`}
                         type="radio"
                         name="rating"
-                        value={item}
-                        onClick={handleReviewStar}
+                        value={stars}
+                        onChange={() => {
+                          handleReviewStar(starRating);
+                        }}
                       />
-                      <label className="rating__label" htmlFor={`star-${item}`}>
-                        Rating {item}
+                      <label
+                        className="rating__label"
+                        htmlFor={`star-${starRating}`}
+                      >
+                        Rating {starRating}
                       </label>
                     </React.Fragment>
                   );
