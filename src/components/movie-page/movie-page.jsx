@@ -32,8 +32,7 @@ import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 import { ApiRoute, AuthorizationStatus } from "../../utils/const";
 import Logo from "../logo/logo";
 import Logout from "../logout/logout";
-
-const check = (item) => (!item ? 1 : 0);
+import { checkFavorite } from "../../utils/utils";
 
 const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
   const authorizationStatus = useSelector(getAuthorizationStatus);
@@ -49,7 +48,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
 
   const addFavor = (e) => {
     e.preventDefault();
-    dispatch(addFavorite(id, check(isFavorite)));
+    dispatch(addFavorite(id, checkFavorite(isFavorite)));
   };
 
   useEffect(() => {
@@ -221,4 +220,4 @@ MoviePage.protTypes = {
   movieReviews: PropTypes.arrayOf(MovieReviewsTypes.isRequired),
 };
 
-export default MoviePage;
+export default React.memo(MoviePage);

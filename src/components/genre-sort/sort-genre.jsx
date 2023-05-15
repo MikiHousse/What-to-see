@@ -35,4 +35,4 @@ const SortGenre = ({ films, genre, onClick }) => {
   );
 };
 
-export { SortGenre };
+export default SortGenre;

@@ -16,7 +16,6 @@ export const AuthorizationStatus = {
 
 export const ApiRoute = {
   FILMS: '/films',
-  FILMS_ID: '/films/',
   PROMO: '/films/promo',
   PLAYER: '/player',
   FAVORITE: '/favorite',
