@@ -30,10 +30,9 @@ import {
   addFavorite,
   fetchPromoFilm,
 } from "../../redux/films-data/films-api-action";
-import { filtrMovieList, checkFavorite, userIsAuth } from "../../utils/utils";
+import { filtrMovieList, checkFavorite } from "../../utils/utils";
 import Logo from "../logo/logo";
 import Logout from "../logout/logout";
-import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 
 const MainPage = () => {
   const films = useSelector(getFilms);
@@ -41,7 +40,6 @@ const MainPage = () => {
   const filmList = useSelector(getCountFilmList);
   const dispatch = useDispatch();
   const promoFilms = useSelector(getPromoFilm);
-  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const {
     id,
@@ -59,7 +57,7 @@ const MainPage = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchPromoFilm());
+    dispatch(fetchPromoFilm(id));
     return () => {
       dispatch(resetGenre());
     };
@@ -166,4 +164,4 @@ MainPage.protTypes = {
   authInfo: PropTypes.arrayOf(AuthInfoTypes.isRequired),
 };
 
-export default MainPage;
+export default React.memo(MainPage);
