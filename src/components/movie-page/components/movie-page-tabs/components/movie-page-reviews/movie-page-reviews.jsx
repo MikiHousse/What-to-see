@@ -1,6 +1,5 @@
 import React from "react";
-
-import { dateConvector } from "../../../utils/utils";
+import { dateConvector } from "../../../../../../utils/utils";
 
 const MoviePageReviews = ({ review }) => {
   return (

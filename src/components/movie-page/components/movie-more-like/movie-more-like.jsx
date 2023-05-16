@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getFilms } from "../../../redux/films-data/films-selectors";
-import { ApiRoute, MORE_LIKE_COUNT } from "../../../utils/const";
+import { ApiRoute, MORE_LIKE_COUNT } from "../../../../utils/const";
+import { getFilms } from "../../../../redux/films-data/films-selectors";
 
 const MovieMoreLike = ({ genre, index }) => {
   const films = useSelector(getFilms);

@@ -1,5 +1,5 @@
 import React from "react";
-import { ratingLevel } from "../../../utils/utils";
+import { ratingLevel } from "../../../../../../utils/utils";
 
 const MoviePageDesc = ({ film }) => {
   const { rating, scoresCount, description, director, starring } = film;

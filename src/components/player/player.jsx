@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { getSelectFilm } from "../../redux/films-data/films-selectors";
 import { fetchSelectedFilm } from "../../redux/films-data/films-api-action";
 
@@ -10,6 +9,7 @@ import { toggleFullScreen, formatTime } from "../../utils/utils";
 const Player = () => {
   const { id } = useParams();
   const selectFilm = useSelector(getSelectFilm);
+  const history = useHistory();
   const dispatch = useDispatch();
   const playRef = useRef();
   const rangeRef = useRef();
@@ -61,14 +61,13 @@ const Player = () => {
           muted
         ></video>
 
-        <Link
-          style={{ textDecoration: "none" }}
-          to="/"
+        <button
+          onClick={() => history.goBack()}
           type="button"
           className="player__exit"
         >
           Exit
-        </Link>
+        </button>
 
         <div className="player__controls">
           <div className="player__controls-row">

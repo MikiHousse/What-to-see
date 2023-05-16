@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import MoviePageDesc from "./movie-page-desc/movie-page-desc";
-import MoviePageDetails from "./movie-page-details/movie-page-details";
-import MoviePageReviews from "./movie-page-reviews/movie-page-reviews";
-import MovieMoreLike from "./movie-more-like/movie-more-like";
+import MoviePageTabs from "./components/movie-page-tabs/movie-page-tabs";
+import MovieMoreLike from "./components/movie-more-like/movie-more-like";
 import Footer from "../footer/footer";
 import User from "../user/user";
 import Loading from "../spinner/Loading";
+import Logo from "../logo/logo";
+import Logout from "../logout/logout";
 
 import {
   FilmTypes,
@@ -18,7 +18,7 @@ import {
   MovieReviewsTypes,
 } from "../../prop-types/prop";
 import {
-  getReviewsFilm,
+  getReviewStatus,
   getSelectFilm,
   getSelectFilmLoaded,
 } from "../../redux/films-data/films-selectors";
@@ -30,24 +30,29 @@ import {
 } from "../../redux/films-data/films-api-action";
 import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 import { ApiRoute, AuthorizationStatus } from "../../utils/const";
-import Logo from "../logo/logo";
-import Logout from "../logout/logout";
-import { checkFavorite } from "../../utils/utils";
+import { checkFavorite, userIsAuth } from "../../utils/utils";
 
 const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { id } = useParams();
+
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  const review = useSelector(getReviewsFilm);
   const selectFilm = useSelector(getSelectFilm);
   const isSelectFilmLoaded = useSelector(getSelectFilmLoaded);
-  const [select, setSelect] = useState("desk");
+  const isReviewLoaded = useSelector(getReviewStatus);
+
   const { name, posterImage, backgroundImage, genre, released, isFavorite } =
     selectFilm;
 
   const addFavor = (e) => {
     e.preventDefault();
+
+    if (!userIsAuth(authorizationStatus)) {
+      return history.push(ApiRoute.LOGIN);
+    }
+
     dispatch(addFavorite(id, checkFavorite(isFavorite)));
   };
 
@@ -57,21 +62,9 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
     dispatch(fetchPromoFilm(id));
   }, [dispatch, id]);
 
-  if (!isSelectFilmLoaded) {
+  if (!isSelectFilmLoaded && !isReviewLoaded) {
     return <Loading />;
   }
-
-  const getByType = (type) => {
-    switch (type) {
-      case "desk":
-        return <MoviePageDesc film={selectFilm} />;
-      case "details":
-        return <MoviePageDetails film={selectFilm} />;
-      case "reviews":
-        return <MoviePageReviews movieReviews={movieReviews} review={review} />;
-    }
-    return <MoviePageDesc film={film} />;
-  };
 
   return (
     <>
@@ -80,12 +73,9 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
           <div className="movie-card__bg">
             <img src={backgroundImage} alt={name} />
           </div>
-
           <h1 className="visually-hidden">WTW</h1>
-
           <header className="page-header movie-card__head">
             <Logo />
-
             <div className="user-block">
               <div className="user-block__avatar">
                 <User />
@@ -150,7 +140,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
               <img src={posterImage} alt={name} width="218" height="327" />
             </div>
             {/* TODO: вынети в отдельный компонент  */}
-            <div className="movie-card__desc">
+            {/* <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">
                   <li
@@ -192,7 +182,12 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
                 </ul>
               </nav>
               {getByType(select)}
-            </div>
+            </div> */}
+            <MoviePageTabs
+              selectFilm={selectFilm}
+              movieReviews={movieReviews}
+              film={film}
+            />
           </div>
         </div>
       </section>

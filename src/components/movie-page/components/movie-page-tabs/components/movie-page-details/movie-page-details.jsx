@@ -1,6 +1,5 @@
 import React from "react";
-
-import { timePlayer } from "../../../utils/utils";
+import { timePlayer } from "../../../../../../utils/utils";
 
 const MoviePageDetails = ({ film }) => {
   const { director, starring, runTime, genre, released } = film;

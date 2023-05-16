@@ -5,14 +5,18 @@ import {
   addFavorite,
   fetchPromoFilm,
 } from "../../../redux/films-data/films-api-action";
-import { checkFavorite } from "../../../utils/utils";
+import { checkFavorite, userIsAuth } from "../../../utils/utils";
 import Logo from "../../logo/logo";
 import User from "../../user/user";
 import Logout from "../../logout/logout";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { ApiRoute } from "../../../utils/const";
+import { getAuthorizationStatus } from "../../../redux/user-data/user-selectors";
 
 const PromoFilm = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const authorizationStatus = useSelector(getAuthorizationStatus);
   const promoFilms = useSelector(getPromoFilm);
 
   const {
@@ -27,6 +31,11 @@ const PromoFilm = () => {
 
   const addFavor = (e) => {
     e.preventDefault();
+
+    if (!userIsAuth(authorizationStatus)) {
+      return history.push(ApiRoute.LOGIN);
+    }
+
     dispatch(addFavorite(id, checkFavorite(isFavorite)));
   };
 
@@ -39,9 +48,7 @@ const PromoFilm = () => {
       <div className="movie-card__bg">
         <img src={backgroundImage} alt={name} />
       </div>
-
       <h1 className="visually-hidden">WTW</h1>
-
       <header className="page-header movie-card__head">
         <Logo />
         <div className="user-block">
