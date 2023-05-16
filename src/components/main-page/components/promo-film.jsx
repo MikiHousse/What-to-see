@@ -12,6 +12,7 @@ import Logout from "../../logout/logout";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { ApiRoute } from "../../../utils/const";
 import { getAuthorizationStatus } from "../../../redux/user-data/user-selectors";
+import ButtonFavorite from "../../button-favorite/button-favorite";
 
 const PromoFilm = () => {
   const dispatch = useDispatch();
@@ -83,7 +84,7 @@ const PromoFilm = () => {
                 </svg>
                 <span>Play</span>
               </Link>
-              <button
+              {/* <button
                 className="btn btn--list movie-card__button"
                 type="button"
                 onClick={addFavor}
@@ -96,7 +97,8 @@ const PromoFilm = () => {
                   )}
                 </svg>
                 <span>My list</span>
-              </button>
+              </button> */}
+              <ButtonFavorite addFavor={addFavor} isFavorite={isFavorite} />
             </div>
           </div>
         </div>

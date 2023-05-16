@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Logo from "../logo/logo";
@@ -14,13 +14,11 @@ import {
   sendingReview,
 } from "../../redux/films-data/films-api-action";
 import { ApiRoute, FetchStatus, STARS_COUNT } from "../../utils/const";
-import { Redirect, useHistory } from "react-router-dom";
 
 const AddReviews = () => {
   const { id } = useParams();
   const selectFilm = useSelector(getSelectFilm);
   const dispatch = useDispatch();
-  const history = useHistory();
   const isLoading = useSelector(getReviewSendingStatus);
   const { posterImage, backgroundImage, name } = selectFilm;
 

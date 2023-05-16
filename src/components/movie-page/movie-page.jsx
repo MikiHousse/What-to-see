@@ -31,6 +31,7 @@ import {
 import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 import { ApiRoute, AuthorizationStatus } from "../../utils/const";
 import { checkFavorite, userIsAuth } from "../../utils/utils";
+import ButtonFavorite from "../button-favorite/button-favorite";
 
 const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
   const dispatch = useDispatch();
@@ -105,7 +106,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
                 </Link>
 
                 {/* TODO: сделать компонент из кнопки  */}
-                <button
+                {/* <button
                   className="btn btn--list movie-card__button"
                   type="button"
                   onClick={addFavor}
@@ -118,7 +119,8 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
                     )}
                   </svg>
                   <span>My list</span>
-                </button>
+                </button> */}
+                <ButtonFavorite addFavor={addFavor} isFavorite={isFavorite} />
                 {authorizationStatus === AuthorizationStatus.AUTH ? (
                   <Link
                     to={`${ApiRoute.FILMS}/${id}/${ApiRoute.REVIEW}`}

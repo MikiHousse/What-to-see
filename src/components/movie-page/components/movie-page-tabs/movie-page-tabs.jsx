@@ -59,4 +59,4 @@ const MoviePageTabs = ({ selectFilm, movieReviews, film }) => {
   );
 };
 
-export default MoviePageTabs;
+export default React.memo(MoviePageTabs);
