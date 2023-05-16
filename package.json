@@ -9,17 +9,23 @@
     "_comment1": "запускает проверку всех модулей в директории src",
     "eslint": "eslint --ext .jsx --ext .js src/",
     "_comment2": "аккумулирует запуск проверки ESLint и тестов",
-    "test": "npm run eslint"
+    "test": "npm run eslint & & npm run test.jest",
+    "test.jest": "jest"
   },
   "devDependencies": {
     "@babel/core": "7.12",
     "@babel/preset-env": "7.12",
     "@babel/preset-react": "7.12",
+    "@testing-library/jest-dom": "5.11.0",
+    "@testing-library/react": "11.2.0",
+    "axios-mock-adapter": "1.19.0",
     "babel-loader": "8.2",
     "eslint": "7.18.0",
     "eslint-config-htmlacademy": "2.1.0",
     "eslint-plugin-react": "7.32.2",
     "history": "4.10",
+    "jest": "26.6.3",
+    "redux-mock-store": "1.5.4",
     "webpack": "4.46",
     "webpack-cli": "3.3",
     "webpack-dev-server": "3.11"
@@ -37,5 +43,11 @@
     "react-router": "5.2.1",
     "react-router-dom": "5.3",
     "reselect": "4.0.0"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [ "<rootDir>/src/setup-tests.js" ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/src/style-mock.js"
+    }
   }
 }

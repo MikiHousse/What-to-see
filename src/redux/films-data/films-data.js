@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { ALL_GENRES, FetchStatus, LIST_COUNT_FILMS } from "../../utils/const";
-import { genreChange, loadFilms, resetGenre, moreFilms, selectedFilm, loadReviews, reviewIsLoading, favoriteFilms,  promotionalFilm } from "../films-data/films-actions";
+import { setGenreChange, setLoadedFilms, setResetGenre, setShowMoreFilms, setSelectedFilm, setLoadedReviews, setReviewIsLoaded, setFavoriteFilms, setPromoFilm } from "../films-data/films-actions";
 import {adapterFilms, selectAdapterFilm} from './adapter'
 
 const initialState = {
@@ -20,34 +20,34 @@ const initialState = {
 
 export const filmsData = createReducer(initialState, (builder) => {
   builder
-    .addCase(genreChange, (state, action) => {
+    .addCase(setGenreChange, (state, action) => {
       state.genre = action.payload
     })
-    .addCase(loadFilms, (state, action) => {
+    .addCase(setLoadedFilms, (state, action) => {
       state.films = adapterFilms(action.payload);
       state.isDataLoaded = true;
     })
-    .addCase(resetGenre, (state) => {
+    .addCase(setResetGenre, (state) => {
       state.countFilmsList = LIST_COUNT_FILMS
     })
-    .addCase(moreFilms, (state, action) => {
+    .addCase(setShowMoreFilms, (state, action) => {
       state.countFilmsList = action.payload + LIST_COUNT_FILMS
     })
-    .addCase(selectedFilm, (state, action) => {
+    .addCase(setSelectedFilm, (state, action) => {
       state.selectFilm = selectAdapterFilm(action.payload)
       state.isSelectFilmLoaded = true
     })
-    .addCase(loadReviews, (state, action) => {
+    .addCase(setLoadedReviews, (state, action) => {
       state.reviews = action.payload
     })
-    .addCase(reviewIsLoading, (state, action) => {
+    .addCase(setReviewIsLoaded, (state, action) => {
       state.isReviewSending = action.payload
     })
-    .addCase(favoriteFilms, (state, action) => {
+    .addCase(setFavoriteFilms, (state, action) => {
       state.myFavoriteFilms = adapterFilms(action.payload)
       state.isMyFavoriteFilmsLoaded = true
     })
-    .addCase(promotionalFilm, (state, action) => {
+    .addCase(setPromoFilm, (state, action) => {
       state.promoFilm = selectAdapterFilm(action.payload)
       state.isPromoFilmLoaded = true
     })

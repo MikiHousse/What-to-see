@@ -8,7 +8,7 @@ import {
   getReviewSendingStatus,
   getSelectFilm,
 } from "../../redux/films-data/films-selectors";
-import { reviewIsLoading } from "../../redux/films-data/films-actions";
+import { setReviewIsLoaded } from "../../redux/films-data/films-actions";
 import {
   fetchSelectedFilm,
   sendingReview,
@@ -49,7 +49,7 @@ const AddReviews = () => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     if (validCommentLength && validStar) {
-      dispatch(reviewIsLoading(FetchStatus.SENDING));
+      dispatch(setReviewIsLoaded(FetchStatus.SENDING));
       dispatch(
         sendingReview(
           {

@@ -19,9 +19,9 @@ import {
   getCountFilmList,
 } from "../../redux/films-data/films-selectors";
 import {
-  genreChange,
-  moreFilms,
-  resetGenre,
+  setGenreChange,
+  setShowMoreFilms,
+  setResetGenre,
 } from "../../redux/films-data/films-actions";
 import { filtrMovieList } from "../../utils/utils";
 import PromoFilm from "./components/promo-film";
@@ -34,16 +34,16 @@ const MainPage = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(resetGenre());
+      dispatch(setResetGenre());
     };
   }, [dispatch]);
 
   const onSelectGenreClick = (filmGenre) => {
-    dispatch(genreChange(filmGenre));
+    dispatch(setGenreChange(filmGenre));
   };
 
   const showMore = () => {
-    dispatch(moreFilms(filmList));
+    dispatch(setShowMoreFilms(filmList));
   };
 
   const movieList = filtrMovieList(films, genres);

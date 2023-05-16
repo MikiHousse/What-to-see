@@ -1,25 +1,25 @@
-import { SELECT_GENRE, RESET_GENRE, LOAD_FILMS, SHOW_MORE_FILMS, SELECT_FILM, REVIEWS_FILM, REVIEW_SENDING, REDIRECT_TO_ROUTE, REVIEW_IS_LOADING, FAVORITE_IS_LOADING, PROMO_FILM } from "./films-action-type";
+import { SET_GENRE_CHANGE, SET_RESET_GENRE, SET_LOADED_FILMS, SET_SHOW_MORE_FILMS, SET_SELECTED_FILM, SET_LOADED_REVIEWS, REDIRECT_TO_ROUTE, SET_REVIEW_IS_LOADED, SET_FAVORITE_FILMS, SET_PROMO_FILM } from "./films-action-type";
 import { createAction } from "@reduxjs/toolkit";
 
-const genreChange = createAction(SELECT_GENRE, (genre) => ({
+export const setGenreChange = createAction(SET_GENRE_CHANGE, (genre) => ({
   payload: genre,
 }))
 
-const resetGenre = createAction(RESET_GENRE)
+export const setResetGenre = createAction(SET_RESET_GENRE)
 
-const loadFilms = createAction(LOAD_FILMS, (films) => ({
+export const setLoadedFilms = createAction(SET_LOADED_FILMS, (films) => ({
   payload: films,
 }))
 
-export const moreFilms = createAction(SHOW_MORE_FILMS, (films) => ({
+export const setShowMoreFilms = createAction(SET_SHOW_MORE_FILMS, (films) => ({
   payload: films
 }))
 
-export const selectedFilm = createAction(SELECT_FILM, (selectFilm) => ({
+export const setSelectedFilm = createAction(SET_SELECTED_FILM, (selectFilm) => ({
   payload: selectFilm
 }))
 
-export const loadReviews = createAction(REVIEW_SENDING, (review) => ({
+export const setLoadedReviews = createAction(SET_LOADED_REVIEWS, (review) => ({
   payload: review
 }))
 
@@ -27,18 +27,14 @@ export const redirectToRoute = createAction(REDIRECT_TO_ROUTE, (redirect) => ({
   payload: redirect
 }))
 
-export const reviewIsLoading = createAction(REVIEW_IS_LOADING, (loading) => ({
+export const setReviewIsLoaded = createAction(SET_REVIEW_IS_LOADED, (loading) => ({
   payload: loading
 }))
 
-export const favoriteFilms = createAction(FAVORITE_IS_LOADING, (film) => ({
+export const setFavoriteFilms = createAction(SET_FAVORITE_FILMS, (film) => ({
   payload: film
 }))
 
-export const promotionalFilm = createAction(PROMO_FILM, (film) => ({
+export const setPromoFilm = createAction(SET_PROMO_FILM, (film) => ({
   payload: film
 }))
-
-
-
-export {genreChange, resetGenre, loadFilms}
