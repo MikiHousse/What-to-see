@@ -10,10 +10,10 @@ import { AuthorizationStatus } from "./utils/const";
 import rootReducer from "./redux/root-reducer";
 import { checkAuthAction } from "./redux/user-data/user-api-action";
 import { fetchFilmsList } from "./redux/films-data/films-api-action";
-import { requireAuthorization } from "./redux/user-data/user-actions";
+import { setRequireAuthorization } from "./redux/user-data/user-actions";
 import { redirect } from "./redirect";
 
-const api = createAPI(() => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)))
+const api = createAPI(() => store.dispatch(setRequireAuthorization(AuthorizationStatus.NO_AUTH)))
 
 const store = configureStore({
   reducer: rootReducer,
