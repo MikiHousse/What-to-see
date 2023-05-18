@@ -1,4 +1,4 @@
-import { SET_GENRE_CHANGE, SET_RESET_GENRE, SET_LOADED_FILMS, SET_SHOW_MORE_FILMS, SET_SELECTED_FILM, SET_LOADED_REVIEWS, REDIRECT_TO_ROUTE, SET_REVIEW_IS_LOADED, SET_FAVORITE_FILMS, SET_PROMO_FILM } from "./films-action-type";
+import { SET_GENRE_CHANGE, SET_RESET_GENRE, SET_LOADED_FILMS, SET_SHOW_MORE_FILMS, SET_SELECTED_FILM, SET_LOADED_REVIEWS, REDIRECT_TO_ROUTE, SET_REVIEW_IS_SENDING, SET_FAVORITE_FILMS, SET_PROMO_FILM } from "./films-action-type";
 import { createAction } from "@reduxjs/toolkit";
 
 export const setGenreChange = createAction(SET_GENRE_CHANGE, (genre) => ({
@@ -27,7 +27,7 @@ export const redirectToRoute = createAction(REDIRECT_TO_ROUTE, (redirect) => ({
   payload: redirect
 }))
 
-export const setReviewIsLoaded = createAction(SET_REVIEW_IS_LOADED, (loading) => ({
+export const setReviewIsSending = createAction(SET_REVIEW_IS_SENDING, (loading) => ({
   payload: loading
 }))
 
