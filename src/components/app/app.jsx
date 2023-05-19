@@ -11,7 +11,6 @@ import AddReviews from "../add-reviews/add-reviews";
 import Player from "../player/player";
 import NotFoundPage from "../not-found-page/not-fountd-page";
 import PrivateRoute from "../private-route/private-route";
-import Loading from "../spinner/Loading";
 
 import {
   MovieСategoriesTypes,
@@ -24,6 +23,7 @@ import { getDataLoadedStatus } from "../../redux/films-data/films-selectors";
 import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 import browserHistory from "../../browserHistory";
 import { AppRoute } from "../../utils/const";
+import Loading from "../loading/loading";
 
 const App = ({ rating, movieMoreLike, film, authInfo }) => {
   const isDataLoaded = useSelector(getDataLoadedStatus);

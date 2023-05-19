@@ -7,7 +7,7 @@ import MoviePageTabs from "./components/movie-page-tabs/movie-page-tabs";
 import MovieMoreLike from "./components/movie-more-like/movie-more-like";
 import Footer from "../footer/footer";
 import User from "../user/user";
-import Loading from "../spinner/Loading";
+import Loading from "../loading/loading";
 import Logo from "../logo/logo";
 import Logout from "../logout/logout";
 
