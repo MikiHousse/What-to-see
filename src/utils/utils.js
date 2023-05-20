@@ -1,6 +1,6 @@
 import { ALL_GENRES, FlagFavorite, AuthorizationStatus } from "./const";
 
-export const filtrMovieList = (list, genre) => {
+export const filterFilmsList = (list, genre) => {
   if (genre === ALL_GENRES) {
     return list;
   }

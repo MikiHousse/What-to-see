@@ -1,11 +1,11 @@
 import React from "react";
 
-const ButtonFavorite = ({ isFavorite, addFavor }) => {
+const ButtonFavorite = ({ isFavorite, handleFavoriteToggle }) => {
   return (
     <button
       className="btn btn--list movie-card__button"
       type="button"
-      onClick={addFavor}
+      onClick={handleFavoriteToggle}
     >
       <svg viewBox="0 0 19 20" width="19" height="20">
         {isFavorite ? (

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPromoFilm } from "../../../redux/films-data/films-selectors";
 import {
-  addFavorite,
+  toggleFavorite,
   fetchPromoFilm,
 } from "../../../redux/films-data/films-api-action";
 import { checkFavorite, userIsAuth } from "../../../utils/utils";
@@ -18,7 +18,7 @@ const PromoFilm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const authorizationStatus = useSelector(getAuthorizationStatus);
-  const promoFilms = useSelector(getPromoFilm);
+  const promoFilm = useSelector(getPromoFilm);
 
   const {
     id,
@@ -28,16 +28,16 @@ const PromoFilm = () => {
     genre,
     released,
     isFavorite,
-  } = promoFilms;
+  } = promoFilm;
 
-  const addFavor = (e) => {
+  const handleFavoriteToggle = (e) => {
     e.preventDefault();
 
     if (!userIsAuth(authorizationStatus)) {
       return history.push(ApiRoute.LOGIN);
     }
 
-    dispatch(addFavorite(id, checkFavorite(isFavorite)));
+    dispatch(toggleFavorite(id, checkFavorite(isFavorite)));
   };
 
   useEffect(() => {
@@ -84,21 +84,10 @@ const PromoFilm = () => {
                 </svg>
                 <span>Play</span>
               </Link>
-              {/* <button
-                className="btn btn--list movie-card__button"
-                type="button"
-                onClick={addFavor}
-              >
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  {isFavorite ? (
-                    <use xlinkHref="#in-list"></use>
-                  ) : (
-                    <use xlinkHref="#add"></use>
-                  )}
-                </svg>
-                <span>My list</span>
-              </button> */}
-              <ButtonFavorite addFavor={addFavor} isFavorite={isFavorite} />
+              <ButtonFavorite
+                handleFavoriteToggle={handleFavoriteToggle}
+                isFavorite={isFavorite}
+              />
             </div>
           </div>
         </div>

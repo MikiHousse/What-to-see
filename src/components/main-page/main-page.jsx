@@ -23,13 +23,13 @@ import {
   setShowMoreFilms,
   setResetGenre,
 } from "../../redux/films-data/films-actions";
-import { filtrMovieList } from "../../utils/utils";
+import { filterFilmsList } from "../../utils/utils";
 import PromoFilm from "./components/promo-film";
 
 const MainPage = () => {
-  const films = useSelector(getFilms);
-  const genres = useSelector(getGenre);
-  const filmList = useSelector(getCountFilmList);
+  const movies = useSelector(getFilms);
+  const genre = useSelector(getGenre);
+  const countMoviesList = useSelector(getCountFilmList);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,11 +42,12 @@ const MainPage = () => {
     dispatch(setGenreChange(filmGenre));
   };
 
-  const showMore = () => {
-    dispatch(setShowMoreFilms(filmList));
+  const onShowMoreClick = () => {
+    dispatch(setShowMoreFilms(countMoviesList));
   };
 
-  const movieList = filtrMovieList(films, genres);
+  const moviesList = filterFilmsList(movies, genre);
+  console.log(moviesList);
 
   return (
     <>
@@ -56,13 +57,19 @@ const MainPage = () => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <SortGenre
-            films={films}
-            genre={genres}
+            movies={movies}
+            genre={genre}
             onClick={onSelectGenreClick}
           />
-          <MovieList films={movieList} filmList={filmList} />
-          {movieList.length > filmList ? (
-            <ShowMore showMore={showMore} filmList={filmList} />
+          <MovieList
+            moviesList={moviesList}
+            countMoviesList={countMoviesList}
+          />
+          {moviesList.length > countMoviesList ? (
+            <ShowMore
+              onShowMoreClick={onShowMoreClick}
+              countMoviesList={countMoviesList}
+            />
           ) : (
             ``
           )}

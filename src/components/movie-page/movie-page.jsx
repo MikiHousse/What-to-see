@@ -23,7 +23,7 @@ import {
   getSelectFilmLoaded,
 } from "../../redux/films-data/films-selectors";
 import {
-  addFavorite,
+  toggleFavorite,
   fetchPromoFilm,
   fetchReviewsFilm,
   fetchSelectedFilm,
@@ -54,7 +54,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
       return history.push(ApiRoute.LOGIN);
     }
 
-    dispatch(addFavorite(id, checkFavorite(isFavorite)));
+    dispatch(toggleFavorite(id, checkFavorite(isFavorite)));
   };
 
   useEffect(() => {

@@ -43,7 +43,7 @@ export const fetchFavoriteFilms = () => (dispatch, _getState, api) => {
     )
 }
 
-export const addFavorite = (id, status) => (dispatch, _getState, api) => {
+export const toggleFavorite = (id, status) => (dispatch, _getState, api) => {
   return (
     api.post(`${ApiRoute.FAVORITE}/${id}/${status}`)
     .then(() => dispatch(fetchSelectedFilm(id)))

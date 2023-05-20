@@ -2,24 +2,24 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AppRoute, MAX_COUNT_GENRES } from "../../utils/const";
 
-const SortGenre = ({ films, genre, onClick }) => {
-  const genresFilms = films.map((film) => film.genre);
+const SortGenre = ({ movies, genre, onClick }) => {
+  const filmGenres = movies.map((item) => item.genre);
 
-  const genresFiltred = Array.from(new Set(genresFilms)).slice(
+  const genresFiltеr = Array.from(new Set(filmGenres)).slice(
     0,
     MAX_COUNT_GENRES
   );
-  genresFiltred.unshift("All genres");
+  genresFiltеr.unshift("All genres");
 
   return (
     <ul className="catalog__genres-list">
-      {genresFiltred.map((item) => {
-        const active = genre === item ? `catalog__genres-item--active` : ``;
+      {genresFiltеr.map((item) => {
+        const isActive = genre === item ? `catalog__genres-item--active` : ``;
 
         return (
           <li
             key={item + 1}
-            className={`catalog__genres-item ${active}`}
+            className={`catalog__genres-item ${isActive}`}
             tabIndex="0"
             onClick={() => {
               onClick(item);

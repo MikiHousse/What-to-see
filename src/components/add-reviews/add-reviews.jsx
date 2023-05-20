@@ -23,47 +23,47 @@ const AddReviews = () => {
   const { posterImage, backgroundImage, name } = selectFilm;
 
   const [comment, setComment] = useState("");
-  const [stars, setStars] = useState(0);
+  const [rating, setRating] = useState(0);
   const [commentError, setCommentError] = useState(false);
-  const [starError, setStarError] = useState(false);
+  const [ratingError, setRatingError] = useState(false);
 
   const validCommentLength = comment.length >= 50 && comment.length <= 400;
-  const validStar = stars >= 1 && stars <= 10;
+  const validRating = rating >= 1 && rating <= 10;
 
   useEffect(() => {
     dispatch(fetchSelectedFilm(id));
   }, [dispatch, id]);
 
-  const handleReviewStar = useCallback(
+  const handleReviewRatingChange = useCallback(
     (item) => {
-      setStars(item);
+      setRating(item);
     },
-    [stars]
+    [rating]
   );
 
-  const handleCommentOnChange = useCallback((e) => {
+  const handleCommentChange = useCallback((e) => {
     setComment(e.target.value);
     setCommentError(false);
   }, []);
 
-  const handleSubmitForm = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (validCommentLength && validStar) {
+    if (validCommentLength && validRating) {
       dispatch(setReviewIsSending(FetchStatus.SENDING));
       dispatch(
         sendingReview(
           {
-            rating: Number(stars),
+            rating: Number(rating),
             comment: comment,
           },
           id
         )
       );
     } else {
-      if (validStar && !validCommentLength) {
+      if (validRating && !validCommentLength) {
         setCommentError(true);
       } else {
-        setStarError(true);
+        setRatingError(true);
       }
     }
   };
@@ -71,7 +71,7 @@ const AddReviews = () => {
   useEffect(() => {
     if (isLoading === FetchStatus.DONE) {
       setComment("");
-      setStars(0);
+      setRating(0);
     }
   }, [isLoading]);
 
@@ -121,7 +121,7 @@ const AddReviews = () => {
         </div>
 
         <div className="add-review">
-          {starError ? (
+          {ratingError ? (
             <p style={{ color: "red" }}>Рейтинг фильма не указан</p>
           ) : (
             ""
@@ -147,9 +147,9 @@ const AddReviews = () => {
                         id={`star-${starRating}`}
                         type="radio"
                         name="rating"
-                        value={stars}
+                        value={rating}
                         onChange={() => {
-                          handleReviewStar(starRating);
+                          handleReviewRatingChange(starRating);
                         }}
                       />
                       <label
@@ -170,17 +170,17 @@ const AddReviews = () => {
                 name="review-text"
                 id="review-text"
                 value={comment}
-                onChange={handleCommentOnChange}
+                onChange={handleCommentChange}
                 placeholder="Review text"
               ></textarea>
               <div className="add-review__submit">
                 <button
                   className="add-review__btn"
                   type="submit"
-                  onClick={handleSubmitForm}
+                  onClick={handleFormSubmit}
                   disabled={
                     !isLoading ||
-                    (stars > 0 && comment.length > 0 ? false : true)
+                    (rating > 0 && comment.length > 0 ? false : true)
                   }
                 >
                   Post

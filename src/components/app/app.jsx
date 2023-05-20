@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Switch, Route, Router as BrowserRouter } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
 import MainPage from "../main-page/main-page";
@@ -9,7 +9,7 @@ import MyList from "../my-list/my-list";
 import MoviePage from "../movie-page/movie-page";
 import AddReviews from "../add-reviews/add-reviews";
 import Player from "../player/player";
-import NotFoundPage from "../not-found-page/not-fountd-page";
+import NotFoundPage from "../not-found-page/not-found-page";
 import PrivateRoute from "../private-route/private-route";
 
 import {
@@ -25,7 +25,7 @@ import browserHistory from "../../browserHistory";
 import { AppRoute } from "../../utils/const";
 import Loading from "../loading/loading";
 
-const App = ({ rating, movieMoreLike, film, authInfo }) => {
+const App = () => {
   const isDataLoaded = useSelector(getDataLoadedStatus);
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
@@ -47,21 +47,16 @@ const App = ({ rating, movieMoreLike, film, authInfo }) => {
           exact
           authorizationStatus={authorizationStatus}
         >
-          {" "}
-          <MyList movieMoreLike={movieMoreLike} authInfo={authInfo} />
+          <MyList />
         </PrivateRoute>
         <Route exact path={AppRoute.FILM}>
-          <MoviePage
-            film={film[0]}
-            movieMoreLike={movieMoreLike}
-            authInfo={authInfo}
-          />
+          <MoviePage />
         </Route>
         <PrivateRoute exact path={AppRoute.REVIEW}>
-          <AddReviews rating={rating} authInfo={authInfo} />
+          <AddReviews />
         </PrivateRoute>
         <Route path={AppRoute.PLAYER} exact>
-          <Player film={film} />
+          <Player />
         </Route>
         <Route>
           <NotFoundPage />

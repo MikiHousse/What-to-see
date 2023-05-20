@@ -30,7 +30,7 @@ store.dispatch(fetchFilmsList())
 
 ReactDom.render(
   <Provider store={store}>
-      <App rating={Rating} movieMoreLike={MovieMoreLike} film={Film} authInfo={AuthInfo} movieReviews={MovieReviews}/>
+      <App/>
   </Provider>,
   document.getElementById(`root`),
 );
