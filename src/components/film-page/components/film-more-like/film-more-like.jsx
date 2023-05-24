@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ApiRoute, MORE_LIKE_COUNT } from "../../../../utils/const";
 import { getFilms } from "../../../../redux/films-data/films-selectors";
 
-const MovieMoreLike = ({ genre, index }) => {
+const FilmMoreLike = ({ genre, index }) => {
   const films = useSelector(getFilms);
 
   const relatedFilms = films
@@ -42,4 +42,4 @@ const MovieMoreLike = ({ genre, index }) => {
   );
 };
 
-export default MovieMoreLike;
+export default FilmMoreLike;

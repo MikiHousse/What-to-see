@@ -1,7 +1,7 @@
 import React from "react";
 import { dateConvector } from "../../../../../../utils/utils";
 
-const MoviePageReviews = ({ review }) => {
+const FilmPageReviews = ({ review }) => {
   return (
     <>
       <div className="movie-card__reviews movie-card__row">
@@ -35,4 +35,4 @@ const MoviePageReviews = ({ review }) => {
   );
 };
 
-export default MoviePageReviews;
+export default FilmPageReviews;

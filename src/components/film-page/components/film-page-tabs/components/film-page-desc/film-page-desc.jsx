@@ -1,7 +1,7 @@
 import React from "react";
 import { ratingLevel } from "../../../../../../utils/utils";
 
-const MoviePageDesc = ({ film }) => {
+const FilmPageDesc = ({ film }) => {
   const { rating, scoresCount, description, director, starring } = film;
   return (
     <>
@@ -34,4 +34,4 @@ const MoviePageDesc = ({ film }) => {
   );
 };
 
-export default MoviePageDesc;
+export default FilmPageDesc;

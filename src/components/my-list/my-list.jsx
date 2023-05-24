@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Footer from "../footer/footer";
 
-import { AuthInfoTypes, MovieMoreLikeTypes } from "../../prop-types/prop";
 import { getFavoriteFilms } from "../../redux/films-data/films-selectors";
 import { fetchFavoriteFilms } from "../../redux/films-data/films-api-action";
 import { ApiRoute } from "../../utils/const";
@@ -73,11 +71,6 @@ const MyList = () => {
       </div>
     </>
   );
-};
-
-MyList.protTypes = {
-  movieMoreLike: PropTypes.arrayOf(MovieMoreLikeTypes.isRequired),
-  authInfo: PropTypes.arrayOf(AuthInfoTypes.isRequired),
 };
 
 export default MyList;

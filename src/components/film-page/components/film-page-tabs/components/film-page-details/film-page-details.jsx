@@ -1,7 +1,7 @@
 import React from "react";
 import { timePlayer } from "../../../../../../utils/utils";
 
-const MoviePageDetails = ({ film }) => {
+const FilmPageDetails = ({ film }) => {
   const { director, starring, runTime, genre, released } = film;
 
   return (
@@ -43,4 +43,4 @@ const MoviePageDetails = ({ film }) => {
   );
 };
 
-export default MoviePageDetails;
+export default FilmPageDetails;

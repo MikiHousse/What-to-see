@@ -1,24 +1,26 @@
 import React, { useState } from "react";
-import MoviePageDesc from "./components/movie-page-desc/movie-page-desc";
-import MoviePageDetails from "./components/movie-page-details/movie-page-details";
-import MoviePageReviews from "./components/movie-page-reviews/movie-page-reviews";
+
+import FilmPageDesc from "./components/film-page-desc/film-page-desc";
+import FilmPageDetails from "./components/film-page-details/film-page-details";
+import FilmPageReviews from "./components/film-page-reviews/film-page-reviews";
+
 import { useSelector } from "react-redux";
 import { getReviewsFilm } from "../../../../redux/films-data/films-selectors";
 
-const MoviePageTabs = ({ selectFilm, movieReviews, film }) => {
+const FilmPageTabs = ({ selectFilm, movieReviews, film }) => {
   const [select, setSelect] = useState("desk");
   const review = useSelector(getReviewsFilm);
 
   const getByType = (type) => {
     switch (type) {
       case "desk":
-        return <MoviePageDesc film={selectFilm} />;
+        return <FilmPageDesc film={selectFilm} />;
       case "details":
-        return <MoviePageDetails film={selectFilm} />;
+        return <FilmPageDetails film={selectFilm} />;
       case "reviews":
-        return <MoviePageReviews movieReviews={movieReviews} review={review} />;
+        return <FilmPageReviews movieReviews={movieReviews} review={review} />;
     }
-    return <MoviePageDesc film={film} />;
+    return <FilmPageDesc film={film} />;
   };
 
   return (
@@ -59,4 +61,4 @@ const MoviePageTabs = ({ selectFilm, movieReviews, film }) => {
   );
 };
 
-export default React.memo(MoviePageTabs);
+export default React.memo(FilmPageTabs);

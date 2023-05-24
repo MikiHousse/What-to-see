@@ -1,15 +1,15 @@
 import React from "react";
-import MovieCard from "../movie-card/movie-card";
+import FilmCard from "../film-card/film-card";
 
-const MovieList = ({ moviesList, countMoviesList = moviesList.length }) => {
+const FilmsList = ({ moviesList, countMoviesList = moviesList.length }) => {
   const movieSliceList = (list) => list.slice(0, countMoviesList);
   return (
     <div className="catalog__movies-list">
       {movieSliceList(moviesList).map((card) => {
-        return <MovieCard key={card.id} item={card} />;
+        return <FilmCard key={card.id} item={card} />;
       })}
     </div>
   );
 };
 
-export default MovieList;
+export default FilmsList;

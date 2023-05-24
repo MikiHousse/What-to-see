@@ -1,22 +1,13 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import MoviePageTabs from "./components/movie-page-tabs/movie-page-tabs";
-import MovieMoreLike from "./components/movie-more-like/movie-more-like";
 import Footer from "../footer/footer";
 import User from "../user/user";
 import Loading from "../loading/loading";
 import Logo from "../logo/logo";
 import Logout from "../logout/logout";
 
-import {
-  FilmTypes,
-  MovieMoreLikeTypes,
-  AuthInfoTypes,
-  MovieReviewsTypes,
-} from "../../prop-types/prop";
 import {
   getReviewStatus,
   getSelectFilm,
@@ -32,8 +23,10 @@ import { getAuthorizationStatus } from "../../redux/user-data/user-selectors";
 import { ApiRoute, AuthorizationStatus } from "../../utils/const";
 import { checkFavorite, userIsAuth } from "../../utils/utils";
 import ButtonFavorite from "../button-favorite/button-favorite";
+import FilmMoreLike from "./components/film-more-like/film-more-like";
+import FilmPageTabs from "./components/film-page-tabs/film-page-tabs";
 
-const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
+const FilmPage = ({ film, movieMoreLike, movieReviews }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
@@ -105,21 +98,6 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
                   <span>Play</span>
                 </Link>
 
-                {/* TODO: сделать компонент из кнопки  */}
-                {/* <button
-                  className="btn btn--list movie-card__button"
-                  type="button"
-                  onClick={addFavor}
-                >
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    {isFavorite ? (
-                      <use xlinkHref="#in-list"></use>
-                    ) : (
-                      <use xlinkHref="#add"></use>
-                    )}
-                  </svg>
-                  <span>My list</span>
-                </button> */}
                 <ButtonFavorite addFavor={addFavor} isFavorite={isFavorite} />
                 {authorizationStatus === AuthorizationStatus.AUTH ? (
                   <Link
@@ -141,51 +119,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
             <div className="movie-card__poster movie-card__poster--big">
               <img src={posterImage} alt={name} width="218" height="327" />
             </div>
-            {/* TODO: вынети в отдельный компонент  */}
-            {/* <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li
-                    className={`movie-nav__item ${
-                      select === "desk" && `movie-nav__item--active`
-                    }`}
-                  >
-                    <p
-                      className="movie-nav__link"
-                      onClick={() => setSelect("desk")}
-                    >
-                      Overview
-                    </p>
-                  </li>
-                  <li
-                    className={`movie-nav__item ${
-                      select === "details" && `movie-nav__item--active`
-                    }`}
-                  >
-                    <p
-                      className="movie-nav__link"
-                      onClick={() => setSelect("details")}
-                    >
-                      Details
-                    </p>
-                  </li>
-                  <li
-                    className={`movie-nav__item ${
-                      select === "reviews" && `movie-nav__item--active`
-                    }`}
-                  >
-                    <p
-                      className="movie-nav__link"
-                      onClick={() => setSelect("reviews")}
-                    >
-                      Reviews
-                    </p>
-                  </li>
-                </ul>
-              </nav>
-              {getByType(select)}
-            </div> */}
-            <MoviePageTabs
+            <FilmPageTabs
               selectFilm={selectFilm}
               movieReviews={movieReviews}
               film={film}
@@ -197,7 +131,7 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieMoreLike
+          <FilmMoreLike
             movieMoreLike={movieMoreLike}
             genre={genre}
             index={id}
@@ -210,11 +144,4 @@ const MoviePage = ({ film, movieMoreLike, movieReviews }) => {
   );
 };
 
-MoviePage.protTypes = {
-  film: PropTypes.arrayOf(FilmTypes.isRequired),
-  movieMoreLike: PropTypes.arrayOf(MovieMoreLikeTypes.isRequired),
-  authInfo: PropTypes.arrayOf(AuthInfoTypes.isRequired),
-  movieReviews: PropTypes.arrayOf(MovieReviewsTypes.isRequired),
-};
-
-export default React.memo(MoviePage);
+export default React.memo(FilmPage);

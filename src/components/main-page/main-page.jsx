@@ -1,17 +1,11 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  MovieСategoriesTypes,
-  FilmTypes,
-  AuthInfoTypes,
-} from "../../prop-types/prop";
-
-import MovieList from "../movie-list/movie-list";
 import SortGenre from "../genre-sort/sort-genre";
 import ShowMore from "../show-more/show-more";
 import Footer from "../footer/footer";
+import FilmPromo from "./components/film-promo";
+import FilmsList from "../films-list/films-list";
 
 import {
   getGenre,
@@ -24,7 +18,6 @@ import {
   setResetGenre,
 } from "../../redux/films-data/films-actions";
 import { filterFilmsList } from "../../utils/utils";
-import PromoFilm from "./components/promo-film";
 
 const MainPage = () => {
   const movies = useSelector(getFilms);
@@ -47,11 +40,10 @@ const MainPage = () => {
   };
 
   const moviesList = filterFilmsList(movies, genre);
-  console.log(moviesList);
 
   return (
     <>
-      <PromoFilm />
+      <FilmPromo />
 
       <div className="page-content" style={{ background: "rgb(29,8,3)" }}>
         <section className="catalog">
@@ -61,7 +53,7 @@ const MainPage = () => {
             genre={genre}
             onClick={onSelectGenreClick}
           />
-          <MovieList
+          <FilmsList
             moviesList={moviesList}
             countMoviesList={countMoviesList}
           />
@@ -79,12 +71,6 @@ const MainPage = () => {
       </div>
     </>
   );
-};
-
-MainPage.protTypes = {
-  movieСategories: PropTypes.arrayOf(MovieСategoriesTypes.isRequired),
-  film: PropTypes.arrayOf(FilmTypes.isRequired),
-  authInfo: PropTypes.arrayOf(AuthInfoTypes.isRequired),
 };
 
 export default MainPage;

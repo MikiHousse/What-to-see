@@ -14,7 +14,7 @@ import { ApiRoute } from "../../../utils/const";
 import { getAuthorizationStatus } from "../../../redux/user-data/user-selectors";
 import ButtonFavorite from "../../button-favorite/button-favorite";
 
-const PromoFilm = () => {
+const FilmPromo = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const authorizationStatus = useSelector(getAuthorizationStatus);
@@ -96,4 +96,4 @@ const PromoFilm = () => {
   );
 };
 
-export default React.memo(PromoFilm);
+export default React.memo(FilmPromo);

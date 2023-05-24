@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Videoplayer from "../videoplayer/videoplayer";
 import { ApiRoute } from "../../utils/const";
 
-const MovieCard = ({ item = {} }) => {
+const FilmCard = ({ item = {} }) => {
   const { previewImage, name, videoLink, id } = item;
   const [isPlay, setIsPlay] = useState(false);
 
@@ -43,4 +43,4 @@ const MovieCard = ({ item = {} }) => {
   );
 };
 
-export default MovieCard;
+export default FilmCard;
