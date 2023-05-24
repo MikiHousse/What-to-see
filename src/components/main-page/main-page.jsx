@@ -20,9 +20,9 @@ import {
 import { filterFilmsList } from "../../utils/utils";
 
 const MainPage = () => {
-  const movies = useSelector(getFilms);
+  const film = useSelector(getFilms);
   const genre = useSelector(getGenre);
-  const countMoviesList = useSelector(getCountFilmList);
+  const countFilmsList = useSelector(getCountFilmList);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,10 +36,10 @@ const MainPage = () => {
   };
 
   const onShowMoreClick = () => {
-    dispatch(setShowMoreFilms(countMoviesList));
+    dispatch(setShowMoreFilms(countFilmsList));
   };
 
-  const moviesList = filterFilmsList(movies, genre);
+  const filmsList = filterFilmsList(film, genre);
 
   return (
     <>
@@ -48,19 +48,12 @@ const MainPage = () => {
       <div className="page-content" style={{ background: "rgb(29,8,3)" }}>
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <SortGenre
-            movies={movies}
-            genre={genre}
-            onClick={onSelectGenreClick}
-          />
-          <FilmsList
-            moviesList={moviesList}
-            countMoviesList={countMoviesList}
-          />
-          {moviesList.length > countMoviesList ? (
+          <SortGenre film={film} genre={genre} onClick={onSelectGenreClick} />
+          <FilmsList filmsList={filmsList} countFilmsList={countFilmsList} />
+          {filmsList.length > countFilmsList ? (
             <ShowMore
               onShowMoreClick={onShowMoreClick}
-              countMoviesList={countMoviesList}
+              countFilmsList={countFilmsList}
             />
           ) : (
             ``

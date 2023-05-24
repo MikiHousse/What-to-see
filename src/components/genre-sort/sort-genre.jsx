@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AppRoute, MAX_COUNT_GENRES } from "../../utils/const";
 
-const SortGenre = ({ movies, genre, onClick }) => {
-  const filmGenres = movies.map((item) => item.genre);
+const SortGenre = ({ film, genre, onClick }) => {
+  const filmGenres = film.map((item) => item.genre);
 
   const genresFiltеr = Array.from(new Set(filmGenres)).slice(
     0,

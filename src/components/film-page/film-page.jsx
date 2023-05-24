@@ -40,7 +40,7 @@ const FilmPage = ({ film, movieMoreLike, movieReviews }) => {
   const { name, posterImage, backgroundImage, genre, released, isFavorite } =
     selectFilm;
 
-  const addFavor = (e) => {
+  const handleFavoriteToggle = (e) => {
     e.preventDefault();
 
     if (!userIsAuth(authorizationStatus)) {
@@ -98,7 +98,10 @@ const FilmPage = ({ film, movieMoreLike, movieReviews }) => {
                   <span>Play</span>
                 </Link>
 
-                <ButtonFavorite addFavor={addFavor} isFavorite={isFavorite} />
+                <ButtonFavorite
+                  handleFavoriteToggle={handleFavoriteToggle}
+                  isFavorite={isFavorite}
+                />
                 {authorizationStatus === AuthorizationStatus.AUTH ? (
                   <Link
                     to={`${ApiRoute.FILMS}/${id}/${ApiRoute.REVIEW}`}

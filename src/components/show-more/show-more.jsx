@@ -1,12 +1,12 @@
 import React from "react";
 
-const ShowMore = ({ onShowMoreClick, countMoviesList }) => {
+const ShowMore = ({ onShowMoreClick, countFilmsList }) => {
   return (
     <div className="catalog__more">
       <button
         className="catalog__button"
         type="button"
-        onClick={() => onShowMoreClick(countMoviesList)}
+        onClick={() => onShowMoreClick(countFilmsList)}
       >
         Show more
       </button>

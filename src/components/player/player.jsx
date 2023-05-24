@@ -18,12 +18,12 @@ const Player = () => {
 
   const [isPlaying, setIsPlaying] = useState(true);
   const [timePassed, setTimePassed] = useState(0);
-  const [end, setEnd] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const time = (e) => setTimePassed(e.target.currentTime);
 
   const runTime = () => {
-    setEnd(playRef.current.duration);
+    setDuration(playRef.current.duration);
   };
 
   const handleFullScreen = (e) => {
@@ -92,7 +92,7 @@ const Player = () => {
               /> */}
             </div>
             <div className="player__time-value">
-              {formatTime(end - timePassed)}
+              {formatTime(duration - timePassed)}
             </div>
           </div>
 
