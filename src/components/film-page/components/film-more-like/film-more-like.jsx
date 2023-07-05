@@ -42,4 +42,4 @@ const FilmMoreLike = ({ genre, index }) => {
   );
 };
 
-export default FilmMoreLike;
+export default React.memo(FilmMoreLike);

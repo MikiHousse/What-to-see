@@ -11,16 +11,17 @@ const FilmPageTabs = ({ selectFilm, movieReviews, film }) => {
   const [select, setSelect] = useState("desk");
   const review = useSelector(getReviewsFilm);
 
-  const getByType = (type) => {
-    switch (type) {
+  const getByType = (select) => {
+    switch (select) {
       case "desk":
         return <FilmPageDesc film={selectFilm} />;
       case "details":
         return <FilmPageDetails film={selectFilm} />;
       case "reviews":
         return <FilmPageReviews movieReviews={movieReviews} review={review} />;
+      default:
+        return <FilmPageDesc film={film} />;
     }
-    return <FilmPageDesc film={film} />;
   };
 
   return (
@@ -61,4 +62,4 @@ const FilmPageTabs = ({ selectFilm, movieReviews, film }) => {
   );
 };
 
-export default React.memo(FilmPageTabs);
+export default FilmPageTabs;

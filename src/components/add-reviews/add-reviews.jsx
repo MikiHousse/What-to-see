@@ -139,13 +139,10 @@ const AddReviews = () => {
               <div className="rating__stars">
                 {Array.from(Array(STARS_COUNT)).map((_, index) => {
                   const starRating = index + 1;
-                  console.log("index" + index);
-                  console.log("starRarting" + starRating);
                   return (
                     <React.Fragment key={index}>
                       <input
-                        className="rating__input visually-hidden
-                        "
+                        className="rating__input visually-hidden"
                         id={`star-${starRating}`}
                         type="radio"
                         name="rating"
